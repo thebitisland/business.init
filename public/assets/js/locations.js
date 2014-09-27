@@ -1,5 +1,5 @@
 var locations = [
-    ['2479 Murphy Court', "Minneapolis, MN 55402", "$36,000", 48.87, 2.29, "property-detail.html", "assets/img/properties/property-01.jpg", "assets/img/property-types/apartment.png"],
+    ['2479 Murphy Court', "Minneapolis, MN 55402", "$36,000", window._latitude+0.001, window._longitude+0.001, "property-detail.html", "assets/img/properties/property-01.jpg", "assets/img/property-types/apartment.png"],
     ['3398 Lodgeville Road', "Golden Valley, MN 55427", "$28,000", 48.866876, 2.309639, "property-detail.html", "assets/img/properties/property-02.jpg", "assets/img/property-types/apartment.png"],
 
     ['2479 Murphy Court', "Minneapolis, MN 55402", "$36,000", 48.874796, 2.299275, "property-detail.html", "assets/img/properties/property-03.jpg", "assets/img/property-types/construction-site.png"],

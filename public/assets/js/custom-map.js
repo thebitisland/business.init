@@ -219,8 +219,8 @@ function createHomepageOSM(_latitude,_longitude){
         $.getScript("assets/js/locations.js", function(){
             var map = L.map('map', {
                 center: [_latitude,_longitude],
-                zoom: 14,
-                scrollWheelZoom: false
+                zoom: 15,
+                scrollWheelZoom: true
             });
             L.tileLayer('http://openmapsurfer.uni-hd.de/tiles/roadsg/x={x}&y={y}&z={z}', {
                 //L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {

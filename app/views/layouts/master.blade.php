@@ -179,65 +179,35 @@
 				<section id="footer-main">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-3 col-sm-3">
+							<div class="col-md-6 col-sm-6">
 								<article>
 									<h3>About Us</h3>
-									<p>Vel fermentum ipsum. Suspendisse quis molestie odio. Interdum et malesuada fames ac ante ipsum
-										primis in faucibus. Quisque aliquet a metus in aliquet. Praesent ut turpis posuere, commodo odio
-										id, ornare tortor
+									<p>The bit island was founded by five technology-loving members from Madrid, Spain. Our goal is the use of open data to offer innovative ways to improve and better our society.
 									</p>
 									<hr>
 									<a href="#" class="link-arrow">Read More</a>
 								</article>
 							</div><!-- /.col-sm-3 -->
-							<div class="col-md-3 col-sm-3">
-								<article>
-									<h3>Recent Properties</h3>
-									<div class="property small">
-										<a href="property-detail.html">
-											<div class="property-image">
-												<img alt="" src="assets/img/properties/property-06.jpg">
-											</div>
-										</a>
-										<div class="info">
-											<a href="property-detail.html"><h4>2186 Rinehart Road</h4></a>
-											<figure>Doral, FL 33178 </figure>
-											<div class="tag price">$ 72,000</div>
-										</div>
-									</div><!-- /.property -->
-									<div class="property small">
-										<a href="property-detail.html">
-											<div class="property-image">
-												<img alt="" src="assets/img/properties/property-09.jpg">
-											</div>
-										</a>
-										<div class="info">
-											<a href="property-detail.html"><h4>2479 Murphy Court</h4></a>
-											<figure>Minneapolis, MN 55402</figure>
-											<div class="tag price">$ 36,000</div>
-										</div>
-									</div><!-- /.property -->
-								</article>
-							</div><!-- /.col-sm-3 -->
+
 							<div class="col-md-3 col-sm-3">
 								<article>
 									<h3>Contact</h3>
 									<address>
-										<strong>Your Company</strong><br>
-										4877 Spruce Drive<br>
-										West Newton, PA 15089
+										<strong>The bit island</strong><br>
+										Madrid<br>
+										Spain
 									</address>
-									+1 (734) 123-4567<br>
-									<a href="#">hello@example.com</a>
+									<br>
+									<a href="#">contact@thebitisland.com</a>
 								</article>
 							</div><!-- /.col-sm-3 -->
 							<div class="col-md-3 col-sm-3">
 								<article>
 									<h3>Useful Links</h3>
 									<ul class="list-unstyled list-links">
-										<li><a href="#">All Properties</a></li>
+										<li><a href="#">Team</a></li>
 										<li><a href="#">Privacy Policy</a></li>
-										<li><a href="#">Login and Register Account</a></li>
+										<li><a href="#">Login and Register Account (Coming!)</a></li>
 										<li><a href="#">FAQ</a></li>
 										<li><a href="#">Terms and Conditions</a></li>
 									</ul>
@@ -249,7 +219,7 @@
 				<section id="footer-thumbnails" class="footer-thumbnails"></section><!-- /#footer-thumbnails -->
 				<section id="footer-copyright">
 					<div class="container">
-						<span>Copyright © 2013. All Rights Reserved.</span>
+						<span>Copyright © 2014. All Rights Reserved.</span>
 						<span class="pull-right"><a href="#page-top" class="roll">Go to top</a></span>
 					</div>
 				</section>
@@ -285,9 +255,10 @@
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->
 <script>
-	_latitude = 48.871;
-	_longitude = 2.3;
-	createHomepageOSM(_latitude,_longitude);
+//40.4102491,-3.6936405,17z
+	window._latitude = 40.4102716;
+	window._longitude =-3.6936405;
+	createHomepageOSM(window._latitude,window._longitude);
 </script>
 </body>
 </html>
