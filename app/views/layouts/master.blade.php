@@ -16,6 +16,8 @@
 	<link rel="stylesheet" href="assets/css/leaflet.css" type="text/css">
 	<link rel="stylesheet" href="assets/css/MarkerCluster.css" type="text/css">
 	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/custom.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="assets/js/leaflet-draw/leaflet.draw.css">
 
 	<title>{{ $title or 'Business.init()' }}</title>
 
@@ -229,7 +231,7 @@
 	</div>
 
 	<div id="overlay"></div>
-
+	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 	<script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet.markercluster.js"></script>
@@ -251,6 +253,7 @@
 	<script type="text/javascript" src="assets/js/jquery.slider.js"></script>
 	<script type="text/javascript" src="assets/js/custom-map.js"></script>
 	<script type="text/javascript" src="assets/js/custom.js"></script>
+	<script type="text/javascript" src="assets/js/leaflet-draw/leaflet.draw.js"></script>
 <!--[if gt IE 8]>
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->

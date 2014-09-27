@@ -216,7 +216,7 @@ function contactUsMap(){
 function createHomepageOSM(_latitude,_longitude){
     setMapHeight();
     if( document.getElementById('map') != null ){
-        $.getScript("assets/js/locations.js", function(){
+        $.getScript("assets/js/locations_libreria.js", function(){
             var map = L.map('map', {
                 center: [_latitude,_longitude],
                 zoom: 15,
@@ -232,30 +232,30 @@ function createHomepageOSM(_latitude,_longitude){
             });
             for (var i = 0; i < locations.length; i++) {
                 var _icon = L.divIcon({
-                    html: '<img src="' + locations[i][7] +'">',
+                    html: '<i style="font-size:20px; padding-top:10px; padding-left:10px;" class="fa ' + locations[i][3] + '"></i>', //'<img src="' + locations[i][7] +'">',
                     iconSize:     [40, 48],
                     iconAnchor:   [20, 48],
                     popupAnchor:  [0, -48]
                 });
                 var title = locations[i][0];
-                var marker = L.marker(new L.LatLng(locations[i][3],locations[i][4]), {
+                var marker = L.marker(new L.LatLng(locations[i][2],locations[i][1]), {
                     title: title,
                     icon: _icon
                 });
                 marker.bindPopup(
                     '<div class="property">' +
-                        '<a href="' + locations[i][5] + '">' +
-                            '<div class="property-image">' +
-                                '<img src="' + locations[i][6] + '">' +
-                            '</div>' +
+                        //'<a href="' + locations[i][5] + '">' +
+                            //'<div class="property-image">' +
+                            //    '<img src="' + locations[i][6] + '">' +
+                            //'</div>' +
                             '<div class="overlay">' +
                                 '<div class="info">' +
-                                    '<div class="tag price"> ' + locations[i][2] + '</div>' +
+                            //        '<div class="tag price"> ' + locations[i][2] + '</div>' +
                                     '<h3>' + locations[i][0] + '</h3>' +
-                                    '<figure>' + locations[i][1] + '</figure>' +
+                            //        '<figure>' + locations[i][1] + '</figure>' +
                                 '</div>' +
                             '</div>' +
-                        '</a>' +
+                        //'</a>' +
                     '</div>'
                 );
                 markers.addLayer(marker);
@@ -282,8 +282,150 @@ function createHomepageOSM(_latitude,_longitude){
                 $('body').removeClass('has-fullscreen-map');
             }, 1000);
             $('#map').removeClass('fade-map');
-        });
 
+
+
+            //-------------------------------------------------------------------------------------
+            // ----------
+            // CHOROPLETH
+
+            var geoJson;
+            function getColorCP(d) {
+                return d > 85000 ? '#800026' :
+                       d > 70000  ? '#BD0026' :
+                       d > 60000  ? '#E31A1C' :
+                       d > 45000  ? '#FC4E2A' :
+                       d > 30000   ? '#FD8D3C' :
+                       d > 10000   ? '#FEB24C' :
+                       d > 5000   ? '#FED976' :
+                                  '#FFEDA0';
+            }
+
+            function styleCP(feature) {
+                return {
+                    fillColor: getColorCP(feature.population),
+                    weight: 2,
+                    opacity: 1,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.1
+                };
+            }
+
+            function highlightFeatureCP(e) {
+                var layer = e.target;
+
+                layer.setStyle({
+                    weight: 5,
+                    color: '#666',
+                    dashArray: '',
+                    fillOpacity: 0.5
+                });
+
+                if (!L.Browser.ie && !L.Browser.opera) {
+                    layer.bringToFront();
+                }
+
+                info.update(layer.feature);
+            }
+
+            function resetHighlightCP(e) {
+                geojson.resetStyle(e.target);
+                info.update();
+            }
+
+            function clickOnCP(e) {
+                console.log(e.target.feature.id + " : " + e.target.feature.population)
+            }
+
+            function onEachFeatureCP(feature, layer) {
+                layer.on({
+                    mouseover: highlightFeatureCP,
+                    mouseout: resetHighlightCP,
+                    click: clickOnCP
+                });
+            }
+
+            d3.json("assets/js/data/cp.json", function(json) {
+
+                geojson = L.geoJson(json, {
+                    style: styleCP,
+                    onEachFeature: onEachFeatureCP
+                }).addTo(map);
+
+            });
+
+
+            var info = L.control();
+
+            info.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+                this.update();
+                return this._div;
+            };
+
+            // method that we will use to update the control based on feature properties passed
+            info.update = function (props) {
+                this._div.innerHTML = '<h4>Poblacion por codigo postal</h4>' +  (props ?
+                    '<b>' + props.id + '</b><br />' + props.population + ' personas'
+                    : 'Pasa el raton por un CP');
+            };
+
+            info.addTo(map);
+
+
+            var legend = L.control({position: 'bottomright'});
+
+            legend.onAdd = function (map) {
+
+                var div = L.DomUtil.create('div', 'info legend'),
+                    grades = [5000,10000,30000,45000,60000,70000,85000],
+                    labels = [];
+
+                // loop through our density intervals and generate a label with a colored square for each interval
+                for (var i = 0; i < grades.length; i++) {
+                    div.innerHTML +=
+                        '<i style="background:' + getColorCP(grades[i] + 1) + '"></i> ' +
+                        grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                }
+
+                return div;
+            };
+
+            legend.addTo(map);
+
+            // CHOROPLETH
+            // ----------
+
+
+            // ----------
+            // LEAFLET - DRAW
+
+            // Initialize the FeatureGroup to store editable layers
+            var drawnItems = new L.FeatureGroup();
+            map.addLayer(drawnItems);
+
+            // Initialize the draw control and pass it the FeatureGroup of editable layers
+            var drawControl = new L.Control.Draw({
+                edit: {
+                    featureGroup: drawnItems
+                }
+            });
+            map.addControl(drawControl);
+
+            map.on('draw:created', function (e) {
+                var type = e.layerType,
+                    layer = e.layer;
+                if (type === 'marker') {}
+                drawnItems.addLayer(layer);
+            });
+
+            //LEAFLET - DRAW
+            // ---------
+
+
+
+        });
     }
 }
 
