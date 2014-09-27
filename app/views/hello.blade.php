@@ -346,43 +346,7 @@
 		</div><!-- /.row-->
 	</div><!-- /.container -->
 </section><!-- /#price-drop -->
-<section id="our-services" class="block">
-	<div class="container">
-		<header class="section-title"><h2>Related Tweets nearby</h2></header>
-		<div class="row">
-			<div class="col-md-4 col-sm-4">
-				<div class="feature-box equal-height">
-					<figure class="icon"><i class="fa fa-folder"></i></figure>
-					<aside class="description">
-						<header><h3>Juan Luis Sanz</h3></header>
-						<p>OMG these shoes are #GORGEOUS</p>
-						<a href="properties-listing.html" class="link-arrow">@kadaki01</a>
-					</aside>
-				</div><!-- /.feature-box -->
-			</div><!-- /.col-md-4 -->
-			<div class="col-md-4 col-sm-4">
-				<div class="feature-box equal-height">
-					<figure class="icon"><i class="fa fa-users"></i></figure>
-					<aside class="description">
-						<header><h3>Jorge Lavin</h3></header>
-						<p>I love the Hollister shop here, I basically live here!</p>
-						<a href="agents-listing.html" class="link-arrow">@koke0117</a>
-					</aside>
-				</div><!-- /.feature-box -->
-			</div><!-- /.col-md-4 -->
-			<div class="col-md-4 col-sm-4">
-				<div class="feature-box equal-height">
-					<figure class="icon"><i class="fa fa-money"></i></figure>
-					<aside class="description">
-						<header><h3>Alvaro Sanchez</h3></header>
-						<p>What a delightful afternoon having a relaxing cup of coffe in the Plaza Mayor</p>
-						<a href="#" class="link-arrow">@alvarosata</a>
-					</aside>
-				</div><!-- /.feature-box -->
-			</div><!-- /.col-md-4 -->
-		</div><!-- /.row -->
-	</div><!-- /.container -->
-</section><!-- /#our-services -->
+
 <section id="new-properties" class="block">
 	<div class="container">
 		<header class="section-title">
@@ -667,6 +631,44 @@
 		</div><!-- /.row-->
 	</div><!-- /.container-->
 </section><!-- /#new-properties-->
+
+<section id="our-services" class="block">
+	<div class="container">
+		<header class="section-title"><h2>Related Tweets nearby</h2></header>
+		<div class="row">
+			<div class="col-md-4 col-sm-4">
+				<div class="feature-box equal-height">
+					<figure class="icon"><i class="fa fa-folder"></i></figure>
+					<aside class="description">
+						<header><h3>Juan Luis Sanz</h3></header>
+						<p>OMG these shoes are #GORGEOUS</p>
+						<a href="properties-listing.html" class="link-arrow">@kadaki01</a>
+					</aside>
+				</div><!-- /.feature-box -->
+			</div><!-- /.col-md-4 -->
+			<div class="col-md-4 col-sm-4">
+				<div class="feature-box equal-height">
+					<figure class="icon"><i class="fa fa-users"></i></figure>
+					<aside class="description">
+						<header><h3>Jorge Lavin</h3></header>
+						<p>I love the Hollister shop here, I basically live here!</p>
+						<a href="agents-listing.html" class="link-arrow">@koke0117</a>
+					</aside>
+				</div><!-- /.feature-box -->
+			</div><!-- /.col-md-4 -->
+			<div class="col-md-4 col-sm-4">
+				<div class="feature-box equal-height">
+					<figure class="icon"><i class="fa fa-money"></i></figure>
+					<aside class="description">
+						<header><h3>Alvaro Sanchez</h3></header>
+						<p>What a delightful afternoon having a relaxing cup of coffe in the Plaza Mayor</p>
+						<a href="#" class="link-arrow">@alvarosata</a>
+					</aside>
+				</div><!-- /.feature-box -->
+			</div><!-- /.col-md-4 -->
+		</div><!-- /.row -->
+	</div><!-- /.container -->
+</section><!-- /#our-services -->
 
 <section id="partners" class="block">
 	<div class="container">
