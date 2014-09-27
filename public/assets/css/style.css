@@ -3319,13 +3319,14 @@ ul.list-links li a:hover {
 .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content {
   border-bottom: 5px solid #fff;
   border-top: 5px solid #073855;
-  height: 206px;
+  /*height: 206px;*/
   width: 260px;
   margin: 0;
   overflow: hidden;
 }
 .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content .property {
   margin-bottom: 0;
+  background-color: #073855;
 }
 .leaflet-popup .leaflet-popup-content-wrapper .leaflet-popup-content .property:hover img {
   top: 0;
