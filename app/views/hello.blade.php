@@ -674,11 +674,10 @@
 	<div class="container">
 		<header class="section-title"><h2>Our Partners</h2></header>
 		<div class="logos">
-			<div class="logo"><a href=""><img src="assets/img/logo-partner-01.png" alt=""></a></div>
-			<div class="logo"><a href=""><img src="assets/img/logo-partner-02.png" alt=""></a></div>
-			<div class="logo"><a href=""><img src="assets/img/logo-partner-03.png" alt=""></a></div>
-			<div class="logo"><a href=""><img src="assets/img/logo-partner-04.png" alt=""></a></div>
-			<div class="logo"><a href=""><img src="assets/img/logo-partner-05.png" alt=""></a></div>
+			<div class="logo col-md-3 col-sm-3"><a href=""><img width="200" src="assets/img/partners/madrid_emprende.png" alt=""></a></div>
+			<div class="logo col-md-3 col-sm-3"><a href=""><img width="200" src="assets/img/partners/emt_alargado.gif" alt=""></a></div>
+			<div class="logo col-md-3 col-sm-3"><a href="http://www.idealista.com/"><img width="200" src="assets/img/partners/idealista.png" alt=""></a></div>
+			<div class="logo col-md-3 col-sm-3"><a href="http://www.idealista.com/labs/propertyMap.htm?action=json&k=1495facc6beff62d21a0282a6f8ac1f1&operation=sale&radio=40.41766848762555,-3.69614839553833&center=40.415914,-3.696148"><img width="200" src="assets/img/partners/logo_everis.jpg" alt=""></a></div>
 		</div>
 	</div><!-- /.container -->
 </section><!-- /#partners -->
