@@ -16,4 +16,4 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::get('/twitterapi', 'TwitterApiController@testMethod');
+Route::get('/twitterapi/{latitude}/{longitude}/{radius}', 'TwitterApiController@getTweets');

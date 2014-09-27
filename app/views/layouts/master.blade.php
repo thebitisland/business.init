@@ -49,7 +49,7 @@
 							<span class="icon-bar"></span>
 						</button>
 						<div class="navbar-brand nav" id="brand">
-							<a href="{{action('TwitterApiController@testMethod');}}"><img src="assets/img/logo.png" alt="brand"></a>
+							<a href="{{action('TwitterApiController@getTweets');}}"><img src="assets/img/logo.png" alt="brand"></a>
 						</div>
 					</div>
 					<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
