@@ -29,9 +29,8 @@
 			<div class="secondary-navigation">
 				<div class="container">
 					<div class="user-area">
-						<a href="create-agency.html" class="promoted">Create Agency</a>
-						<a href="create-account.html" class="promoted"><strong>Register</strong></a>
-						<a href="sign-in.html">Sign In</a>
+						<a href="#" class="promoted"><strong>Register (Coming soon!)</strong></a>
+						<a href="#">Sign In (Coming soon!)</a>
 						<div class="language-bar">
 							<a href="#" class="active"><img src="assets/img/flags/gb.png"></a>
 							<a href="#"><img src="assets/img/flags/de.png"></a>
@@ -50,34 +49,25 @@
 							<span class="icon-bar"></span>
 						</button>
 						<div class="navbar-brand nav" id="brand">
-							<a href="index-google-map-fullscreen.html"><img src="assets/img/logo.png" alt="brand"></a>
+							<a href="{{action('TwitterApiController@testMethod');}}"><img src="assets/img/logo.png" alt="brand"></a>
 						</div>
 					</div>
 					<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
 						<ul class="nav navbar-nav">
-							<li class="active has-child"><a href="#">Homepage</a>
+							<li class="active has-child"><a href="#">Projects</a>
 								<ul class="child-navigation">
-									<li><a href="index-google-map-fullscreen.html">Google Map Full Screen</a></li>
-									<li><a href="index-google-map-fixed-height.html">Google Map Fixed Height</a></li>
-									<li><a href="index-google-map-fixed-navigation.html">Google Map Fixed Navigation</a></li>
-									<li><a href="index-osm.html">OpenStreetMap Full Screen</a></li>
-									<li><a href="index-osm-fixed-height.html">OpenStreetMap Fixed Height</a></li>
-									<li><a href="index-osm-fixed-navigation.html">OpenStreetMap Fixed Navigation</a></li>
-									<li><a href="index-slider.html">Slider Homepage</a></li>
-									<li><a href="index-slider-search-box.html">Slider with Search Box</a></li>
-									<li><a href="index-horizontal-search-floated.html">Horizontal Search Floated</a></li>
-									<li><a href="index-advanced-horizontal-search.html">Horizontal Advanced Search</a></li>
-									<li><a href="index-slider-horizontal-search-box.html">Horizontal Slider Search</a></li>
-									<li><a href="index-slider-horizontal-search-box-floated.html">Horizontal Slider Floated Search</a></li>
+									<li><a href="#">Business.init()</a></li>
+									<li><a href="#">eDrive</a></li>
+
 								</ul>
 							</li>
 							<li><a href="about.html">About</a></li>
 							<li><a href="contact.html">Contact</a></li>
 						</ul>
 					</nav><!-- /.navbar collapse-->
-					<div class="add-your-property">
+					{{-- <div class="add-your-property">
 						<a href="submit.html" class="btn btn-default"><i class="fa fa-plus"></i><span class="text">Add Your Property</span></a>
-					</div>
+					</div> --}}
 				</header><!-- /.navbar -->
 			</div><!-- /.container -->
 		</div><!-- /.navigation -->
@@ -102,33 +92,13 @@
 								<form role="form" id="form-map" class="form-map form-search">
 									<h2>What do <b>you</b> want?</h2>
 									<div class="form-group">
-										<input type="text" class="form-control" id="search-box-property-id" placeholder="Property ID">
+										<input type="text" class="form-control" id="search-box-property-id" placeholder="Where?">
 									</div>
 									<div class="form-group">
 										<select name="type">
 											<option value="">Status</option>
 											<option value="1">Rent</option>
 											<option value="2">Sale</option>
-										</select>
-									</div><!-- /.form-group -->
-									<div class="form-group">
-										<select name="country">
-											<option value="">Country</option>
-											<option value="1">France</option>
-											<option value="2">Great Britain</option>
-											<option value="3">Spain</option>
-											<option value="4">Russia</option>
-											<option value="5">United States</option>
-										</select>
-									</div><!-- /.form-group -->
-									<div class="form-group">
-										<select name="city">
-											<option value="">City</option>
-											<option value="1">New York</option>
-											<option value="2">Los Angeles</option>
-											<option value="3">Chicago</option>
-											<option value="4">Houston</option>
-											<option value="5">Philadelphia</option>
 										</select>
 									</div><!-- /.form-group -->
 									<div class="form-group">
@@ -143,12 +113,12 @@
 									</div><!-- /.form-group -->
 									<div class="form-group">
 										<select name="property-type">
-											<option value="">Property Type</option>
-											<option value="1">Apartment</option>
-											<option value="2">Condominium</option>
-											<option value="3">Cottage</option>
-											<option value="4">Flat</option>
-											<option value="5">House</option>
+											<option value="">Business type</option>
+											<option value="1">Book stores</option>
+											<option value="2">Clothes</option>
+											<option value="3">Restaurants</option>
+											<option value="4">Electronics</option>
+											<option value="5">Music stores</option>
 										</select>
 									</div><!-- /.form-group -->
 									<div class="form-group">
