@@ -270,7 +270,13 @@ function createHomepageOSM(_latitude,_longitude){
             });
         }
 
-        //addMarkers("assets/js/locations_libreria.js");
+        $('#bus_type').change(function() {
+            if ($(this).val() == 1){
+                addMarkers("assets/js/locations_libreria.js");
+            }
+
+        });
+        
         
 
         map.on('locationfound', onLocationFound);

@@ -114,7 +114,7 @@
 										</select>
 									</div><!-- /.form-group -->
 									<div class="form-group">
-										<select name="property-type">
+										<select name="property-type" id="bus_type">
 											<option value="">Business type</option>
 											<option value="1">Book stores</option>
 											<option value="2">Clothes</option>
