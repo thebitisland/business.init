@@ -314,7 +314,6 @@ function createHomepageOSM(_latitude,_longitude){
             }
         });
         
-        
 
         map.on('locationfound', onLocationFound);
 
@@ -344,6 +343,7 @@ function createHomepageOSM(_latitude,_longitude){
         // CHOROPLETH
 
         var geoJson;
+        var cloroLayer;
         function getColorCP(d) {
             return d > 85000 ? '#800026' :
                    d > 70000  ? '#BD0026' :
@@ -362,7 +362,7 @@ function createHomepageOSM(_latitude,_longitude){
                 opacity: 1,
                 color: 'white',
                 dashArray: '3',
-                fillOpacity: 0.1
+                fillOpacity: 0.3
             };
         }
 
@@ -400,15 +400,40 @@ function createHomepageOSM(_latitude,_longitude){
             });
         }
 
-        d3.json("assets/js/data/cp.json", function(json) {
+        var loadCP = function(file, style){
+            d3.json(file, function(json) {
 
-            geojson = L.geoJson(json, {
-                style: styleCP,
-                onEachFeature: onEachFeatureCP
-            }).addTo(map);
+                geojson = L.geoJson(json, {
+                    style: style,
+                    onEachFeature: onEachFeatureCP
+                })//.addTo(map);
 
-        });
+                map.addLayer(geojson)
+                cloroLayer = geojson
+            });
+        }
 
+        function getColorRenta(d) {
+            return d > 27000 ? '#005824' :
+                   d > 25000  ? '#238b45' :
+                   d > 23500  ? '#41ae76' :
+                   d > 22000  ? '#66c2a4' :
+                   d > 20500   ? '#99d8c9' :
+                   d > 19500   ? '#ccece6' :
+                   d > 18000   ? '#e5f5f9' :
+                              '#f7fcfd';
+        }
+
+        function styleRenta(feature) {
+            return {
+                fillColor: getColorRenta(feature.population),
+                weight: 2,
+                opacity: 1,
+                color: 'white',
+                dashArray: '3',
+                fillOpacity: 0.3
+            };
+        }
 
         var info = L.control();
 
@@ -420,33 +445,73 @@ function createHomepageOSM(_latitude,_longitude){
 
         // method that we will use to update the control based on feature properties passed
         info.update = function (props) {
-            this._div.innerHTML = '<h4>Poblacion por codigo postal</h4>' +  (props ?
-                '<b>' + props.id + '</b><br />' + props.population + ' personas'
-                : 'Pasa el raton por un CP');
+            var info1, info2;
+            if (heatmap == 0){
+                info1 = "Population"
+                info2 = "people"
+            } else {
+                info1 = "Mean income"
+                info2 = "€/year"
+            }
+
+            this._div.innerHTML = '<h4>' + info1 + ' per postal code</h4>' +  (props ?
+                '<b>Postal code: ' + props.id + '</b><br />' + props.population + ' ' + info2
+                : 'Hover over a region to see more info');
         };
-
-        info.addTo(map);
-
 
         var legend = L.control({position: 'bottomright'});
 
         legend.onAdd = function (map) {
 
+            if (heatmap == 0){
+                var grade = [5000,10000,30000,45000,60000,70000,85000]
+                var getColor = getColorCP
+            } else {
+                var grade = [18000,19500,20500,22000,23500,25000,27000]
+                var getColor = getColorRenta
+            }
+
             var div = L.DomUtil.create('div', 'info legend'),
-                grades = [5000,10000,30000,45000,60000,70000,85000],
+                grades = grade,
                 labels = [];
 
             // loop through our density intervals and generate a label with a colored square for each interval
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
-                    '<i style="background:' + getColorCP(grades[i] + 1) + '"></i> ' +
+                    '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
                     grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
             }
 
             return div;
         };
 
+        
+        var heatmap = 0
+        loadCP("assets/js/data/cp_poblacion.json", styleCP);
         legend.addTo(map);
+        info.addTo(map);
+
+        $('#cloro_type').change(function() {
+
+            map.removeLayer(cloroLayer)
+            //map.removeLayer(legend)
+            legend.removeFrom(map)
+            info.removeFrom(map)
+            //map.removeLayer(info)
+
+            if ($(this).val() == 1){
+                heatmap = 0
+                loadCP("assets/js/data/cp_poblacion.json", styleCP);
+                legend.addTo(map);
+                info.addTo(map);
+            } else if ($(this).val() == 2){
+                heatmap = 1
+                loadCP("assets/js/data/cp_renta.json", styleRenta);
+                legend.addTo(map);
+                info.addTo(map);
+            }
+
+        });
 
         // CHOROPLETH
         // ----------
@@ -461,7 +526,12 @@ function createHomepageOSM(_latitude,_longitude){
 
         // Initialize the draw control and pass it the FeatureGroup of editable layers
         var drawControl = new L.Control.Draw({
-            edit: {
+            draw: {
+                polyline: false,
+                polygon: false,
+                rectangle: false,
+                marker: false
+            },edit: {
                 featureGroup: drawnItems
             }
         });
@@ -470,7 +540,11 @@ function createHomepageOSM(_latitude,_longitude){
         map.on('draw:created', function (e) {
             var type = e.layerType,
                 layer = e.layer;
-            if (type === 'marker') {}
+            if (type === 'circle') {
+
+                console.log(layer._latlng.lat + ":" + layer._latlng.lng)
+
+            }
             drawnItems.addLayer(layer);
         });
 
