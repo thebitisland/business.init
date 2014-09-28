@@ -639,7 +639,7 @@ var updateIdealista = function(latitude, longitude, radius){
                 item += '<div class="info">'
                 item += '<div class="tag price">'+value.price+'€</div>'
                 item += '<h3>'+value.address+'</h3>'
-                item += '<figure>Golden Valley, MN 55427</figure>'
+                item += '<figure>'+value.neighborhood+'</figure>'
                 item += '</div>'
                 item += '<ul class="additional-info">'
                 item += '<li>'
@@ -666,6 +666,9 @@ var updateIdealista = function(latitude, longitude, radius){
                 $('.owl-wrapper').append(item);
             };
 
+        }, 
+        error: function(){
+            $('.owl-wrapper').html('<h4>The idealista API is not available</h4>');
         }
 	});
 
