@@ -288,7 +288,7 @@ $(document).ready(function($) {
     }
 
     centerSearchBox();
-
+    updateIdealista(40.415914, -3.696148, 0.001);
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -615,3 +615,95 @@ function drawFooterThumbnails(){
         }
     });
 }
+
+var updateIdealista = function(latitude, longitude, radius){
+    $.ajax({
+        url: "http://business.thebitisland.com/idealistaapi/"+latitude+"/"+longitude+"/"+radius,
+        success: function(myData){
+            console.dir(myData);
+            $('.owl-wrapper').empty();
+            var i = 0;
+            //$.each(myData[1].elementList, function(index, value){
+            var max = (myData[1].elementList.length > 4)?5:myData[1].elementList.length
+            for (var i = 0; i < max ; i++) {
+                value = myData[1].elementList[i];
+                console.log(i + ' - ' + value);
+           var thumb = (value.thumbnail==="")?'assets/img/dummy.jpg':value.thumbnail;
+                var item = '<div class="owl-item" style="width: 381px;"><div style="max-height: 200px;" class="property big">'
+                item += '<a href="http://'+value.photosUrl+'">'
+                item += '<div class="property-image">'
+                item += '<img alt="" src="'+thumb+'">'
+                item += '</div>'
+                item += '<div class="overlay">'
+                item += '<div class="info">'
+                item += '<div class="tag price">'+value.price+'€</div>'
+                item += '<h3>'+value.address+'</h3>'
+                item += '<figure>Golden Valley, MN 55427</figure>'
+                item += '</div>'
+                item += '<ul class="additional-info">'
+                item += '<li>'
+                item += '<header>Area:</header>'
+                item += '<figure>'+value.size+'m<sup>2</sup></figure>'
+                item += '</li>'
+                item += '<li>'
+                item += '<header>Beds:</header>'
+                item += '<figure>'+value.rooms+'</figure>'
+                item += '</li>'
+                item += '<li>'
+                item += '<header>Baths:</header>'
+                item += '<figure>2</figure>'
+                item += '</li>'
+                item += '<li>'
+                item += '<header>Garages:</header>'
+                item += '<figure>0</figure>'
+                item += '</li>'
+                item += '</ul>'
+                item += '</div>'
+                item += '</a>'
+                item += '</div></div>'
+
+                $('.owl-wrapper').append(item);
+            };
+
+        }
+	});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

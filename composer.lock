@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a8c9bc04a5706bf54f2a6d2e62168e90",
+    "hash": "319969f41ceddda7b1646f1675182f47",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1623,6 +1623,53 @@
             "description": "Symfony Translation Component",
             "homepage": "http://symfony.com",
             "time": "2014-09-03 09:00:14"
+        },
+        {
+            "name": "unikent/curl",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/unikent/laravel-curl.git",
+                "reference": "b948661170086d91e35246046c87b9a1e2747782"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/unikent/laravel-curl/zipball/b948661170086d91e35246046c87b9a1e2747782",
+                "reference": "b948661170086d91e35246046c87b9a1e2747782",
+                "shasum": ""
+            },
+            "require": {
+                "lib-curl": "*",
+                "php": ">=5.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Curl": "libraries/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philip Sturgeon",
+                    "homepage": "http://philsturgeon.co.uk/code/codeigniter-curl"
+                },
+                {
+                    "name": "Isaak Mogetutu",
+                    "homepage": "http://twitter.com/mogetutu"
+                }
+            ],
+            "description": "Laravel Curl Helper Library.",
+            "homepage": "https://github.com/philsturgeon/codeigniter-curl",
+            "keywords": [
+                "curl",
+                "laravel",
+                "php"
+            ],
+            "time": "2013-03-04 11:02:43"
         }
     ],
     "packages-dev": [
@@ -1632,9 +1679,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "unikent/curl": 20
+    },
     "prefer-stable": false,
     "platform": [
 
