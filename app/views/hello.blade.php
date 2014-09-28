@@ -4,9 +4,200 @@
 <section id="featured-properties" class="featured-properties block background-color-grey-light carousel-full-width">
 	<div class="container">
 	<header class="section-title"><h2>Results</h2></header>
-	<header id="apinotworking" class="section-title"><h4>The Idealista API is not available at this time</h4></header>
 	</div><!-- /.container -->
 	<div class="owl-carousel featured-properties-carousel">
+		<div class="property big">
+			<a href="property-detail.html">
+				<div class="property-image">
+					<img alt="" src="assets/img/properties/property-01.jpg">
+				</div>
+				<div class="overlay">
+					<div class="info">
+						<div class="tag price">$ 11,000</div>
+						<h3>3398 Lodgeville Road</h3>
+						<figure>Golden Valley, MN 55427</figure>
+					</div>
+					<ul class="additional-info">
+						<li>
+							<header>Area:</header>
+							<figure>240m<sup>2</sup></figure>
+						</li>
+						<li>
+							<header>Beds:</header>
+							<figure>2</figure>
+						</li>
+						<li>
+							<header>Baths:</header>
+							<figure>2</figure>
+						</li>
+						<li>
+							<header>Garages:</header>
+							<figure>0</figure>
+						</li>
+					</ul>
+				</div>
+			</a>
+		</div><!-- /.property -->
+		<div class="property big">
+			<a href="property-detail.html">
+				<div class="property-image">
+					<img alt="" src="assets/img/properties/property-02.jpg">
+				</div>
+				<div class="overlay">
+					<div class="info">
+						<div class="tag price">$ 16,000</div>
+						<h3>987 Cantebury Drive</h3>
+						<figure>Chicago, IL 60610 </figure>
+					</div>
+					<ul class="additional-info">
+						<li>
+							<header>Area:</header>
+							<figure>120m<sup>2</sup></figure>
+						</li>
+						<li>
+							<header>Beds:</header>
+							<figure>1</figure>
+						</li>
+						<li>
+							<header>Baths:</header>
+							<figure>1</figure>
+						</li>
+						<li>
+							<header>Garages:</header>
+							<figure>1</figure>
+						</li>
+					</ul>
+				</div>
+			</a>
+		</div><!-- /.property -->
+		<div class="property big">
+			<a href="property-detail.html">
+				<div class="property-image">
+					<img alt="" src="assets/img/properties/property-03.jpg">
+				</div>
+				<div class="overlay">
+					<div class="info">
+						<div class="tag price">$ 28,500</div>
+						<h3>1866 Clement Street</h3>
+						<figure>Atlanta, GA 30303 </figure>
+					</div>
+					<ul class="additional-info">
+						<li>
+							<header>Area:</header>
+							<figure>120m<sup>2</sup></figure>
+						</li>
+						<li>
+							<header>Beds:</header>
+							<figure>1</figure>
+						</li>
+						<li>
+							<header>Baths:</header>
+							<figure>1</figure>
+						</li>
+						<li>
+							<header>Garages:</header>
+							<figure>1</figure>
+						</li>
+					</ul>
+				</div>
+			</a>
+		</div><!-- /.property -->
+		<div class="property big">
+			<a href="property-detail.html">
+				<div class="property-image">
+					<img alt="" src="assets/img/properties/property-04.jpg">
+				</div>
+				<div class="overlay">
+					<div class="info">
+						<div class="tag price">$ 268,800</div>
+						<h3>2186 Rinehart Road</h3>
+						<figure>Doral, FL 33178 </figure>
+					</div>
+					<ul class="additional-info">
+						<li>
+							<header>Area:</header>
+							<figure>620m<sup>2</sup></figure>
+						</li>
+						<li>
+							<header>Beds:</header>
+							<figure>3</figure>
+						</li>
+						<li>
+							<header>Baths:</header>
+							<figure>2</figure>
+						</li>
+						<li>
+							<header>Garages:</header>
+							<figure>2</figure>
+						</li>
+					</ul>
+				</div>
+			</a>
+		</div><!-- /.property -->
+		<div class="property big">
+			<a href="property-detail.html">
+				<div class="property-image">
+					<img alt="" src="assets/img/properties/property-05.jpg">
+				</div>
+				<div class="overlay">
+					<div class="info">
+						<div class="tag price">$ 28,500</div>
+						<h3>1866 Clement Street</h3>
+						<figure>Atlanta, GA 30303 </figure>
+					</div>
+					<ul class="additional-info">
+						<li>
+							<header>Area:</header>
+							<figure>120m<sup>2</sup></figure>
+						</li>
+						<li>
+							<header>Beds:</header>
+							<figure>1</figure>
+						</li>
+						<li>
+							<header>Baths:</header>
+							<figure>1</figure>
+						</li>
+						<li>
+							<header>Garages:</header>
+							<figure>1</figure>
+						</li>
+					</ul>
+				</div>
+			</a>
+		</div><!-- /.property -->
+		<div class="property big">
+			<a href="property-detail.html">
+				<div class="property-image">
+					<img alt="" src="assets/img/properties/property-03.jpg">
+				</div>
+				<div class="overlay">
+					<div class="info">
+						<div class="tag price">$ 28,500</div>
+						<h3>1866 Clement Street</h3>
+						<figure>Atlanta, GA 30303 </figure>
+					</div>
+					<ul class="additional-info">
+						<li>
+							<header>Area:</header>
+							<figure>120m<sup>2</sup></figure>
+						</li>
+						<li>
+							<header>Beds:</header>
+							<figure>1</figure>
+						</li>
+						<li>
+							<header>Baths:</header>
+							<figure>1</figure>
+						</li>
+						<li>
+							<header>Garages:</header>
+							<figure>1</figure>
+						</li>
+					</ul>
+				</div>
+			</a>
+		</div><!-- /.property -->
 	</div>
 </section><!-- /#featured-properties -->
 <section id="price-drop" class="block">
