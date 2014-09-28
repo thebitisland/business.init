@@ -104,13 +104,10 @@
 										</select>
 									</div><!-- /.form-group -->
 									<div class="form-group">
-										<select name="district">
-											<option value="">District</option>
-											<option value="1">Manhattan</option>
-											<option value="2">The Bronx</option>
-											<option value="3">Brooklyn</option>
-											<option value="4">Queens</option>
-											<option value="5">Staten Island</option>
+										<select name="district" id="cloro_type">
+											<option value="">MapOptions</option>
+											<option value="1">Population</option>
+											<option value="2">Income</option>
 										</select>
 									</div><!-- /.form-group -->
 									<div class="form-group">
