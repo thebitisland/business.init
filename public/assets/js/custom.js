@@ -622,6 +622,7 @@ var updateIdealista = function(latitude, longitude, radius){
         success: function(myData){
             console.dir(myData);
             $('.owl-wrapper').empty();
+            $('#apinotworking').remove();
             var i = 0;
             //$.each(myData[1].elementList, function(index, value){
             var max = (myData[1].elementList.length > 4)?5:myData[1].elementList.length
