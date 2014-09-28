@@ -212,12 +212,13 @@ function contactUsMap(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // OpenStreetMap - Homepage
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+var map;
+var layers = [];
 function createHomepageOSM(_latitude,_longitude){
     setMapHeight();
     if( document.getElementById('map') != null ){
         
-        var map = L.map('map', {
+        map = L.map('map', {
             center: [_latitude,_longitude],
             zoom: 15,
             scrollWheelZoom: true
@@ -229,15 +230,30 @@ function createHomepageOSM(_latitude,_longitude){
         }).addTo(map);
 
 
-        var addMarkers = function(file){
+        var addMarkers = function(file, cluster){
+            var markers;
             $.getScript(file, function(){
             
-                var markers = L.markerClusterGroup({
-                    showCoverageOnHover: false
+                if (cluster == false)
+                    var zoomLevelCluster = 1;
+                else 
+                    var zoomLevelCluster = 33;
+
+                markers = L.markerClusterGroup({
+                    showCoverageOnHover: false,
+                    disableClusteringAtZoom: zoomLevelCluster
+
                 });
+
                 for (var i = 0; i < locations.length; i++) {
+
+                    if (cluster == true)
+                        mHtml = '<i style="font-size:20px; padding-top:9px; padding-left:9px;" class="fa ' + locations[i][3] + '"></i>'
+                    else
+                        mHtml = '<i style="color:red; font-size:20px; padding-top:9px; padding-left:9px;" class="fa ' + locations[i][3] + '"></i>'
+
                     var _icon = L.divIcon({
-                        html: '<i style="font-size:20px; padding-top:10px; padding-left:10px;" class="fa ' + locations[i][3] + '"></i>', //'<img src="' + locations[i][7] +'">',
+                        html: mHtml, //'<img src="' + locations[i][7] +'">',
                         iconSize:     [40, 48],
                         iconAnchor:   [20, 48],
                         popupAnchor:  [0, -48]
@@ -267,14 +283,35 @@ function createHomepageOSM(_latitude,_longitude){
                 }
 
                 map.addLayer(markers);
+                layers.push(markers);
             });
+            return markers;
         }
 
         $('#bus_type').change(function() {
             if ($(this).val() == 1){
-                addMarkers("assets/js/locations_libreria.js");
+                addMarkers("assets/js/locations_libreria.js", true);
+                addMarkers("assets/js/locations_bibliotecas.js", true);
             }
 
+        });
+
+        addMarkers("assets/js/locations_renfe.js", false);
+        addMarkers("assets/js/locations_metro.js", false);
+        var metro = 1;
+
+        map.on('zoomend', function(e) {
+            if (map.getZoom() >= 15) {
+                if (metro == 0) {
+                    map.addLayer(layers[0]);
+                    map.addLayer(layers[1]);
+                    metro = 1
+                }
+            } else {
+                map.removeLayer(layers[0]);
+                map.removeLayer(layers[1]);
+                metro = 0;
+            }
         });
         
         
