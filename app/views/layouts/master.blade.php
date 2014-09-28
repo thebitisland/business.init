@@ -185,7 +185,6 @@
 						</div><!-- /.row -->
 					</div><!-- /.container -->
 				</section><!-- /#footer-main -->
-				<section id="footer-thumbnails" class="footer-thumbnails"></section><!-- /#footer-thumbnails -->
 				<section id="footer-copyright">
 					<div class="container">
 						<span>Copyright © 2014. All Rights Reserved.</span>
@@ -229,6 +228,7 @@
 	window._latitude = 40.4102716;
 	window._longitude =-3.6936405;
 	createHomepageOSM(window._latitude,window._longitude);
+	updateIdealista(window._latitude, window._longitude, 0.001);
 </script>
 </body>
 </html>

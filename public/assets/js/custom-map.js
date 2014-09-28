@@ -543,6 +543,8 @@ function createHomepageOSM(_latitude,_longitude){
             if (type === 'circle') {
 
                 console.log(layer._latlng.lat + ":" + layer._latlng.lng)
+                //updateIdealista(40.415914, -3.696148, 0.001);
+                updateIdealista(layer._latlng.lat, layer._latlng.lng, 0.001);
 
             }
             drawnItems.addLayer(layer);
