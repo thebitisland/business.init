@@ -3252,16 +3252,35 @@ ul.list-links li a:hover {
   z-index: -1;
 }
 
-.leaflet-div-icon {
+.leaflet-div-icon.blue {
   -moz-transition: 0.4s;
   -webkit-transition: 0.4s;
   transition: 0.4s;
   background-color: transparent;
   border: none;
-  background-image: url("../img/marker.png");
+  background-image: url("../img/marker_blue.png");
 }
-.leaflet-div-icon:after {
+
+.leaflet-div-icon.green {
   -moz-transition: 0.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  background-color: transparent;
+  border: none;
+  background-image: url("../img/marker_green.png");
+}
+
+.leaflet-div-icon.red {
+  -moz-transition: 0.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  background-color: transparent;
+  border: none;
+  background-image: url("../img/marker_red.png");
+}
+
+.leaflet-div-icon:after {
+  /*-moz-transition: 0.4s;
   -webkit-transition: 0.4s;
   transition: 0.4s;
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
@@ -3269,15 +3288,15 @@ ul.list-links li a:hover {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
-  border: 3px solid #1396e2;
+  border: 2px solid #1396e2;
   content: "";
   display: block;
-  height: 34px;
-  left: 3px;
+  height: 22px;
+  left: 2px;
   position: absolute;
-  top: 3px;
-  width: 34px;
-  z-index: 2;
+  top: 2px;
+  width: 22px;
+  z-index: 2;*/
 }
 .leaflet-div-icon:hover {
   top: -5px;
@@ -3465,7 +3484,7 @@ ul.list-links li a:hover {
   position: relative;
 }
 
-.marker-cluster {
+.marker-cluster.blue {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
@@ -3481,6 +3500,41 @@ ul.list-links li a:hover {
   font-weight: bold;
   line-height: 38px;
 }
+
+.marker-cluster.green {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-transition: 0.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  color: #fff;
+  width: 32px;
+  height: 38px;
+  background-color: #39b54a;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 38px;
+}
+
+.marker-cluster.red{
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -moz-transition: 0.4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  color: #fff;
+  width: 32px;
+  height: 38px;
+  background-color: #ec565c;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 38px;
+}
+
 .marker-cluster:hover {
   background-color: #073855;
 }
