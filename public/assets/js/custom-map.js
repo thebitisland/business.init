@@ -5,220 +5,16 @@ $.ajaxSetup({
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Google Map - Homepage
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function createHomepageGoogleMap(_latitude,_longitude){
-    setMapHeight();
-    if( document.getElementById('map') != null ){
-        $.getScript("assets/js/locations.js", function(){
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 14,
-                scrollwheel: false,
-                center: new google.maps.LatLng(_latitude, _longitude),
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                styles: mapStyles
-            });
-            var i;
-            var newMarkers = [];
-            for (i = 0; i < locations.length; i++) {
-                var pictureLabel = document.createElement("img");
-                pictureLabel.src = locations[i][7];
-                var boxText = document.createElement("div");
-                infoboxOptions = {
-                    content: boxText,
-                    disableAutoPan: false,
-                    //maxWidth: 150,
-                    pixelOffset: new google.maps.Size(-100, 0),
-                    zIndex: null,
-                    alignBottom: true,
-                    boxClass: "infobox-wrapper",
-                    enableEventPropagation: true,
-                    closeBoxMargin: "0px 0px -8px 0px",
-                    closeBoxURL: "assets/img/close-btn.png",
-                    infoBoxClearance: new google.maps.Size(1, 1)
-                };
-                var marker = new MarkerWithLabel({
-                    title: locations[i][0],
-                    position: new google.maps.LatLng(locations[i][3], locations[i][4]),
-                    map: map,
-                    icon: 'assets/img/marker.png',
-                    labelContent: pictureLabel,
-                    labelAnchor: new google.maps.Point(50, 0),
-                    labelClass: "marker-style"
-                });
-                newMarkers.push(marker);
-                boxText.innerHTML =
-                    '<div class="infobox-inner">' +
-                        '<a href="' + locations[i][5] + '">' +
-                        '<div class="infobox-image" style="position: relative">' +
-                        '<img src="' + locations[i][6] + '">' + '<div><span class="infobox-price">' + locations[i][2] + '</span></div>' +
-                        '</div>' +
-                        '</a>' +
-                        '<div class="infobox-description">' +
-                        '<div class="infobox-title"><a href="'+ locations[i][5] +'">' + locations[i][0] + '</a></div>' +
-                        '<div class="infobox-location">' + locations[i][1] + '</div>' +
-                        '</div>' +
-                        '</div>';
-                //Define the infobox
-                newMarkers[i].infobox = new InfoBox(infoboxOptions);
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                        for (h = 0; h < newMarkers.length; h++) {
-                            newMarkers[h].infobox.close();
-                        }
-                        newMarkers[i].infobox.open(map, this);
-                    }
-                })(marker, i));
-
-            }
-            var clusterStyles = [
-                {
-                    url: 'assets/img/cluster.png',
-                    height: 37,
-                    width: 37
-                }
-            ];
-            var markerCluster = new MarkerClusterer(map, newMarkers, {styles: clusterStyles, maxZoom: 15});
-            $('body').addClass('loaded');
-            setTimeout(function() {
-                $('body').removeClass('has-fullscreen-map');
-            }, 1000);
-            $('#map').removeClass('fade-map');
-
-            //  Dynamically show/hide markers --------------------------------------------------------------
-
-            google.maps.event.addListener(map, 'idle', function() {
-
-                for (var i=0; i < locations.length; i++) {
-                    if ( map.getBounds().contains(newMarkers[i].getPosition()) ){
-                        // newMarkers[i].setVisible(true); // <- Uncomment this line to use dynamic displaying of markers
-
-                        //newMarkers[i].setMap(map);
-                        //markerCluster.setMap(map);
-                    } else {
-                        // newMarkers[i].setVisible(false); // <- Uncomment this line to use dynamic displaying of markers
-
-                        //newMarkers[i].setMap(null);
-                        //markerCluster.setMap(null);
-                    }
-                }
-            });
-
-            // Function which set marker to the user position
-            function success(position) {
-                var center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                map.panTo(center);
-                $('#map').removeClass('fade-map');
-            }
-
-        });
-        // Enable Geo Location on button click
-        $('.geo-location').on("click", function() {
-            if (navigator.geolocation) {
-                $('#map').addClass('fade-map');
-                navigator.geolocation.getCurrentPosition(success);
-            } else {
-                error('Geo Location is not supported');
-            }
-        });
-    }
-}
-
-// Function which set marker to the user position
-function success(position) {
-    createHomepageGoogleMap(position.coords.latitude, position.coords.longitude);
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Google Map - Property Detail
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function initMap(propertyId) {
-    $.getScript("assets/js/locations.js", function(){
-        var subtractPosition = 0;
-        var mapWrapper = $('#property-detail-map.float');
-
-        if (document.documentElement.clientWidth > 1200) {
-            subtractPosition = 0.013;
-        }
-        if (document.documentElement.clientWidth < 1199) {
-            subtractPosition = 0.006;
-        }
-        if (document.documentElement.clientWidth < 979) {
-            subtractPosition = 0.001;
-        }
-        if (document.documentElement.clientWidth < 767) {
-            subtractPosition = 0;
-        }
-
-        var mapCenter = new google.maps.LatLng(locations[propertyId][3],locations[propertyId][4]);
-
-        if ( $("#property-detail-map").hasClass("float") ) {
-            mapCenter = new google.maps.LatLng(locations[propertyId][3],locations[propertyId][4] - subtractPosition);
-            mapWrapper.css('width', mapWrapper.width() + mapWrapper.offset().left )
-        }
-
-        var mapOptions = {
-            zoom: 15,
-            center: mapCenter,
-            disableDefaultUI: false,
-            scrollwheel: false,
-            styles: mapStyles
-        };
-        var mapElement = document.getElementById('property-detail-map');
-        var map = new google.maps.Map(mapElement, mapOptions);
-
-        var pictureLabel = document.createElement("img");
-        pictureLabel.src = locations[propertyId][7];
-        var markerPosition = new google.maps.LatLng(locations[propertyId][3],locations[propertyId][4]);
-        var marker = new MarkerWithLabel({
-            position: markerPosition,
-            map: map,
-            icon: 'assets/img/marker.png',
-            labelContent: pictureLabel,
-            labelAnchor: new google.maps.Point(50, 0),
-            labelClass: "marker-style"
-        });
-    });
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Google Map - Contact
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function contactUsMap(){
-    var mapCenter = new google.maps.LatLng(_latitude,_longitude);
-    var mapOptions = {
-        zoom: 15,
-        center: mapCenter,
-        disableDefaultUI: false,
-        scrollwheel: false,
-        styles: mapStyles
-    };
-    var mapElement = document.getElementById('contact-map');
-    var map = new google.maps.Map(mapElement, mapOptions);
-
-    var marker = new MarkerWithLabel({
-        position: mapCenter,
-        map: map,
-        icon: 'assets/img/marker.png',
-        //labelContent: pictureLabel,
-        labelAnchor: new google.maps.Point(50, 0),
-        labelClass: "marker-style"
-    });
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // OpenStreetMap - Homepage
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var map;
-var layers = [];
+var self = {};
+self.layers = [];
+
 function createHomepageOSM(_latitude,_longitude){
     setMapHeight();
     if( document.getElementById('map') != null ){
         
-        map = L.map('map', {
+        self.map = L.map('map', {
             center: [_latitude,_longitude],
             zoom: 15,
             scrollWheelZoom: true
@@ -227,10 +23,14 @@ function createHomepageOSM(_latitude,_longitude){
             //L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
             //subdomains: '0123',
             attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-        }).addTo(map);
+        }).addTo(self.map);
 
 
-        var addMarkers = function(file, cluster){
+        //-------------------------------------------------------------------------------------
+        // ----------
+        // MARKERS
+
+        var addMarkers = function(file, cluster, color){
             var markers;
             $.getScript(file, function(){
             
@@ -239,24 +39,41 @@ function createHomepageOSM(_latitude,_longitude){
                 else 
                     var zoomLevelCluster = 33;
 
+                var iconCreateFunction = function (cluster) {
+                    var childCount = cluster.getChildCount();
+            
+                    var c = ' marker-cluster-';
+                    if (childCount < 10) {
+                        c += 'small';
+                    } else if (childCount < 100) {
+                        c += 'medium';
+                    } else {
+                        c += 'large';
+                    }
+            
+                    return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster ' + color + c, iconSize: new L.Point(40, 40) });
+                }
+
                 markers = L.markerClusterGroup({
                     showCoverageOnHover: false,
-                    disableClusteringAtZoom: zoomLevelCluster
+                    disableClusteringAtZoom: zoomLevelCluster,
+                    iconCreateFunction: iconCreateFunction
 
                 });
 
                 for (var i = 0; i < locations.length; i++) {
 
                     if (cluster == true)
-                        mHtml = '<i style="font-size:20px; padding-top:9px; padding-left:9px;" class="fa ' + locations[i][3] + '"></i>'
+                        mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:6px;" class="fa ' + locations[i][3] + '"></i>'
                     else
-                        mHtml = '<i style="color:red; font-size:20px; padding-top:9px; padding-left:9px;" class="fa ' + locations[i][3] + '"></i>'
+                        mHtml = '<i style="color:red; font-size:13px; padding-top:7px; padding-left:7px;" class="fa ' + locations[i][3] + '"></i>'
 
                     var _icon = L.divIcon({
                         html: mHtml, //'<img src="' + locations[i][7] +'">',
-                        iconSize:     [40, 48],
-                        iconAnchor:   [20, 48],
-                        popupAnchor:  [0, -48]
+                        iconSize:     [40*0.65, 48*0.65],
+                        iconAnchor:   [20*0.65, 48*0.65],
+                        popupAnchor:  [0, -48*0.65],
+                        className: "leaflet-div-icon "+color
                     });
                     var title = locations[i][0];
                     var marker = L.marker(new L.LatLng(locations[i][2],locations[i][1]), {
@@ -282,44 +99,52 @@ function createHomepageOSM(_latitude,_longitude){
                     markers.addLayer(marker);
                 }
 
-                map.addLayer(markers);
-                layers.push(markers);
+                self.map.addLayer(markers);
+                self.layers.push(markers);
             });
             return markers;
         }
 
         $('#bus_type').change(function() {
             if ($(this).val() == 1){
-                addMarkers("assets/js/locations_libreria.js", true);
-                addMarkers("assets/js/locations_bibliotecas.js", true);
+                addMarkers("assets/js/data/locations_libreria.js", true, "red");
+                addMarkers("assets/js/data/locations_bibliotecas.js", true, "green");
             }
 
         });
 
-        addMarkers("assets/js/locations_renfe.js", false);
-        addMarkers("assets/js/locations_metro.js", false);
+        addMarkers("assets/js/data/locations_renfe.js", false, "blue");
+        addMarkers("assets/js/data/locations_metro.js", false, "blue");
         var metro = 1;
 
-        map.on('zoomend', function(e) {
-            if (map.getZoom() >= 15) {
+        self.map.on('zoomend', function(e) {
+            if (self.map.getZoom() >= 15) {
                 if (metro == 0) {
-                    map.addLayer(layers[0]);
-                    map.addLayer(layers[1]);
+                    self.map.addLayer(self.layers[0]);
+                    self.map.addLayer(self.layers[1]);
                     metro = 1
                 }
             } else {
-                map.removeLayer(layers[0]);
-                map.removeLayer(layers[1]);
+                self.map.removeLayer(self.layers[0]);
+                self.map.removeLayer(self.layers[1]);
                 metro = 0;
             }
         });
-        
 
-        map.on('locationfound', onLocationFound);
+        // MARKERS
+        // ----------
+        //-------------------------------------------------------------------------------------
+
+
+        //-------------------------------------------------------------------------------------
+        // ----------
+        // LOCATE MYSELF
+
+        self.map.on('locationfound', onLocationFound);
 
         function locateUser() {
             $('#map').addClass('fade-map');
-            map.locate({setView : true})
+            self.map.locate({setView : true})
         }
 
         function onLocationFound(){
@@ -336,7 +161,10 @@ function createHomepageOSM(_latitude,_longitude){
         }, 1000);
         $('#map').removeClass('fade-map');
 
-
+        // LOCATE MYSELF
+        // ----------
+        //-------------------------------------------------------------------------------------
+        
 
         //-------------------------------------------------------------------------------------
         // ----------
@@ -344,20 +172,34 @@ function createHomepageOSM(_latitude,_longitude){
 
         var geoJson;
         var cloroLayer;
-        function getColorCP(d) {
-            return d > 85000 ? '#800026' :
-                   d > 70000  ? '#BD0026' :
-                   d > 60000  ? '#E31A1C' :
-                   d > 45000  ? '#FC4E2A' :
-                   d > 30000   ? '#FD8D3C' :
-                   d > 10000   ? '#FEB24C' :
-                   d > 5000   ? '#FED976' :
-                              '#FFEDA0';
+
+        self.color_population = d3.scale.linear().domain([0,75000]).range(['#DCD100', '#DC0B00']).clamp(true);
+        self.color_renta = d3.scale.linear().domain([18000,27000]).range(['#21F600', '#1B1BF0']).clamp(true);
+        function getColor(d) {
+            if (self.heatmap == 0) {
+                return self.color_population(d)
+            } else {
+                return self.color_renta(d);
+            }
         }
 
-        function styleCP(feature) {
+        function getValue(feature){
+            if (self.heatmap == 0){
+                var population = 0;
+                for (var key in feature.properties.population) {
+                    for (var key2 in feature.properties.population[key]){
+                        population += feature.properties.population[key][key2];
+                    }
+                }
+                return population;
+            } else{
+                return feature.properties.renta;
+            }
+        }
+
+        function styleCloropleth(feature) {
             return {
-                fillColor: getColorCP(feature.population),
+                fillColor: getColor(getValue(feature)),
                 weight: 2,
                 opacity: 1,
                 color: 'white',
@@ -366,7 +208,18 @@ function createHomepageOSM(_latitude,_longitude){
             };
         }
 
-        function highlightFeatureCP(e) {
+        function styleCloropleth(feature) {
+            return {
+                fillColor: getColor(getValue(feature)),
+                weight: 2,
+                opacity: 1,
+                color: 'white',
+                dashArray: '3',
+                fillOpacity: 0.3
+            };
+        }
+
+        function highlightFeature(e) {
             var layer = e.target;
 
             layer.setStyle({
@@ -383,56 +236,34 @@ function createHomepageOSM(_latitude,_longitude){
             info.update(layer.feature);
         }
 
-        function resetHighlightCP(e) {
+        function resetHighlight(e) {
             geojson.resetStyle(e.target);
             info.update();
         }
 
-        function clickOnCP(e) {
-            console.log(e.target.feature.id + " : " + e.target.feature.population)
+        function clickOnDistrit(e) {
+            console.log(e.target.feature.properties.DESBDT + " : " + getValue(e.target.feature) + " : " + e.latlng.lat + "|" + e.latlng.lng)
         }
 
-        function onEachFeatureCP(feature, layer) {
+        function onEachFeature(feature, layer) {
             layer.on({
-                mouseover: highlightFeatureCP,
-                mouseout: resetHighlightCP,
-                click: clickOnCP
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+                click: clickOnDistrit
             });
         }
 
-        var loadCP = function(file, style){
+        var loadCloropleth = function(file, style){
             d3.json(file, function(json) {
 
                 geojson = L.geoJson(json, {
                     style: style,
-                    onEachFeature: onEachFeatureCP
+                    onEachFeature: onEachFeature
                 })//.addTo(map);
 
-                map.addLayer(geojson)
+                self.map.addLayer(geojson)
                 cloroLayer = geojson
             });
-        }
-
-        function getColorRenta(d) {
-            return d > 27000 ? '#005824' :
-                   d > 25000  ? '#238b45' :
-                   d > 23500  ? '#41ae76' :
-                   d > 22000  ? '#66c2a4' :
-                   d > 20500   ? '#99d8c9' :
-                   d > 19500   ? '#ccece6' :
-                   d > 18000   ? '#e5f5f9' :
-                              '#f7fcfd';
-        }
-
-        function styleRenta(feature) {
-            return {
-                fillColor: getColorRenta(feature.population),
-                weight: 2,
-                opacity: 1,
-                color: 'white',
-                dashArray: '3',
-                fillOpacity: 0.3
-            };
         }
 
         var info = L.control();
@@ -446,7 +277,7 @@ function createHomepageOSM(_latitude,_longitude){
         // method that we will use to update the control based on feature properties passed
         info.update = function (props) {
             var info1, info2;
-            if (heatmap == 0){
+            if (self.heatmap == 0){
                 info1 = "Population"
                 info2 = "people"
             } else {
@@ -455,7 +286,7 @@ function createHomepageOSM(_latitude,_longitude){
             }
 
             this._div.innerHTML = '<h4>' + info1 + ' per postal code</h4>' +  (props ?
-                '<b>Postal code: ' + props.id + '</b><br />' + props.population + ' ' + info2
+                '<b>Distrit: ' + props.properties.DESBDT.split(" ").pop() + '</b><br />' + getValue(props) + ' ' + info2
                 : 'Hover over a region to see more info');
         };
 
@@ -463,12 +294,10 @@ function createHomepageOSM(_latitude,_longitude){
 
         legend.onAdd = function (map) {
 
-            if (heatmap == 0){
+            if (self.heatmap == 0){
                 var grade = [5000,10000,30000,45000,60000,70000,85000]
-                var getColor = getColorCP
             } else {
                 var grade = [18000,19500,20500,22000,23500,25000,27000]
-                var getColor = getColorRenta
             }
 
             var div = L.DomUtil.create('div', 'info legend'),
@@ -486,31 +315,21 @@ function createHomepageOSM(_latitude,_longitude){
         };
 
         
-        var heatmap = 0
-        loadCP("assets/js/data/cp_poblacion.json", styleCP);
-        legend.addTo(map);
-        info.addTo(map);
+        self.heatmap = 0
+        loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth);
+        legend.addTo(self.map);
+        info.addTo(self.map);
 
         $('#cloro_type').change(function() {
 
-            map.removeLayer(cloroLayer)
-            //map.removeLayer(legend)
-            legend.removeFrom(map)
-            info.removeFrom(map)
-            //map.removeLayer(info)
+            self.map.removeLayer(cloroLayer)
+            legend.removeFrom(self.map)
+            info.removeFrom(self.map)
 
-            if ($(this).val() == 1){
-                heatmap = 0
-                loadCP("assets/js/data/cp_poblacion.json", styleCP);
-                legend.addTo(map);
-                info.addTo(map);
-            } else if ($(this).val() == 2){
-                heatmap = 1
-                loadCP("assets/js/data/cp_renta.json", styleRenta);
-                legend.addTo(map);
-                info.addTo(map);
-            }
-
+            self.heatmap = $(this).val()-1
+            loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth);
+            legend.addTo(self.map);
+            info.addTo(self.map);
         });
 
         // CHOROPLETH
@@ -522,7 +341,7 @@ function createHomepageOSM(_latitude,_longitude){
 
         // Initialize the FeatureGroup to store editable layers
         var drawnItems = new L.FeatureGroup();
-        map.addLayer(drawnItems);
+        self.map.addLayer(drawnItems);
 
         // Initialize the draw control and pass it the FeatureGroup of editable layers
         var drawControl = new L.Control.Draw({
@@ -535,9 +354,9 @@ function createHomepageOSM(_latitude,_longitude){
                 featureGroup: drawnItems
             }
         });
-        map.addControl(drawControl);
+        self.map.addControl(drawControl);
 
-        map.on('draw:created', function (e) {
+        self.map.on('draw:created', function (e) {
             var type = e.layerType,
                 layer = e.layer;
             if (type === 'circle') {

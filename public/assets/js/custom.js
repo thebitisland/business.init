@@ -508,7 +508,7 @@ function centerSearchBox() {
         $('#map, #slider').css('margin-top',$navigation.height());
         $searchBox.css('z-index',98);
     } else {
-        $('.leaflet-map-pane').css('top',-50);
+        $('.leaflet-map-pane').css('top',0); //-50
         $(".homepage-slider").css('margin-top', -$('.navigation header').height());
     }
     if ($(window).width() > 768) {
@@ -585,6 +585,7 @@ function equalHeight(container){
 
 function drawFooterThumbnails(){
 
+    /*
     var i = 0;
     var rows = 1; // how many rows to display, default = 1
     var thumbnailsPerRow = 1; // how many thumbnails per row to display, default = 1
@@ -613,6 +614,7 @@ function drawFooterThumbnails(){
             createThumbnail();
         }
     });
+    */
 }
 
 var updateIdealista = function(latitude, longitude, radius){
