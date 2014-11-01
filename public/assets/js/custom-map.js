@@ -318,7 +318,6 @@ function createHomepageOSM(_latitude,_longitude){
                 })//.addTo(map);
 
                 self.map.addLayer(self.geojson)
-                self.geojson = self.geojson
                 self.legend.addTo(self.map);
                 self.info.addTo(self.map);
             });
