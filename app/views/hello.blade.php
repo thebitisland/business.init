@@ -523,7 +523,7 @@
 	</div><!-- /.container -->
 </section><!-- /#our-services -->
 
-<section id="partners" class="block">
+<section id="partners">
 	<div class="container">
 		<header class="section-title"><h2>Our Partners</h2></header>
 		<div class="logos">
