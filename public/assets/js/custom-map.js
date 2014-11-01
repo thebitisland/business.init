@@ -142,22 +142,16 @@ function createHomepageOSM(_latitude,_longitude){
         // ----------
         // LOCATE MYSELF
 
-        self.map.on('locationfound', onLocationFound);
-
-        function locateUser() {
-            $('#map').addClass('fade-map');
-            self.map.locate({setView : true})
-        }
-
-        function onLocationFound(e){
+        self.map.on('locationfound', function(event){
             $('#map').removeClass('fade-map');
-            self.myposition = L.marker(e.latlng);
+            self.myposition = L.marker(event.latlng);
             self.map.removeLayer(self.myposition);
             self.myposition.addTo(self.map);
-        }
+        });
 
-        $('.geo-location').on("click", function() {
-            locateUser();
+        $('.geo-location').on("click", function(event) {
+            $('#map').addClass('fade-map');
+            self.map.locate({setView : true})
         });
 
         $('body').addClass('loaded');
@@ -175,15 +169,56 @@ function createHomepageOSM(_latitude,_longitude){
         // ----------
         // CHOROPLETH
 
-        self.geoJson;
-        var cloroLayer;
+        self.geojson;
+
+        self.ages = ["0-3","4-12","13-17","18-26","27-35","36-65",">66"]
+        self.genreSelectors = ["mujer_ES","hombre_ES","mujer_EX","hombre_EX"]
+        self.getSelector = function(){
+            self.ages = $(".checkbox_age:checked").map(function(){
+                return $(this).val();
+            }).get();
+
+            var country = $(".checkbox_country:checked").map(function(){
+                return $(this).val();
+            }).get();
+
+            var genre = $(".checkbox_genre:checked").map(function(){
+                return $(this).val();
+            }).get();
+
+            self.genreSelectors = [];
+
+            country.forEach(function(origin){
+                genre.forEach(function(sex){
+                    self.genreSelectors.push(sex + "_" + origin);
+                })
+            })
+
+            self.map.removeLayer(self.geojson)
+            self.legend.removeFrom(self.map)
+
+            d3.json("assets/js/data/madrid_barrios.json", function(json) {
+                setColorScales(json);
+                self.geojson = L.geoJson(json, {
+                    style: styleCloropleth,
+                    onEachFeature: onEachFeature
+                })
+                self.map.addLayer(self.geojson)
+                self.legend.addTo(self.map);
+            });
+        }
 
         function getValue(feature){
             if (self.heatmap == 0){
                 var population = 0;
+                
                 for (var key in feature.properties.population) {
-                    for (var key2 in feature.properties.population[key]){
-                        population += feature.properties.population[key][key2];
+                    if ($.inArray(key, self.genreSelectors) != -1) {
+                        for (var key2 in feature.properties.population[key]){
+                            if ($.inArray(key2, self.ages) != -1) {
+                                population += feature.properties.population[key][key2];
+                            }
+                        }
                     }
                 }
                 return population;
@@ -193,16 +228,14 @@ function createHomepageOSM(_latitude,_longitude){
         }
 
         function setColorScales(json){
-            var value, minRange, maxRange,
-                min = 999999,
-                max = 0; 
+            var value, minRange, maxRange;
+                self.min = 999999,
+                self.max = 0; 
             json.features.forEach(function(feature){
                 value = getValue(feature);
-                if(value < min) min = value;
-                if(value > max) max = value;
+                if(value < self.min) self.min = value;
+                if(value > self.max) self.max = value;
             });
-
-            console.log(min + "|" + max)
 
             if (self.heatmap==0){
                 minRange = '#ff0';
@@ -211,7 +244,7 @@ function createHomepageOSM(_latitude,_longitude){
                 minRange = '#21F600';
                 maxRange = '#1B1BF0';
             }
-            self.color_scale = d3.scale.linear().domain([min,max]).range([minRange, maxRange]).clamp(true);
+            self.color_scale = d3.scale.linear().domain([self.min,self.max]).range([minRange, maxRange]).clamp(true);
         }
 
         function styleCloropleth(feature) {
@@ -271,6 +304,10 @@ function createHomepageOSM(_latitude,_longitude){
         }
 
         var loadCloropleth = function(file, style){
+
+            if (self.heatmap == 1) self.populationSelector.removeFrom(self.map);
+            if (self.heatmap == 0) self.populationSelector.addTo(self.map);
+
             d3.json(file, function(json) {
 
                 setColorScales(json);
@@ -281,11 +318,34 @@ function createHomepageOSM(_latitude,_longitude){
                 })//.addTo(map);
 
                 self.map.addLayer(self.geojson)
-                cloroLayer = self.geojson
+                self.geojson = self.geojson
                 self.legend.addTo(self.map);
                 self.info.addTo(self.map);
             });
         }
+
+        self.populationSelector = L.control();
+
+        self.populationSelector.onAdd = function (map) {
+            self.popSelector = L.DomUtil.create('div', 'populationSelector'); // create a div with a class "info"
+            
+            var myhtml = '<form action="" onchange="self.getSelector()">'
+            myhtml += '<input type="checkbox" class="checkbox_genre" checked name="women" value="mujer"> Women &nbsp;&nbsp;&nbsp;'
+            myhtml += '<input type="checkbox" class="checkbox_genre" checked name="men" value="hombre"> Men<br>'
+            myhtml += '<input type="checkbox" class="checkbox_country" checked name="nationals" value="ES"> Nationals &nbsp;&nbsp;&nbsp;'
+            myhtml += '<input type="checkbox" class="checkbox_country" checked name="Foreigners" value="EX"> Foreigners<br>'
+            myhtml += '<input type="checkbox" class="checkbox_age" checked name="0-3" value="0-3"> 0-3&nbsp;&nbsp;&nbsp;'
+            myhtml += '<input type="checkbox" class="checkbox_age" checked name="4-12" value="4-12"> 4-12&nbsp;&nbsp;&nbsp;'
+            myhtml += '<input type="checkbox" class="checkbox_age" checked name="13-17" value="13-17"> 13-17<br>'
+            myhtml += '<input type="checkbox" class="checkbox_age" checked name="18-26" value="18-26"> 18-26&nbsp;&nbsp;&nbsp;'
+            myhtml += '<input type="checkbox" class="checkbox_age" checked name="27-35" value="27-35"> 27-35&nbsp;&nbsp;&nbsp;'
+            myhtml += '<input type="checkbox" class="checkbox_age" checked name="36-65" value="36-65"> 36-65<br>'
+            myhtml += '<input type="checkbox" class="checkbox_age" checked name=">66" value=">66"> >66<br>'
+            myhtml += '</form>'
+
+            self.popSelector.innerHTML = myhtml
+            return self.popSelector;
+        };
 
         self.info = L.control();
 
@@ -309,27 +369,26 @@ function createHomepageOSM(_latitude,_longitude){
             this._div.innerHTML = '<h4>' + info1 + ' per distrit</h4>' +  (props ?
                 '<b>Distrit: ' + props.properties.DESBDT.split(" ").pop() + '</b><br />' + getValue(props) + ' ' + info2
                 : 'Hover over a region to see more info');
+
         };
 
         self.legend = L.control({position: 'bottomright'});
 
         self.legend.onAdd = function (map) {
 
-            if (self.heatmap == 0){
-                var grade = [5000,10000,30000,45000,60000,70000,85000]
-            } else {
-                var grade = [18000,19500,20500,22000,23500,25000,27000]
-            }
+            var step = (self.max-self.min)/6
+            var grade = [self.min,self.min+step,self.min+2*step,self.min+3*step,self.min+4*step,self.min+5*step,self.max]
 
             var div = L.DomUtil.create('div', 'info legend'),
                 grades = grade,
                 labels = [];
 
             // loop through our density intervals and generate a label with a colored square for each interval
+            div.innerHTML += grades[0] + ' - ' + grades[6]
+            div.innerHTML += '<br>'
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
-                    '<i style="background:' + self.color_scale(grades[i] + 1) + '"></i> ' +
-                    grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+                    '<i style="background:' + self.color_scale(grades[i] + 1) + '"></i>'// + grades[i] + '+';
             }
 
             return div;
@@ -341,7 +400,7 @@ function createHomepageOSM(_latitude,_longitude){
 
         $('#cloro_type').change(function() {
 
-            self.map.removeLayer(cloroLayer)
+            self.map.removeLayer(self.geojson)
             self.legend.removeFrom(self.map)
             self.info.removeFrom(self.map)
 
