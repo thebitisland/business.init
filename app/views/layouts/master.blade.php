@@ -23,24 +23,11 @@
 
 </head>
 
-<body class="page-homepage navigation-fixed-bottom has-fullscreen-map map-osm" id="page-top" data-spy="scroll" data-target=".navigation" data-offset="90">
+<body class="page-homepage navigation-fixed-top  map-osm" id="page-top" data-spy="scroll" data-target=".navigation" data-offset="90">
 	<!-- Wrapper -->
 	<div class="wrapper">
 
 		<div class="navigation">
-			<div class="secondary-navigation">
-				<div class="container">
-					<div class="user-area">
-						<a href="#" class="promoted"><strong>Register (Coming soon!)</strong></a>
-						<a href="#">Sign In (Coming soon!)</a>
-						<div class="language-bar">
-							<a href="#" class="active"><img src="assets/img/flags/gb.png"></a>
-							<a href="#"><img src="assets/img/flags/de.png"></a>
-							<a href="#"><img src="assets/img/flags/es.png"></a>
-						</div>
-					</div>
-				</div>
-			</div>
 			<div class="container">
 				<header class="navbar" id="top" role="banner">
 					<div class="navbar-header">
@@ -56,15 +43,13 @@
 					</div>
 					<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
 						<ul class="nav navbar-nav">
-							<li class="active has-child"><a href="#">Projects</a>
-								<ul class="child-navigation">
-									<li><a href="#">Business.init()</a></li>
-									<li><a href="#">eDrive</a></li>
-
-								</ul>
-							</li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="contact.html">Contact</a></li>
+							<li class="active"><a href="#map">Map</a></li>
+							<li><a href="#featured-properties">Idealista</a></li>
+							<li><a href="#new-properties">Statistics</a></li>
+						    <li><a href="#partners">Tweets</a></li>
+							<li><a href="#page-footer">Contact</a></li>
+							<li><a href="#"><img src="assets/img/flags/gb.png" class="img-nav"></a></li>
+							<li><a href="#"><img src="assets/img/flags/es.png" class="img-nav"></a></li>
 						</ul>
 					</nav><!-- /.navbar collapse-->
 					{{-- <div class="add-your-property">
@@ -81,7 +66,7 @@
 		</div>
 
 		<!-- Map -->
-		<div id="map" class="has-parallax"></div>
+		<div id="map" class="has-parallax leaflet-container leaflet-fade-anim" tabindex="0" style=""></div>
 		<!-- end Map -->
 
 		<!-- Search Box -->
@@ -148,17 +133,15 @@
 				<section id="footer-main">
 					<div class="container">
 						<div class="row">
-							<div class="col-md-6 col-sm-6">
+							<div class="col-md-8 col-sm-6">
 								<article>
 									<h3>About Us</h3>
 									<p>The bit island was founded by five technology-loving members from Madrid, Spain. Our goal is the use of open data to offer innovative ways to improve and better our society.
 									</p>
-									<hr>
-									<a href="#" class="link-arrow">Read More</a>
 								</article>
 							</div><!-- /.col-sm-3 -->
 
-							<div class="col-md-3 col-sm-3">
+							<div class="col-md-4 col-sm-3">
 								<article>
 									<h3>Contact</h3>
 									<address>
@@ -166,20 +149,7 @@
 										Madrid<br>
 										Spain
 									</address>
-									<br>
 									<a href="#">contact@thebitisland.com</a>
-								</article>
-							</div><!-- /.col-sm-3 -->
-							<div class="col-md-3 col-sm-3">
-								<article>
-									<h3>Useful Links</h3>
-									<ul class="list-unstyled list-links">
-										<li><a href="#">Team</a></li>
-										<li><a href="#">Privacy Policy</a></li>
-										<li><a href="#">Login and Register Account (Coming!)</a></li>
-										<li><a href="#">FAQ</a></li>
-										<li><a href="#">Terms and Conditions</a></li>
-									</ul>
 								</article>
 							</div><!-- /.col-sm-3 -->
 						</div><!-- /.row -->

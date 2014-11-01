@@ -103,7 +103,7 @@ h1 {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
   margin-top: 10px;
-  padding-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 h2 {
@@ -3204,7 +3204,8 @@ ul.list-links li a:hover {
 
 #map {
   width: 100%;
-  height: 700px;
+   margin-top:265px;
+  height: 482px;
 }
 
 #contact-map {
@@ -4465,23 +4466,24 @@ form label.error:before {
   font-weight: normal;
   margin-bottom: 30px;
   margin-top: 0;
+  padding-top:10px;
 }
 #page-footer .inner #footer-main {
   background-color: #f3f3f3;
-  padding: 40px 0;
+  padding: 15px 0;
 }
 #page-footer .inner #footer-copyright {
-  background-color: #073855;
+  background-color: #1396e2;
   color: #fff;
   display: table;
-  padding: 20px 0;
+  padding: 5px 0;
   width: 100%;
 }
 #page-footer .inner #footer-copyright a {
   color: #fff;
 }
 #page-footer .inner #footer-copyright a:hover {
-  color: #1396e2;
+  color: #fff;
 }
 #page-footer .inner .property:last-child {
   margin-bottom: 0 !important;
@@ -4549,8 +4551,9 @@ body, html {
   border: none;
   margin-bottom: 0;
   min-height: inherit;
-  padding: 30px 0;
+  padding: 0 0;
   /**/
+
   display: table;
   width: 100%;
 }
@@ -5843,4 +5846,7 @@ body, html {
 @page {
   page-break-after: auto;
   margin: 0;
+}
+.img-nav{
+margin-top: -5px;
 }
