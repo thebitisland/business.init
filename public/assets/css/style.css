@@ -555,8 +555,8 @@ ul.list-links li a:hover {
   background-color: #fff;
   color: #073855;
   position: absolute;
-  right: 0px;
-  top: 60px;
+  right: 180px;
+  top: 15px;
   width: 38px;
 }
 .geo-location-wrapper .btn:hover {

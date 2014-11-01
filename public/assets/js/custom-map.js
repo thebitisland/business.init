@@ -19,11 +19,13 @@ function createHomepageOSM(_latitude,_longitude){
             zoom: 15,
             scrollWheelZoom: true
         });
-        L.tileLayer('http://openmapsurfer.uni-hd.de/tiles/roadsg/x={x}&y={y}&z={z}', {
+        //L.tileLayer('http://openmapsurfer.uni-hd.de/tiles/roadsg/x={x}&y={y}&z={z}', {
             //L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
             //subdomains: '0123',
-            attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-        }).addTo(self.map);
+        //    attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+        //})
+        // replace "toner" here with "terrain" or "watercolor"
+        new L.StamenTileLayer("toner-lite").addTo(self.map)
 
 
         //-------------------------------------------------------------------------------------
@@ -147,8 +149,11 @@ function createHomepageOSM(_latitude,_longitude){
             self.map.locate({setView : true})
         }
 
-        function onLocationFound(){
+        function onLocationFound(e){
             $('#map').removeClass('fade-map');
+            self.myposition = L.marker(e.latlng);
+            self.map.removeLayer(self.myposition);
+            self.myposition.addTo(self.map);
         }
 
         $('.geo-location').on("click", function() {
@@ -170,18 +175,8 @@ function createHomepageOSM(_latitude,_longitude){
         // ----------
         // CHOROPLETH
 
-        var geoJson;
+        self.geoJson;
         var cloroLayer;
-
-        self.color_population = d3.scale.linear().domain([0,75000]).range(['#DCD100', '#DC0B00']).clamp(true);
-        self.color_renta = d3.scale.linear().domain([18000,27000]).range(['#21F600', '#1B1BF0']).clamp(true);
-        function getColor(d) {
-            if (self.heatmap == 0) {
-                return self.color_population(d)
-            } else {
-                return self.color_renta(d);
-            }
-        }
 
         function getValue(feature){
             if (self.heatmap == 0){
@@ -197,9 +192,31 @@ function createHomepageOSM(_latitude,_longitude){
             }
         }
 
+        function setColorScales(json){
+            var value, minRange, maxRange,
+                min = 999999,
+                max = 0; 
+            json.features.forEach(function(feature){
+                value = getValue(feature);
+                if(value < min) min = value;
+                if(value > max) max = value;
+            });
+
+            console.log(min + "|" + max)
+
+            if (self.heatmap==0){
+                minRange = '#ff0';
+                maxRange = '#F00';
+            } else {
+                minRange = '#21F600';
+                maxRange = '#1B1BF0';
+            }
+            self.color_scale = d3.scale.linear().domain([min,max]).range([minRange, maxRange]).clamp(true);
+        }
+
         function styleCloropleth(feature) {
             return {
-                fillColor: getColor(getValue(feature)),
+                fillColor: self.color_scale(getValue(feature)),
                 weight: 2,
                 opacity: 1,
                 color: 'white',
@@ -210,7 +227,7 @@ function createHomepageOSM(_latitude,_longitude){
 
         function styleCloropleth(feature) {
             return {
-                fillColor: getColor(getValue(feature)),
+                fillColor: self.color_scale(getValue(feature)),
                 weight: 2,
                 opacity: 1,
                 color: 'white',
@@ -233,12 +250,12 @@ function createHomepageOSM(_latitude,_longitude){
                 layer.bringToFront();
             }
 
-            info.update(layer.feature);
+            self.info.update(layer.feature);
         }
 
         function resetHighlight(e) {
-            geojson.resetStyle(e.target);
-            info.update();
+            self.geojson.resetStyle(e.target);
+            self.info.update();
         }
 
         function clickOnDistrit(e) {
@@ -256,26 +273,30 @@ function createHomepageOSM(_latitude,_longitude){
         var loadCloropleth = function(file, style){
             d3.json(file, function(json) {
 
-                geojson = L.geoJson(json, {
+                setColorScales(json);
+
+                self.geojson = L.geoJson(json, {
                     style: style,
                     onEachFeature: onEachFeature
                 })//.addTo(map);
 
-                self.map.addLayer(geojson)
-                cloroLayer = geojson
+                self.map.addLayer(self.geojson)
+                cloroLayer = self.geojson
+                self.legend.addTo(self.map);
+                self.info.addTo(self.map);
             });
         }
 
-        var info = L.control();
+        self.info = L.control();
 
-        info.onAdd = function (map) {
+        self.info.onAdd = function (map) {
             this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
             this.update();
             return this._div;
         };
 
         // method that we will use to update the control based on feature properties passed
-        info.update = function (props) {
+        self.info.update = function (props) {
             var info1, info2;
             if (self.heatmap == 0){
                 info1 = "Population"
@@ -285,14 +306,14 @@ function createHomepageOSM(_latitude,_longitude){
                 info2 = "€/year"
             }
 
-            this._div.innerHTML = '<h4>' + info1 + ' per postal code</h4>' +  (props ?
+            this._div.innerHTML = '<h4>' + info1 + ' per distrit</h4>' +  (props ?
                 '<b>Distrit: ' + props.properties.DESBDT.split(" ").pop() + '</b><br />' + getValue(props) + ' ' + info2
                 : 'Hover over a region to see more info');
         };
 
-        var legend = L.control({position: 'bottomright'});
+        self.legend = L.control({position: 'bottomright'});
 
-        legend.onAdd = function (map) {
+        self.legend.onAdd = function (map) {
 
             if (self.heatmap == 0){
                 var grade = [5000,10000,30000,45000,60000,70000,85000]
@@ -307,7 +328,7 @@ function createHomepageOSM(_latitude,_longitude){
             // loop through our density intervals and generate a label with a colored square for each interval
             for (var i = 0; i < grades.length; i++) {
                 div.innerHTML +=
-                    '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+                    '<i style="background:' + self.color_scale(grades[i] + 1) + '"></i> ' +
                     grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
             }
 
@@ -317,19 +338,15 @@ function createHomepageOSM(_latitude,_longitude){
         
         self.heatmap = 0
         loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth);
-        legend.addTo(self.map);
-        info.addTo(self.map);
 
         $('#cloro_type').change(function() {
 
             self.map.removeLayer(cloroLayer)
-            legend.removeFrom(self.map)
-            info.removeFrom(self.map)
+            self.legend.removeFrom(self.map)
+            self.info.removeFrom(self.map)
 
             self.heatmap = $(this).val()-1
             loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth);
-            legend.addTo(self.map);
-            info.addTo(self.map);
         });
 
         // CHOROPLETH

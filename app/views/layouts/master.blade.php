@@ -217,6 +217,7 @@
 	<script type="text/javascript" src="assets/js/jquery.dependClass-0.1.js"></script>
 	<script type="text/javascript" src="assets/js/draggable-0.1.js"></script>
 	<script type="text/javascript" src="assets/js/jquery.slider.js"></script>
+	<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
 	<script type="text/javascript" src="assets/js/custom-map.js"></script>
 	<script type="text/javascript" src="assets/js/custom.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet-draw/leaflet.draw.js"></script>
