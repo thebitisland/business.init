@@ -89,13 +89,6 @@
 										</select>
 									</div><!-- /.form-group -->
 									<div class="form-group">
-										<select name="district" id="cloro_type">
-											<option value="">MapOptions</option>
-											<option value="1">Population</option>
-											<option value="2">Income</option>
-										</select>
-									</div><!-- /.form-group -->
-									<div class="form-group">
 										<select name="property-type" id="bus_type">
 											<option value="">Business type</option>
 											<option value="1">Book stores</option>
@@ -188,6 +181,7 @@
 	<script type="text/javascript" src="assets/js/draggable-0.1.js"></script>
 	<script type="text/javascript" src="assets/js/jquery.slider.js"></script>
 	<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+	<script type="text/javascript" src="assets/js/spin.min.js"></script>
 	<script type="text/javascript" src="assets/js/custom-map.js"></script>
 	<script type="text/javascript" src="assets/js/custom.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet-draw/leaflet.draw.js"></script>

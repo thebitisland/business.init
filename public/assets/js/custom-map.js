@@ -28,6 +28,28 @@ function createHomepageOSM(_latitude,_longitude){
         new L.StamenTileLayer("toner-lite").addTo(self.map)
 
 
+        var opts = {
+          lines: 9, // The number of lines to draw
+          length: 30, // The length of each line
+          width: 7, // The line thickness
+          radius: 21, // The radius of the inner circle
+          corners: 1, // Corner roundness (0..1)
+          rotate: 0, // The rotation offset
+          direction: 1, // 1: clockwise, -1: counterclockwise
+          color: '#000', // #rgb or #rrggbb or array of colors
+          speed: 1, // Rounds per second
+          trail: 50, // Afterglow percentage
+          shadow: false, // Whether to render a shadow
+          hwaccel: false, // Whether to use hardware acceleration
+          className: 'spinner', // The CSS class to assign to the spinner
+          zIndex: 2e9, // The z-index (defaults to 2000000000)
+          top: '50%', // Top position relative to parent
+          left: '50%' // Left position relative to parent
+        };
+        var target = document.getElementById('map');
+        self.spinner = new Spinner(opts).spin(target);
+
+
         //-------------------------------------------------------------------------------------
         // ----------
         // MARKERS
@@ -171,12 +193,10 @@ function createHomepageOSM(_latitude,_longitude){
 
         self.geojson;
 
-        self.ages = ["0-3","4-12","13-17","18-26","27-35","36-65",">66"]
         self.genreSelectors = ["mujer_ES","hombre_ES","mujer_EX","hombre_EX"]
         self.getSelector = function(){
-            self.ages = $(".checkbox_age:checked").map(function(){
-                return $(this).val();
-            }).get();
+
+            self.spinner = new Spinner(opts).spin(target);
 
             var country = $(".checkbox_country:checked").map(function(){
                 return $(this).val();
@@ -205,7 +225,21 @@ function createHomepageOSM(_latitude,_longitude){
                 })
                 self.map.addLayer(self.geojson)
                 self.legend.addTo(self.map);
+
+                self.spinner.stop();
             });
+        }
+
+        self.minAge = "0"
+        self.maxAge = "120"
+        self.onSliderChanged = function(){
+
+            var val = self.ageSlider.val().split(";");
+            if((val[0] != self.minAge) || (val[1] != self.maxAge)) {
+                self.minAge = val[0];
+                self.maxAge = val[1];
+                self.getSelector()   
+            }
         }
 
         function getValue(feature){
@@ -215,7 +249,7 @@ function createHomepageOSM(_latitude,_longitude){
                 for (var key in feature.properties.population) {
                     if ($.inArray(key, self.genreSelectors) != -1) {
                         for (var key2 in feature.properties.population[key]){
-                            if ($.inArray(key2, self.ages) != -1) {
+                            if ((parseInt(key2) >= parseInt(self.minAge)) && (parseInt(key2) <= parseInt(self.maxAge))) {
                                 population += feature.properties.population[key][key2];
                             }
                         }
@@ -283,12 +317,12 @@ function createHomepageOSM(_latitude,_longitude){
                 layer.bringToFront();
             }
 
-            self.info.update(layer.feature);
+            self.infoUpdate(layer.feature);
         }
 
         function resetHighlight(e) {
             self.geojson.resetStyle(e.target);
-            self.info.update();
+            self.infoUpdate();
         }
 
         function clickOnDistrit(e) {
@@ -305,8 +339,12 @@ function createHomepageOSM(_latitude,_longitude){
 
         var loadCloropleth = function(file, style){
 
-            if (self.heatmap == 1) self.populationSelector.removeFrom(self.map);
-            if (self.heatmap == 0) self.populationSelector.addTo(self.map);
+            if (self.heatmap == 1) {
+                d3.select('.populationSelector').style("display", "none")
+            }
+            if (self.heatmap == 0){
+                d3.select('.populationSelector').style("display", "")
+            }
 
             d3.json(file, function(json) {
 
@@ -319,43 +357,60 @@ function createHomepageOSM(_latitude,_longitude){
 
                 self.map.addLayer(self.geojson)
                 self.legend.addTo(self.map);
-                self.info.addTo(self.map);
+
+                self.spinner.stop();
             });
         }
 
-        self.populationSelector = L.control();
+        self.cloro_control = L.control();
+        self.cloro_control.onAdd = function (map) {
+            self.cloroplethControl = L.DomUtil.create('div', 'cloroplethControl'); // create a div with a class "info"
+            var myhtml = ''
+            myhtml += '<h5>Map controls</h5>'
+            myhtml += '<div class="form-group control-form"><b>Show:</b> ' 
+            myhtml += '  <select name="district" id="cloro_type">'
+            myhtml += '    <option value="1">Population</option>'
+            myhtml += '    <option value="2">Income</option>'
+            myhtml += '  </select>'
+            myhtml += '</div>'
 
-        self.populationSelector.onAdd = function (map) {
-            self.popSelector = L.DomUtil.create('div', 'populationSelector'); // create a div with a class "info"
-            
-            var myhtml = '<form action="" onchange="self.getSelector()">'
-            myhtml += '<input type="checkbox" class="checkbox_genre" checked name="women" value="mujer"> Women &nbsp;&nbsp;&nbsp;'
-            myhtml += '<input type="checkbox" class="checkbox_genre" checked name="men" value="hombre"> Men<br>'
-            myhtml += '<input type="checkbox" class="checkbox_country" checked name="nationals" value="ES"> Nationals &nbsp;&nbsp;&nbsp;'
-            myhtml += '<input type="checkbox" class="checkbox_country" checked name="Foreigners" value="EX"> Foreigners<br>'
-            myhtml += '<input type="checkbox" class="checkbox_age" checked name="0-3" value="0-3"> 0-3&nbsp;&nbsp;&nbsp;'
-            myhtml += '<input type="checkbox" class="checkbox_age" checked name="4-12" value="4-12"> 4-12&nbsp;&nbsp;&nbsp;'
-            myhtml += '<input type="checkbox" class="checkbox_age" checked name="13-17" value="13-17"> 13-17<br>'
-            myhtml += '<input type="checkbox" class="checkbox_age" checked name="18-26" value="18-26"> 18-26&nbsp;&nbsp;&nbsp;'
-            myhtml += '<input type="checkbox" class="checkbox_age" checked name="27-35" value="27-35"> 27-35&nbsp;&nbsp;&nbsp;'
-            myhtml += '<input type="checkbox" class="checkbox_age" checked name="36-65" value="36-65"> 36-65<br>'
-            myhtml += '<input type="checkbox" class="checkbox_age" checked name=">66" value=">66"> >66<br>'
-            myhtml += '</form>'
+            self.htmlPop = '<div class="populationSelector">'
+            self.htmlPop += '<form action="" onchange="self.getSelector()">'
+            self.htmlPop += '<input type="checkbox" class="checkbox_genre" checked name="women" value="mujer"> Women <i style="color:#ff69b4;" class="fa fa-female"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+            self.htmlPop += '<input type="checkbox" class="checkbox_genre" checked name="men" value="hombre"> Men <i style="color:#1e90ff;" class="fa fa-male"></i><br>'
+            self.htmlPop += '<input type="checkbox" class="checkbox_country" checked name="nationals" value="ES"> Nationals <i style="color:#f00;" class="fa fa-flag-o"></i>&nbsp;&nbsp;&nbsp;'
+            self.htmlPop += '<input type="checkbox" class="checkbox_country" checked name="Foreigners" value="EX"> Foreigners <i style="color:#000;" class="fa fa-compass"></i><br>'
+            self.htmlPop += '</form>'
+            self.htmlPop += '<div class="form-group">'
+            self.htmlPop += '<h4><b>Age range:</b></h4>'
+            self.htmlPop += '    <div class="price-range" onmouseup="self.onSliderChanged()">'
+            self.htmlPop += '        <input id="age-input" type="text" name="price" value="0;120">'
+            self.htmlPop += '    </div>'
+            self.htmlPop += '</div>'
+            self.htmlPop +='</div>'
 
-            self.popSelector.innerHTML = myhtml
-            return self.popSelector;
+            self.htmlInfo = '<div class="info">'
+            self.htmlInfo += '  <h4>Population per distrit</h4>'
+            self.htmlInfo += '  Hover over a region to <br>see more info'
+            self.htmlInfo += '</div>';
+
+            self.cloroplethControl.innerHTML = myhtml + self.htmlInfo + self.htmlPop;
+            return self.cloroplethControl;
         };
+        self.cloro_control.addTo(self.map);
 
-        self.info = L.control();
-
-        self.info.onAdd = function (map) {
-            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-            this.update();
-            return this._div;
-        };
+        self.ageSlider = $("#age-input");
+        if(self.ageSlider.length > 0) {
+            self.ageSlider.slider({
+                from: 0,
+                to: 120,
+                step: 1,
+                round: 1
+            });
+        }
 
         // method that we will use to update the control based on feature properties passed
-        self.info.update = function (props) {
+        self.infoUpdate = function (props) {
             var info1, info2;
             if (self.heatmap == 0){
                 info1 = "Population"
@@ -365,10 +420,11 @@ function createHomepageOSM(_latitude,_longitude){
                 info2 = "€/year"
             }
 
-            this._div.innerHTML = '<h4>' + info1 + ' per distrit</h4>' +  (props ?
-                '<b>Distrit: ' + props.properties.DESBDT.split(" ").pop() + '</b><br />' + getValue(props) + ' ' + info2
-                : 'Hover over a region to see more info');
+            self.htmlInfo = '<h4>' + info1 + ' per distrit</h4>' +  (props ?
+                'Distrit: <b>' + props.properties.DESBDT.split(" ").slice(1).join(' ') + '</b><br />' + getValue(props) + ' ' + info2
+                : 'Hover over a region to <br>see more info');
 
+            d3.select('.info').html(self.htmlInfo);
         };
 
         self.legend = L.control({position: 'bottomright'});
@@ -401,7 +457,6 @@ function createHomepageOSM(_latitude,_longitude){
 
             self.map.removeLayer(self.geojson)
             self.legend.removeFrom(self.map)
-            self.info.removeFrom(self.map)
 
             self.heatmap = $(this).val()-1
             loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth);
