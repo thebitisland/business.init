@@ -50,7 +50,6 @@ function createHomepageOSM(_latitude,_longitude){
         self.spinner = new Spinner(opts).spin(target);
 
 
-
         //-------------------------------------------------------------------------------------
         // ----------
         // MARKERS
@@ -194,12 +193,10 @@ function createHomepageOSM(_latitude,_longitude){
 
         self.geojson;
 
-        self.ages = ["0-3","4-12","13-17","18-26","27-35","36-65",">66"]
         self.genreSelectors = ["mujer_ES","hombre_ES","mujer_EX","hombre_EX"]
         self.getSelector = function(){
-            self.ages = $(".checkbox_age:checked").map(function(){
-                return $(this).val();
-            }).get();
+
+            self.spinner = new Spinner(opts).spin(target);
 
             var country = $(".checkbox_country:checked").map(function(){
                 return $(this).val();
@@ -228,18 +225,20 @@ function createHomepageOSM(_latitude,_longitude){
                 })
                 self.map.addLayer(self.geojson)
                 self.legend.addTo(self.map);
+
+                self.spinner.stop();
             });
         }
 
         self.minAge = "0"
-        self.maxAge = "110"
+        self.maxAge = "120"
         self.onSliderChanged = function(){
 
             var val = self.ageSlider.val().split(";");
             if((val[0] != self.minAge) || (val[1] != self.maxAge)) {
                 self.minAge = val[0];
                 self.maxAge = val[1];
-                
+                self.getSelector()   
             }
         }
 
@@ -250,7 +249,7 @@ function createHomepageOSM(_latitude,_longitude){
                 for (var key in feature.properties.population) {
                     if ($.inArray(key, self.genreSelectors) != -1) {
                         for (var key2 in feature.properties.population[key]){
-                            if ($.inArray(key2, self.ages) != -1) {
+                            if ((parseInt(key2) >= parseInt(self.minAge)) && (parseInt(key2) <= parseInt(self.maxAge))) {
                                 population += feature.properties.population[key][key2];
                             }
                         }
@@ -377,21 +376,15 @@ function createHomepageOSM(_latitude,_longitude){
 
             self.htmlPop = '<div class="populationSelector">'
             self.htmlPop += '<form action="" onchange="self.getSelector()">'
-            self.htmlPop += '<input type="checkbox" class="checkbox_genre" checked name="women" value="mujer"> Women &nbsp;&nbsp;&nbsp;'
-            self.htmlPop += '<input type="checkbox" class="checkbox_genre" checked name="men" value="hombre"> Men<br>'
-            self.htmlPop += '<input type="checkbox" class="checkbox_country" checked name="nationals" value="ES"> Nationals &nbsp;&nbsp;&nbsp;'
-            self.htmlPop += '<input type="checkbox" class="checkbox_country" checked name="Foreigners" value="EX"> Foreigners<br>'
-            self.htmlPop += '<input type="checkbox" class="checkbox_age" checked name="0-3" value="0-3"> 0-3&nbsp;&nbsp;&nbsp;'
-            self.htmlPop += '<input type="checkbox" class="checkbox_age" checked name="4-12" value="4-12"> 4-12&nbsp;&nbsp;&nbsp;'
-            self.htmlPop += '<input type="checkbox" class="checkbox_age" checked name="13-17" value="13-17"> 13-17<br>'
-            self.htmlPop += '<input type="checkbox" class="checkbox_age" checked name="18-26" value="18-26"> 18-26&nbsp;&nbsp;&nbsp;'
-            self.htmlPop += '<input type="checkbox" class="checkbox_age" checked name="27-35" value="27-35"> 27-35&nbsp;&nbsp;&nbsp;'
-            self.htmlPop += '<input type="checkbox" class="checkbox_age" checked name="36-65" value="36-65"> 36-65<br>'
-            self.htmlPop += '<input type="checkbox" class="checkbox_age" checked name=">66" value=">66"> >66<br>'
+            self.htmlPop += '<input type="checkbox" class="checkbox_genre" checked name="women" value="mujer"> Women <i style="color:#ff69b4;" class="fa fa-female"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+            self.htmlPop += '<input type="checkbox" class="checkbox_genre" checked name="men" value="hombre"> Men <i style="color:#1e90ff;" class="fa fa-male"></i><br>'
+            self.htmlPop += '<input type="checkbox" class="checkbox_country" checked name="nationals" value="ES"> Nationals <i style="color:#f00;" class="fa fa-flag-o"></i>&nbsp;&nbsp;&nbsp;'
+            self.htmlPop += '<input type="checkbox" class="checkbox_country" checked name="Foreigners" value="EX"> Foreigners <i style="color:#000;" class="fa fa-compass"></i><br>'
             self.htmlPop += '</form>'
             self.htmlPop += '<div class="form-group">'
+            self.htmlPop += '<h4><b>Age range:</b></h4>'
             self.htmlPop += '    <div class="price-range" onmouseup="self.onSliderChanged()">'
-            self.htmlPop += '        <input id="age-input" type="text" name="price" value="0;110">'
+            self.htmlPop += '        <input id="age-input" type="text" name="price" value="0;120">'
             self.htmlPop += '    </div>'
             self.htmlPop += '</div>'
             self.htmlPop +='</div>'
@@ -410,7 +403,7 @@ function createHomepageOSM(_latitude,_longitude){
         if(self.ageSlider.length > 0) {
             self.ageSlider.slider({
                 from: 0,
-                to: 110,
+                to: 120,
                 step: 1,
                 round: 1
             });
@@ -428,7 +421,7 @@ function createHomepageOSM(_latitude,_longitude){
             }
 
             self.htmlInfo = '<h4>' + info1 + ' per distrit</h4>' +  (props ?
-                '<b>Distrit: ' + props.properties.DESBDT.split(" ").pop() + '</b><br />' + getValue(props) + ' ' + info2
+                'Distrit: <b>' + props.properties.DESBDT.split(" ").slice(1).join(' ') + '</b><br />' + getValue(props) + ' ' + info2
                 : 'Hover over a region to <br>see more info');
 
             d3.select('.info').html(self.htmlInfo);
