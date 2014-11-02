@@ -61,7 +61,7 @@ function createHomepageOSM(_latitude,_longitude){
                 if (cluster == false)
                     var zoomLevelCluster = 1;
                 else 
-                    var zoomLevelCluster = 33;
+                    var zoomLevelCluster = 16;
 
                 var iconCreateFunction = function (cluster) {
                     var childCount = cluster.getChildCount();
@@ -82,15 +82,21 @@ function createHomepageOSM(_latitude,_longitude){
                     showCoverageOnHover: false,
                     disableClusteringAtZoom: zoomLevelCluster,
                     iconCreateFunction: iconCreateFunction
-
                 });
 
                 for (var i = 0; i < locations.length; i++) {
 
-                    if (cluster == true)
+                    if (cluster == true){
                         mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:6px;" class="fa ' + locations[i][3] + '"></i>'
-                    else
-                        mHtml = '<i style="color:red; font-size:13px; padding-top:7px; padding-left:7px;" class="fa ' + locations[i][3] + '"></i>'
+                    } else {  
+                        if(locations[i][3]=="metro"){
+                            mHtml = '<img style="padding-top:6px;" width="18px" src="./assets/img/metro.png"/>'
+                        } else if (locations[i][3]=="renfe") {
+                            mHtml = '<img style="padding-top:5px;padding-right:1px" width="13px" src="./assets/img/cercanias.png"/>'
+                        } else {
+                            mHtml = '<i style="color:red; font-size:13px; padding-top:7px; padding-left:7px;" class="fa ' + locations[i][3] + '"></i>'
+                        }
+                    }
 
                     var _icon = L.divIcon({
                         html: mHtml, //'<img src="' + locations[i][7] +'">',
@@ -105,25 +111,17 @@ function createHomepageOSM(_latitude,_longitude){
                         icon: _icon
                     });
                     marker.bindPopup(
-                        '<div class="property" style="padding-top:50px">' +
-                            //'<a href="' + locations[i][5] + '">' +
-                                //'<div class="property-image">' +
-                                //    '<img src="' + locations[i][6] + '">' +
-                                //'</div>' +
-                                '<div class="overlay">' +
-                                    '<div class="info">' +
-                                //        '<div class="tag price"> ' + locations[i][2] + '</div>' +
-                                        '<h3>' + locations[i][0] + '</h3>' +
-                                //        '<figure>' + locations[i][1] + '</figure>' +
-                                    '</div>' +
-                                '</div>' +
-                            //'</a>' +
+                        '<div class="popup_info">' +
+                            '<h3>' + locations[i][0].split(" ").slice(1).join(' ') + '</h3>' +
+                            '<hr>' +
+                            '<h3>' + locations[i][0].split(" ")[0].split(',').join(', ') + '</h3>' +
                         '</div>'
                     );
                     markers.addLayer(marker);
                 }
 
-                self.map.addLayer(markers);
+                if(file != "assets/js/data/bus.js")
+                    self.map.addLayer(markers);
                 self.layers.push(markers);
             });
             return markers;
@@ -137,21 +135,26 @@ function createHomepageOSM(_latitude,_longitude){
 
         });
 
-        addMarkers("assets/js/data/locations_renfe.js", false, "blue");
-        addMarkers("assets/js/data/locations_metro.js", false, "blue");
-        var metro = 1;
+        addMarkers("assets/js/data/renfe.js", false, "blue");
+        addMarkers("assets/js/data/metro.js", false, "blue");
+        addMarkers("assets/js/data/bus.js", false, "blue");
+        self.metro = 1;
 
         self.map.on('zoomend', function(e) {
-            if (self.map.getZoom() >= 15) {
-                if (metro == 0) {
-                    self.map.addLayer(self.layers[0]);
-                    self.map.addLayer(self.layers[1]);
-                    metro = 1
+
+            if (self.map.getZoom() >= 14) {
+                for (var i = 0; i < 3; i++) {
+                    if ($.inArray(''+i, self.transport_types) != -1)
+                        self.map.addLayer(self.layers[i])
+                    else
+                        self.map.removeLayer(self.layers[i]);
                 }
+                self.metro = 1
             } else {
                 self.map.removeLayer(self.layers[0]);
                 self.map.removeLayer(self.layers[1]);
-                metro = 0;
+                self.map.removeLayer(self.layers[2]);
+                self.metro = 0;
             }
         });
 
@@ -214,6 +217,7 @@ function createHomepageOSM(_latitude,_longitude){
 
             self.map.removeLayer(self.geojson)
             self.legend.removeFrom(self.map)
+            self.transport.removeFrom(self.map)
 
             loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth, false);
         }
@@ -347,6 +351,7 @@ function createHomepageOSM(_latitude,_longitude){
     
                     self.map.addLayer(self.geojson)
                     self.legend.addTo(self.map);
+                    self.transport.addTo(self.map)
     
                     self.spinner.stop();
                 });
@@ -362,6 +367,7 @@ function createHomepageOSM(_latitude,_longitude){
     
                 self.map.addLayer(self.geojson)
                 self.legend.addTo(self.map);
+                self.transport.addTo(self.map)
     
                 self.spinner.stop();
             }
@@ -454,6 +460,33 @@ function createHomepageOSM(_latitude,_longitude){
             return div;
         };
 
+        self.transport_types = ["0","1"]
+        self.getTransport = function(){
+            self.transport_types = $(".checkbox_transport:checked").map(function(){
+                return $(this).val();
+            }).get();
+            
+            if (self.map.getZoom() >= 14) {
+                for (var i = 0; i < 3; i++) {
+                    if ($.inArray(''+i, self.transport_types) != -1)
+                        self.map.addLayer(self.layers[i])
+                    else
+                        self.map.removeLayer(self.layers[i]);
+                }
+            }
+        }
+
+        self.transport = L.control({position: 'bottomright'});
+
+        self.transport.onAdd = function (map) {
+            self.transportControl = L.DomUtil.create('div', 'info transport');
+
+            self.transportControl.innerHTML = '<b>Public Transport</b><br>'
+            self.transportControl.innerHTML += '<form action="" onchange="self.getTransport()"><input type="checkbox" class="checkbox_transport" checked name="Metro" value="1"> Metro <img style="padding-bottom:2px" width="18px" src="./assets/img/metro.png"/>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" checked name="Renfe" value="0"> Renfe <img style="padding-bottom:4px" width="18px" src="./assets/img/cercanias.png"/>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" name="Bus" value="2"> Bus <i class="fa fa-bus"></i>'
+            self.transportControl.innerHTML += '</form>'
+
+            return self.transportControl;
+        };
         
         self.heatmap = 0
         loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth, true);
@@ -462,6 +495,7 @@ function createHomepageOSM(_latitude,_longitude){
 
             self.map.removeLayer(self.geojson)
             self.legend.removeFrom(self.map)
+            self.transport.removeFrom(self.map)
 
             self.heatmap = $(this).val()-1
             loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth, false);

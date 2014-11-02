@@ -22,6 +22,10 @@
     color: #777;
 }
 
+.info:hover {
+    background: rgba(255,255,255,0.9);
+}
+
 .legend {
     min-width: 0px;
     line-height: 18px;
@@ -57,4 +61,26 @@
 .control-form {
     width: 75% !important;
     white-space:nowrap;
+}
+
+.popup_info {
+    
+}
+
+.popup_info hr {
+    margin: 0;
+}
+
+.popup_info h3{
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+    padding-right: 38px;
+}
+
+.transport {
+    right: 150px;
+    bottom: -58px;
+    min-width: 0px;
+    height: 48px;
 }
