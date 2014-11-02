@@ -196,8 +196,6 @@ function createHomepageOSM(_latitude,_longitude){
         self.genreSelectors = ["mujer_ES","hombre_ES","mujer_EX","hombre_EX"]
         self.getSelector = function(){
 
-            self.spinner = new Spinner(opts).spin(target);
-
             var country = $(".checkbox_country:checked").map(function(){
                 return $(this).val();
             }).get();
@@ -217,17 +215,7 @@ function createHomepageOSM(_latitude,_longitude){
             self.map.removeLayer(self.geojson)
             self.legend.removeFrom(self.map)
 
-            d3.json("assets/js/data/madrid_barrios.json", function(json) {
-                setColorScales(json);
-                self.geojson = L.geoJson(json, {
-                    style: styleCloropleth,
-                    onEachFeature: onEachFeature
-                })
-                self.map.addLayer(self.geojson)
-                self.legend.addTo(self.map);
-
-                self.spinner.stop();
-            });
+            loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth, false);
         }
 
         self.minAge = "0"
@@ -337,7 +325,7 @@ function createHomepageOSM(_latitude,_longitude){
             });
         }
 
-        var loadCloropleth = function(file, style){
+        var loadCloropleth = function(file, style, dd){
 
             if (self.heatmap == 1) {
                 d3.select('.populationSelector').style("display", "none")
@@ -346,20 +334,37 @@ function createHomepageOSM(_latitude,_longitude){
                 d3.select('.populationSelector').style("display", "")
             }
 
-            d3.json(file, function(json) {
+            if (dd){
+                d3.json(file, function(json) {
+    
+                    self.dataJson = json;
+                    setColorScales(json);
+    
+                    self.geojson = L.geoJson(json, {
+                        style: style,
+                        onEachFeature: onEachFeature
+                    })//.addTo(map);
+    
+                    self.map.addLayer(self.geojson)
+                    self.legend.addTo(self.map);
+    
+                    self.spinner.stop();
+                });
+            }else{
+                self.spinner = new Spinner(opts).spin(target);
 
-                setColorScales(json);
-
-                self.geojson = L.geoJson(json, {
+                setColorScales(self.dataJson);
+    
+                self.geojson = L.geoJson(self.dataJson, {
                     style: style,
                     onEachFeature: onEachFeature
                 })//.addTo(map);
-
+    
                 self.map.addLayer(self.geojson)
                 self.legend.addTo(self.map);
-
+    
                 self.spinner.stop();
-            });
+            }
         }
 
         self.cloro_control = L.control();
@@ -451,7 +456,7 @@ function createHomepageOSM(_latitude,_longitude){
 
         
         self.heatmap = 0
-        loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth);
+        loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth, true);
 
         $('#cloro_type').change(function() {
 
@@ -459,7 +464,7 @@ function createHomepageOSM(_latitude,_longitude){
             self.legend.removeFrom(self.map)
 
             self.heatmap = $(this).val()-1
-            loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth);
+            loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth, false);
         });
 
         // CHOROPLETH

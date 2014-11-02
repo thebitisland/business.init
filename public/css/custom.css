@@ -23,6 +23,7 @@
 }
 
 .legend {
+    min-width: 0px;
     line-height: 18px;
     color: #555;
     text-align: center;
