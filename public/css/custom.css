@@ -22,6 +22,10 @@
     color: #777;
 }
 
+.info:hover {
+    background: rgba(255,255,255,0.9);
+}
+
 .legend {
     min-width: 0px;
     line-height: 18px;
@@ -71,4 +75,12 @@
     margin-bottom: 5px;
     margin-top: 5px;
     margin-left: 10px;
+    padding-right: 38px;
+}
+
+.transport {
+    right: 150px;
+    bottom: -58px;
+    min-width: 0px;
+    height: 48px;
 }
