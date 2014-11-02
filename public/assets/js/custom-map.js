@@ -82,15 +82,19 @@ function createHomepageOSM(_latitude,_longitude){
                     showCoverageOnHover: false,
                     disableClusteringAtZoom: zoomLevelCluster,
                     iconCreateFunction: iconCreateFunction
-
                 });
 
                 for (var i = 0; i < locations.length; i++) {
 
-                    if (cluster == true)
+                    if (cluster == true){
                         mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:6px;" class="fa ' + locations[i][3] + '"></i>'
-                    else
-                        mHtml = '<i style="color:red; font-size:13px; padding-top:7px; padding-left:7px;" class="fa ' + locations[i][3] + '"></i>'
+                    } else {  
+                        if(locations[i][3]=="metro"){
+                            mHtml = '<img style="padding-top:6px;" width="18px" src="./assets/img/metro.png"/>'
+                        } else {
+                            mHtml = '<i style="color:red; font-size:13px; padding-top:7px; padding-left:7px;" class="fa ' + locations[i][3] + '"></i>'
+                        }
+                    }
 
                     var _icon = L.divIcon({
                         html: mHtml, //'<img src="' + locations[i][7] +'">',
@@ -105,19 +109,10 @@ function createHomepageOSM(_latitude,_longitude){
                         icon: _icon
                     });
                     marker.bindPopup(
-                        '<div class="property" style="padding-top:50px">' +
-                            //'<a href="' + locations[i][5] + '">' +
-                                //'<div class="property-image">' +
-                                //    '<img src="' + locations[i][6] + '">' +
-                                //'</div>' +
-                                '<div class="overlay">' +
-                                    '<div class="info">' +
-                                //        '<div class="tag price"> ' + locations[i][2] + '</div>' +
-                                        '<h3>' + locations[i][0] + '</h3>' +
-                                //        '<figure>' + locations[i][1] + '</figure>' +
-                                    '</div>' +
-                                '</div>' +
-                            //'</a>' +
+                        '<div class="popup_info">' +
+                            '<h3>' + locations[i][0].split(" ").slice(1).join(' ') + '</h3>' +
+                            '<hr>' +
+                            '<h3>' + locations[i][0].split(" ")[0].split(',').join(', ') + '</h3>' +
                         '</div>'
                     );
                     markers.addLayer(marker);
@@ -137,8 +132,9 @@ function createHomepageOSM(_latitude,_longitude){
 
         });
 
-        addMarkers("assets/js/data/locations_renfe.js", false, "blue");
-        addMarkers("assets/js/data/locations_metro.js", false, "blue");
+        addMarkers("assets/js/data/renfe.js", false, "blue");
+        addMarkers("assets/js/data/metro.js", false, "blue");
+        addMarkers("assets/js/data/bus.js", false, "blue");
         var metro = 1;
 
         self.map.on('zoomend', function(e) {
@@ -146,11 +142,13 @@ function createHomepageOSM(_latitude,_longitude){
                 if (metro == 0) {
                     self.map.addLayer(self.layers[0]);
                     self.map.addLayer(self.layers[1]);
+                    self.map.addLayer(self.layers[2]);
                     metro = 1
                 }
             } else {
                 self.map.removeLayer(self.layers[0]);
                 self.map.removeLayer(self.layers[1]);
+                self.map.removeLayer(self.layers[2]);
                 metro = 0;
             }
         });
