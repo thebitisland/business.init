@@ -440,37 +440,34 @@ function createHomepageOSM(_latitude,_longitude){
                 //updateIdealista(40.415914, -3.696148, 0.001);
                 updateIdealista(layer._latlng.lat, layer._latlng.lng, 0.001);
                  var query = $( "#bus_type option:selected" ).text();
-                if(query!= "Business type"){
+           
 
                     if(query!= "Business type"){
 
-                    if(query== "Book stores"){
-                        query="librerias";
-                    }else if(query== "Clothes"){
-                        query="ropa";
-                    }else if(query= "Restaurants"){
-                        query="restaurantes";
-                    }else if(query= "Electronics"){
-                        query="electronica";
-                    }else if(query= "Music stores"){
-                        query="musica";
+                    if(query == "Book stores"){
+                        query = "librerias";
+                    }else if(query == "Clothes"){
+                        query = "ropa";
+                    }else if(query == "Restaurants"){
+                        query = "restaurantes";
+                    }else if(query == "Electronics"){
+                        query = "electronica";
+                    }else if(query == "Music stores"){
+                        query = "musica";
                     }        
 
                 loadFoursquareData(layer._latlng.lat,layer._latlng.lng,query);
                 }else{
                     alert("No has seleccionado valor");
                 }
-               
-
-            }
 
             }
             drawnItems.addLayer(layer);
-        });
+        }
+        );
 
         //LEAFLET - DRAW
         // ---------
-
 
     }
 
