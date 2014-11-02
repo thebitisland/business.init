@@ -1979,11 +1979,15 @@ ul.list-links li a:hover {
   -moz-transition: 0.4s;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  bottom: -50px;
+  bottom: -30px;
   left: 0;
   position: absolute;
   width: 100%;
   z-index: 1;
+}
+
+.property .overlay p {
+  padding: 5px 0 0;
 }
 .property .overlay h3 {
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
@@ -1994,6 +1998,7 @@ ul.list-links li a:hover {
 }
 .property .overlay figure {
   color: #fff;
+  margin-top: 5px;
   font-weight: lighter;
 }
 .property .overlay .additional-info {

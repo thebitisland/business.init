@@ -45,7 +45,7 @@
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="#map">Map</a></li>
 							<li><a href="#featured-properties">Idealista</a></li>
-							<li><a href="#new-properties">Statistics</a></li>
+							<li><a href="#new-properties">Related Business</a></li>
 						    <li><a href="#partners">Tweets</a></li>
 							<li><a href="#page-footer">Contact</a></li>
 							<li><a href="#"><img src="assets/img/flags/gb.png" class="img-nav"></a></li>
@@ -200,6 +200,7 @@
 	window._longitude =-3.6936405;
 	createHomepageOSM(window._latitude,window._longitude);
 	updateIdealista(window._latitude, window._longitude, 0.001);
+
 </script>
 </body>
 </html>
