@@ -80,7 +80,12 @@ function createHomepageOSM(_latitude,_longitude){
                 for (var i = 0; i < locations.length; i++) {
 
                     if (cluster == true){
-                        mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:6px;" class="fa ' + locations[i][3] + '"></i>'
+                        if ((file == "assets/js/data/locations_guarderia.js") || (file == "assets/js/data/locations_infantil.js" || (file == "assets/js/data/locations_zapato.js")))
+                            mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:8px;" class="fa ' + locations[i][3] + '"></i>'
+                        else if ((file == "assets/js/data/locations_bking.js") || (file == "assets/js/data/locations_mcdonald.js")) 
+                            mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:7px;" class="fa ' + locations[i][3] + '"></i>'
+                        else
+                            mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:6px;" class="fa ' + locations[i][3] + '"></i>'
                     } else {  
                         if(locations[i][3]=="metro"){
                             mHtml = '<img style="padding-top:6px;" width="18px" src="./assets/img/metro.png"/>'
@@ -131,15 +136,15 @@ function createHomepageOSM(_latitude,_longitude){
             }
             else if ($(this).val() == 2){
                 addMarkers("assets/js/data/locations_guarderia.js", true, "red");
-                //addMarkers("assets/js/data/locations_infantil_municipal.js", true, "green");
+                addMarkers("assets/js/data/locations_infantil.js", true, "green");
             }
             else if ($(this).val() == 3){
                 addMarkers("assets/js/data/locations_gimnasio.js", true, "red");
-                //addMarkers("assets/js/data/locations_polideportivo.js", true, "green");
+                addMarkers("assets/js/data/locations_polideportivos.js", true, "green");
             }
             else if ($(this).val() == 4){
                 addMarkers("assets/js/data/locations_academia.js", true, "red");
-                //addMarkers("assets/js/data/locations_escuela_oficial.js", true, "green");
+                addMarkers("assets/js/data/locations_idiomas.js", true, "green");
             }
             else if ($(this).val() == 5){
                 addMarkers("assets/js/data/locations_zapato.js", true, "red");
