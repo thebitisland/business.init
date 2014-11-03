@@ -780,11 +780,10 @@ var loadFoursquareData = function(lat,lon,query,radius) {
 }
 
 
-var searchPLace = function(query) {
+var searchPlace = function(query) {
     var xmlhttp;
     var txt,x,i;
 
-   
     var url="http://nominatim.openstreetmap.org/search?q="+query+"&format=json&polygon=1"
     if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
       xmlhttp=new XMLHttpRequest();
@@ -794,17 +793,16 @@ var searchPLace = function(query) {
     
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-
             
             var jsonObj = JSON.parse(xmlhttp.responseText);
             var items = jsonObj[0];
             var lon = jsonObj[0].lon;
             var lat= jsonObj[0].lat;
-            console.log(items);
-            console.log(lon);
-            console.log(lat);
-            
+            //console.log(lon);
+            //console.log(lat);
 
+            return [lat,lon]
+            
         }
     }
     xmlhttp.open("GET",url,true);
