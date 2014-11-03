@@ -189,6 +189,7 @@
 	<script type="text/javascript" src="assets/js/custom.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet-draw/leaflet.draw.js"></script>
 	<script type="text/javascript" src="assets/js/toastr/toastr.js"></script>
+	<script type="text/javascript" src="assets/js/twitterApiHandler.js"></script>
 <!--[if gt IE 8]>
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->
@@ -197,6 +198,7 @@
 	window._latitude = 40.4000;
 	window._longitude = -3.6833;
 	createHomepageOSM(window._latitude,window._longitude);
+	//$("#Idealista").css("display","none");
 	//updateIdealista(window._latitude, window._longitude, 0.001);
 
 </script>

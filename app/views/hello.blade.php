@@ -3,9 +3,17 @@
 @section('content')
 <section id="featured-properties" class="featured-properties block background-color-grey-light carousel-full-width">
 	<div class="container">
-	<header class="section-title"><h2>Results</h2></header>
+	<header class="section-title"><h2>Idealista</h2></header>
 	</div><!-- /.container -->
-	<div class="owl-carousel featured-properties-carousel">
+
+	<div class="container" id="noIdealista">
+
+	<h3>Choose a location</h3>
+    <p>Using the circle feature select a range in the map.</p>
+		
+	</div><!-- /.container-->
+
+	<div class="owl-carousel featured-properties-carousel" id="Idealista">
 		<div class="property big">
 			<a href="property-detail.html">
 				<div class="property-image">
