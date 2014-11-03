@@ -54,7 +54,7 @@ function createHomepageOSM(_latitude,_longitude){
         // ----------
         // MARKERS
 
-        var addMarkers = function(file, cluster, color){
+        var addMarkers = function(file, cluster, color, name){
             var markers;
             $.getScript(file, function(){
             
@@ -108,13 +108,23 @@ function createHomepageOSM(_latitude,_longitude){
                         title: title,
                         icon: _icon
                     });
-                    marker.bindPopup(
-                        '<div class="popup_info">' +
-                            '<h3>' + locations[i][0].split(" ").slice(1).join(' ') + '</h3>' +
-                            '<hr>' +
-                            '<h3>' + locations[i][0].split(" ")[0].split(',').join(', ') + '</h3>' +
-                        '</div>'
-                    );
+                    if (name == null) {
+                        marker.bindPopup(
+                            '<div class="popup_info">' +
+                                '<h3>' + locations[i][0].split(" ").slice(1).join(' ') + '</h3>' +
+                                '<hr>' +
+                                '<h3>' + locations[i][0].split(" ")[0].split(',').join(', ') + '</h3>' +
+                            '</div>'
+                        );
+                    } else {
+                        marker.bindPopup(
+                            '<div class="popup_info">' +
+                                '<h3>' + name + '</h3>' +
+                                '<hr>' +
+                                '<h3>' + locations[i][0] + '</h3>' +
+                            '</div>'
+                        );
+                    }
                     markers.addLayer(marker);
                 }
 
@@ -131,37 +141,37 @@ function createHomepageOSM(_latitude,_longitude){
             }
             
             if ($(this).val() == 1){
-                addMarkers("assets/js/data/locations_libreria.js", true, "red");
-                addMarkers("assets/js/data/locations_bibliotecas.js", true, "green");
+                addMarkers("assets/js/data/locations_libreria.js", true, "red", "LIBRERÍA");
+                addMarkers("assets/js/data/locations_bibliotecas.js", true, "green", "BIBLIOTECA MUNICIPAL");
             }
             else if ($(this).val() == 2){
-                addMarkers("assets/js/data/locations_guarderia.js", true, "red");
-                addMarkers("assets/js/data/locations_infantil.js", true, "green");
+                addMarkers("assets/js/data/locations_guarderia.js", true, "red", "GUARDERÍA");
+                addMarkers("assets/js/data/locations_infantil.js", true, "green", "ESCUELA MUNICIPAL INFANTIL");
             }
             else if ($(this).val() == 3){
-                addMarkers("assets/js/data/locations_gimnasio.js", true, "red");
-                addMarkers("assets/js/data/locations_polideportivos.js", true, "green");
+                addMarkers("assets/js/data/locations_gimnasio.js", true, "red", "GIMNASIO");
+                addMarkers("assets/js/data/locations_polideportivos.js", true, "green", "POLIDEPORTIVO MUNICIPAL");
             }
             else if ($(this).val() == 4){
-                addMarkers("assets/js/data/locations_academia.js", true, "red");
-                addMarkers("assets/js/data/locations_idiomas.js", true, "green");
+                addMarkers("assets/js/data/locations_academia.js", true, "red", "ACADEMIA");
+                addMarkers("assets/js/data/locations_idiomas.js", true, "green", "ESCUELA OFICIAL DE IDIOMAS");
             }
             else if ($(this).val() == 5){
-                addMarkers("assets/js/data/locations_zapato.js", true, "red");
+                addMarkers("assets/js/data/locations_zapato.js", true, "red", "ZAPATERÍA");
             }
             else if ($(this).val() == 6){
-                addMarkers("assets/js/data/locations_mercadona.js", true, "red");
+                addMarkers("assets/js/data/locations_mercadona.js", true, "red", "SUPERMERCADO");
             }
             else if ($(this).val() == 7){
-                addMarkers("assets/js/data/locations_bking.js", true, "green");
-                addMarkers("assets/js/data/locations_mcdonald.js", true, "red");
+                addMarkers("assets/js/data/locations_bking.js", true, "green", "HAMBURGUESERÍA");
+                addMarkers("assets/js/data/locations_mcdonald.js", true, "red", "HAMBURGUESERÍA");
             }
 
         });
 
-        addMarkers("assets/js/data/renfe.js", false, "blue");
-        addMarkers("assets/js/data/metro.js", false, "blue");
-        addMarkers("assets/js/data/bus.js", false, "blue");
+        addMarkers("assets/js/data/renfe.js", false, "blue", null);
+        addMarkers("assets/js/data/metro.js", false, "blue", null);
+        addMarkers("assets/js/data/bus.js", false, "blue", null);
         self.metro = 1;
 
         self.map.on('zoomend', function(e) {
