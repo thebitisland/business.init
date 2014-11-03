@@ -328,6 +328,61 @@
 	</div><!-- /.container -->
 </section><!-- /#our-services -->
 
+<section id="start" class="block">
+	<div class="container">
+		<header class="section-title"><h2>Start a business</h2></header>
+
+		<h4>Para darte de alta como autónomo, tienes tres opciones: hacer los trámites acudiendo personalmente a Hacienda y a la Seguridad Social, acudir a un PAE (Puntos de Atención al Emprendedor) o hacerlo directamente a través de internet.</h4>
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+			<div class="accordion ac" id="accordion2">
+		                <div class="accordion-group">
+		                    <div class="accordion-heading">
+		                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+		                        Trámites fiscales
+		                        </a>
+		                    </div><!-- /accordion-heading -->
+		                    <div id="collapseOne" class="accordion-body collapse in">
+		                        <div class="accordion-inner">
+								<p>A realizar en tu delegación de Hacienda.Antes de iniciar la actividad tienes que realizar la Declaración Censal, "básicamente, un resumen de la situación tributaria en la que se encuentra la persona", indica Rosario Moreno, asesora jurídica de ATA. Para ello, debes presentar, bien telemática, bien presencialmente, el modelo 036 o 037 (simplificado). Darse de alta en el Impuesto de Actividades Económicas (IAE) durante el primer mes de inicio de la actividad. El modelo que tienes que presentar es el 840. Lo importante en este paso es prestar atención a la hora de elegir el epígrafe que defina la actividad que vas a desarrollar. "Y si se pretenden realizar varias, habrá que marcar tantos epígrafes como actividades".</p>
+								</div><!-- /accordion-inner -->
+		                    </div><!-- /collapse -->
+		                </div><!-- /accordion-group -->
+		                <br>
+		
+		                <div class="accordion-group">
+		                    <div class="accordion-heading">
+		                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+		                        Trámites laborales
+		                        </a>
+		                    </div>
+		                    <div id="collapseTwo" class="accordion-body collapse">
+		                        <div class="accordion-inner">
+								<p>A realizar en la Administración de la Tesorería General de la Seguridad Social. Debes darte de alta en el Régimen Especial de Trabajadores Autónomos. Para ello, presenta el modelo TA.521 cumplimentado, junto a la fotocopia del alta en el IAE y fotocopia del DNI.</p>
+								</div><!-- /accordion-inner -->
+		                    </div><!-- /collapse -->
+		                </div><!-- /accordion-group -->
+		                <br>
+		
+		                 <div class="accordion-group">
+		                    <div class="accordion-heading">
+		                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+		                        Otros tramites
+		                        </a>
+		                    </div>
+		                    <div id="collapseThree" class="accordion-body collapse">
+		                        <div class="accordion-inner">
+								<p>Formalizar la Licencia de Apertura en el Ayuntamiento, en caso de que haya un centro de trabajo. Dar de alta a tus trabajadores en la Seguridad Social, en caso de que decidas contratar a más gente.</p>
+								</div><!-- /accordion-inner -->
+		                    </div><!-- /collapse -->
+		                </div><!-- /accordion-group -->
+		                <br>
+				
+					</div>
+		</div><!-- /.row -->
+	</div><!-- /.container -->
+</section><!-- /#our-services -->
+
 <section id="partners">
 	<div class="container">
 		<header class="section-title"><h2>Our Partners</h2></header>
