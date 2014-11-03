@@ -52,6 +52,7 @@
 							<li><a href="#featured-properties">Idealista</a></li>
 							<li><a href="#new-properties">Related Business</a></li>
 						    <li><a href="#partners">Tweets</a></li>
+						    <li><a href="#start">Start a business</a></li>
 							<li><a href="#page-footer">Contact</a></li>
 							<li><a href="#"><img src="assets/img/flags/gb.png" class="img-nav"></a></li>
 							<li><a href="#"><img src="assets/img/flags/es.png" class="img-nav"></a></li>
@@ -213,6 +214,7 @@
 	window._latitude = 40.4000;
 	window._longitude = -3.6833;
 	createHomepageOSM(window._latitude,window._longitude);
+	searchPLace("Madrid");
 	//$("#Idealista").css("display","none");
 	//updateIdealista(window._latitude, window._longitude, 0.001);
 
