@@ -48,6 +48,7 @@
 					<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="#map">Map</a></li>
+							<li><a href="#statSection">Distrit statistics</a></li>
 							<li><a href="#featured-properties">Idealista</a></li>
 							<li><a href="#new-properties">Related Business</a></li>
 						    <li><a href="#partners">Tweets</a></li>

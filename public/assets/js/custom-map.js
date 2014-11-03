@@ -352,7 +352,8 @@ function createHomepageOSM(_latitude,_longitude){
         }
 
         function clickOnDistrit(e) {
-            $('#stats').css("display","block")
+            $('#noStats').css("display","none");
+            $('#stats').css("display","block");
             d3.select("#sexRatio").html("");
             drawCHgraps(e.target.feature);
 
