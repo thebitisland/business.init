@@ -165,6 +165,10 @@ ul.list-links li a:hover {
   padding-left: 5px;
 }
 
+#stats{
+  display:none;
+}
+
 .page-sub-page #page-content:after {
   background: #f1f1f1;
   background: -moz-linear-gradient(top, #f1f1f1 0%, white 80%);

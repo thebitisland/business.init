@@ -8,6 +8,8 @@
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
 	<link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+	
+	<link rel="stylesheet" type="text/css" href="assets/js/stats_graphs/nv.d3.css">
 	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
 	<link rel="stylesheet" href="assets/css/bootstrap-select.min.css" type="text/css">
 	<link rel="stylesheet" href="assets/css/jquery.slider.min.css" type="text/css">
@@ -19,6 +21,7 @@
 	<link rel="stylesheet" href="css/custom.css" type="text/css">
 	<link rel="stylesheet" type="text/css" href="assets/js/leaflet-draw/leaflet.draw.css">
 	<link rel="stylesheet" type="text/css" href="assets/js/toastr/toastr.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/stat_graphs.css">
 
 	<title>{{ $title or 'Business.init()' }}</title>
 
@@ -45,6 +48,7 @@
 					<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="#map">Map</a></li>
+							<li><a href="#statSection">Distrit statistics</a></li>
 							<li><a href="#featured-properties">Idealista</a></li>
 							<li><a href="#new-properties">Related Business</a></li>
 						    <li><a href="#partners">Tweets</a></li>
@@ -163,7 +167,9 @@
 	</div>
 
 	<div id="overlay"></div>
-	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+	<!--<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>-->
+	<script type="text/javascript" src="assets/js/stats_graphs/d3.v2.js"></script>
+	
 	<script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet.markercluster.js"></script>
@@ -189,6 +195,16 @@
 	<script type="text/javascript" src="assets/js/custom.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet-draw/leaflet.draw.js"></script>
 	<script type="text/javascript" src="assets/js/toastr/toastr.js"></script>
+
+	<script type="text/javascript" src="assets/js/stats_graphs/nv.d3.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/tooltip.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/utils.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/legend.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/axis.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/multiBar.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/multiBarChart.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/stream_layers.js"></script>
+	<script type="text/javascript" src="assets/js/stat_graphs.js"></script>
 <!--[if gt IE 8]>
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->
