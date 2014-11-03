@@ -18,6 +18,7 @@
 	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
 	<link rel="stylesheet" href="css/custom.css" type="text/css">
 	<link rel="stylesheet" type="text/css" href="assets/js/leaflet-draw/leaflet.draw.css">
+	<link rel="stylesheet" type="text/css" href="assets/js/toastr/toastr.css">
 
 	<title>{{ $title or 'Business.init()' }}</title>
 
@@ -81,11 +82,13 @@
 									<div class="form-group">
 										<select name="property-type" id="bus_type">
 											<option value="0">Business type</option>
-											<option value="1">Book stores</option>
-											<option value="2">Clothes</option>
-											<option value="3">Restaurants</option>
-											<option value="4">Electronics</option>
-											<option value="5">Music stores</option>
+											<option value="1">Book store</option>
+											<option value="2">Nursery</option>
+											<option value="3">Gymnasium</option>
+											<option value="4">Language School</option>
+											<option value="5">Shoeshop</option>
+											<option value="6">Mercadona</option>
+											<option value="7">Burguer King</option>
 										</select>
 									</div><!-- /.form-group -->
 									<div class="form-group">
@@ -185,6 +188,7 @@
 	<script type="text/javascript" src="assets/js/custom-map.js"></script>
 	<script type="text/javascript" src="assets/js/custom.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet-draw/leaflet.draw.js"></script>
+	<script type="text/javascript" src="assets/js/toastr/toastr.js"></script>
 <!--[if gt IE 8]>
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->

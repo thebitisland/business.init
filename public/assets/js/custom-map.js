@@ -54,26 +54,19 @@ function createHomepageOSM(_latitude,_longitude){
         // ----------
         // MARKERS
 
-        var addMarkers = function(file, cluster, color){
+        var addMarkers = function(file, cluster, color, name){
             var markers;
             $.getScript(file, function(){
             
                 if (cluster == false)
                     var zoomLevelCluster = 1;
                 else 
-                    var zoomLevelCluster = 16;
+                    var zoomLevelCluster = 13;
 
                 var iconCreateFunction = function (cluster) {
                     var childCount = cluster.getChildCount();
             
-                    var c = ' marker-cluster-';
-                    if (childCount < 10) {
-                        c += 'small';
-                    } else if (childCount < 100) {
-                        c += 'medium';
-                    } else {
-                        c += 'large';
-                    }
+                    var c = ' ';
             
                     return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster ' + color + c, iconSize: new L.Point(40, 40) });
                 }
@@ -87,7 +80,12 @@ function createHomepageOSM(_latitude,_longitude){
                 for (var i = 0; i < locations.length; i++) {
 
                     if (cluster == true){
-                        mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:6px;" class="fa ' + locations[i][3] + '"></i>'
+                        if ((file == "assets/js/data/locations_guarderia.js") || (file == "assets/js/data/locations_infantil.js" || (file == "assets/js/data/locations_zapato.js")))
+                            mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:8px;" class="fa ' + locations[i][3] + '"></i>'
+                        else if ((file == "assets/js/data/locations_bking.js") || (file == "assets/js/data/locations_mcdonald.js")) 
+                            mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:7px;" class="fa ' + locations[i][3] + '"></i>'
+                        else
+                            mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:6px;" class="fa ' + locations[i][3] + '"></i>'
                     } else {  
                         if(locations[i][3]=="metro"){
                             mHtml = '<img style="padding-top:6px;" width="18px" src="./assets/img/metro.png"/>'
@@ -110,13 +108,23 @@ function createHomepageOSM(_latitude,_longitude){
                         title: title,
                         icon: _icon
                     });
-                    marker.bindPopup(
-                        '<div class="popup_info">' +
-                            '<h3>' + locations[i][0].split(" ").slice(1).join(' ') + '</h3>' +
-                            '<hr>' +
-                            '<h3>' + locations[i][0].split(" ")[0].split(',').join(', ') + '</h3>' +
-                        '</div>'
-                    );
+                    if (name == null) {
+                        marker.bindPopup(
+                            '<div class="popup_info">' +
+                                '<h3>' + locations[i][0].split(" ").slice(1).join(' ') + '</h3>' +
+                                '<hr>' +
+                                '<h3>' + locations[i][0].split(" ")[0].split(',').join(', ') + '</h3>' +
+                            '</div>'
+                        );
+                    } else {
+                        marker.bindPopup(
+                            '<div class="popup_info">' +
+                                '<h3>' + name + '</h3>' +
+                                '<hr>' +
+                                '<h3>' + locations[i][0] + '</h3>' +
+                            '</div>'
+                        );
+                    }
                     markers.addLayer(marker);
                 }
 
@@ -128,16 +136,42 @@ function createHomepageOSM(_latitude,_longitude){
         }
 
         $('#bus_type').change(function() {
+            for (var i = 3; i < self.layers.length; i++) {
+                self.map.removeLayer(self.layers[i]);
+            }
+            
             if ($(this).val() == 1){
-                addMarkers("assets/js/data/locations_libreria.js", true, "red");
-                addMarkers("assets/js/data/locations_bibliotecas.js", true, "green");
+                addMarkers("assets/js/data/locations_libreria.js", true, "red", "LIBRERÍA");
+                addMarkers("assets/js/data/locations_bibliotecas.js", true, "green", "BIBLIOTECA MUNICIPAL");
+            }
+            else if ($(this).val() == 2){
+                addMarkers("assets/js/data/locations_guarderia.js", true, "red", "GUARDERÍA");
+                addMarkers("assets/js/data/locations_infantil.js", true, "green", "ESCUELA MUNICIPAL INFANTIL");
+            }
+            else if ($(this).val() == 3){
+                addMarkers("assets/js/data/locations_gimnasio.js", true, "red", "GIMNASIO");
+                addMarkers("assets/js/data/locations_polideportivos.js", true, "green", "POLIDEPORTIVO MUNICIPAL");
+            }
+            else if ($(this).val() == 4){
+                addMarkers("assets/js/data/locations_academia.js", true, "red", "ACADEMIA");
+                addMarkers("assets/js/data/locations_idiomas.js", true, "green", "ESCUELA OFICIAL DE IDIOMAS");
+            }
+            else if ($(this).val() == 5){
+                addMarkers("assets/js/data/locations_zapato.js", true, "red", "ZAPATERÍA");
+            }
+            else if ($(this).val() == 6){
+                addMarkers("assets/js/data/locations_mercadona.js", true, "red", "SUPERMERCADO");
+            }
+            else if ($(this).val() == 7){
+                addMarkers("assets/js/data/locations_bking.js", true, "green", "HAMBURGUESERÍA");
+                addMarkers("assets/js/data/locations_mcdonald.js", true, "red", "HAMBURGUESERÍA");
             }
 
         });
 
-        addMarkers("assets/js/data/renfe.js", false, "blue");
-        addMarkers("assets/js/data/metro.js", false, "blue");
-        addMarkers("assets/js/data/bus.js", false, "blue");
+        addMarkers("assets/js/data/renfe.js", false, "blue", null);
+        addMarkers("assets/js/data/metro.js", false, "blue", null);
+        addMarkers("assets/js/data/bus.js", false, "blue", null);
         self.metro = 1;
 
         self.map.on('zoomend', function(e) {
@@ -544,20 +578,24 @@ function createHomepageOSM(_latitude,_longitude){
                 var query = $( "#bus_type option:selected" ).text();
                 if(query!= "Business type"){
 
-                    if(query == "Book stores"){
+                    if(query == "Book store"){
                         query = "librerias";
-                    }else if(query == "Clothes"){
-                        query = "ropa";
-                    }else if(query == "Restaurants"){
-                        query = "restaurantes";
-                    }else if(query == "Electronics"){
-                        query = "electronica";
-                    }else if(query == "Music stores"){
-                        query = "musica";
+                    }else if(query == "Nursery"){
+                        query = "guarderia";
+                    }else if(query == "Gymnasium"){
+                        query = "gimnasio";
+                    }else if(query == "Shoeshop"){
+                        query = "zapateria";
+                    }else if(query == "Mercadona"){
+                        query = "mercadona";
+                    }else if(query == "Language School"){
+                        query = "academia idioma";
+                    }else if(query == "Burguer King"){
+                        query = "Burguer King";
                     }
                     loadFoursquareData(layer._latlng.lat,layer._latlng.lng,query);
                 }else{
-                    //alert("No has seleccionado valor");
+                    toastr["error"]("In order to see related business", "Select a business type!")
                 }
 
             }
@@ -571,8 +609,22 @@ function createHomepageOSM(_latitude,_longitude){
 
     }
 
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "positionClass": "toast-top-left",
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 
-     function loadFoursquareData(lat,lon,query) {
+    function loadFoursquareData(lat,lon,query) {
         self.ratings = []
         var xmlhttp;
         var txt,x,i;
