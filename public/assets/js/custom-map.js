@@ -568,6 +568,7 @@ function createHomepageOSM(_latitude,_longitude){
 
      function loadFoursquareData(lat,lon,query)
     {
+        self.ratings = []
         var xmlhttp;
         var txt,x,i;
 
@@ -620,7 +621,7 @@ function createHomepageOSM(_latitude,_longitude){
                 var location= venues.location;
                 var address = location.address;
                 var rating = venues.rating;
-                ratings.push(rating);
+                self.ratings.push(rating);
                 var name = venues.name;
                 var photo_suffix= venues.photos.groups[0].items[0].suffix;
                 var photo_prefix = "https://irs2.4sqi.net/img/general/";
@@ -658,7 +659,7 @@ function createHomepageOSM(_latitude,_longitude){
 
             //console.log(final_html);
 
-            console.log(ratings);
+            console.log(self.ratings);
 
             document.getElementById("foursquare").innerHTML=body;
 
