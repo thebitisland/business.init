@@ -519,24 +519,30 @@ function createHomepageOSM(_latitude,_longitude){
                 polygon: false,
                 rectangle: false,
                 marker: false
-            },edit: {
-                featureGroup: drawnItems
             }
         });
         self.map.addControl(drawControl);
 
+        d3.select(".leaflet-top.leaflet-left").append("div")
+            .html("Click to add circle")
+            .attr("class", "help_circle")
+
         self.map.on('draw:created', function (e) {
+            
+            d3.select(".help_circle").remove();
+
             var type = e.layerType,
                 layer = e.layer;
             if (type === 'circle') {
 
+                if(self.prevCircle != null) drawnItems.removeLayer(self.prevCircle);
+
                 console.log(layer._latlng.lat + ":" + layer._latlng.lng)
                 //updateIdealista(40.415914, -3.696148, 0.001);
                 updateIdealista(layer._latlng.lat, layer._latlng.lng, 0.001);
-                 var query = $( "#bus_type option:selected" ).text();
-           
 
-                    if(query!= "Business type"){
+                var query = $( "#bus_type option:selected" ).text();
+                if(query!= "Business type"){
 
                     if(query == "Book stores"){
                         query = "librerias";
@@ -548,17 +554,17 @@ function createHomepageOSM(_latitude,_longitude){
                         query = "electronica";
                     }else if(query == "Music stores"){
                         query = "musica";
-                    }        
-
-                loadFoursquareData(layer._latlng.lat,layer._latlng.lng,query);
+                    }
+                    loadFoursquareData(layer._latlng.lat,layer._latlng.lng,query);
                 }else{
-                    alert("No has seleccionado valor");
+                    //alert("No has seleccionado valor");
                 }
 
             }
             drawnItems.addLayer(layer);
-        }
-        );
+            layer.bringToBack();
+            self.prevCircle = layer;
+        });
 
         //LEAFLET - DRAW
         // ---------
@@ -566,107 +572,95 @@ function createHomepageOSM(_latitude,_longitude){
     }
 
 
-     function loadFoursquareData(lat,lon,query)
-    {
+     function loadFoursquareData(lat,lon,query) {
         self.ratings = []
         var xmlhttp;
         var txt,x,i;
 
         $("#noBusiness").css("opacity","0");
         $("#foursquare").empty();
-        var url="https://api.foursquare.com/v2/venues/explore?client_id=LXYDA3DJQAXS1F35ROQVWJTLGNBOYJHJPJZPNWHQ1DMTLJVM&venuePhotos=1&client_secret=CR30J1LYOGBZDCZQ2KQFXC2X4ADDO22SNXZO2HRDIGOBIURE&v=20120609&ll="+lat+","+lon+"&query="+query;
-        if (window.XMLHttpRequest)
-          {// code for IE7+, Firefox, Chrome, Opera, Safari
+        var url="https://api.foursquare.com/v2/venues/explore?client_id=LXYDA3DJQAXS1F35ROQVWJTLGNBOYJHJPJZPNWHQ1DMTLJVM&venuePhotos=1&client_secret=CR30J1LYOGBZDCZQ2KQFXC2X4ADDO22SNXZO2HRDIGOBIURE&v=20120609&ll="+lat+","+lon+"&query="+query+"&llAcc=1";
+        
+        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
           xmlhttp=new XMLHttpRequest();
-          }
-        else
-          {// code for IE6, IE5
-          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-          }
-        xmlhttp.onreadystatechange=function()
-          {
-          if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-
-           //var html_intro = "<div class='row'>";
-           //var html_final = "</div><!-- /.row-->";
-           var body = "";
-
-           var picture_dimension="250x140"
-
-           var stars_5= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span></p>";         
-           var stars_4= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span></p>";
-           var stars_3= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
-           var stars_2= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
-           var stars_1= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
-            var jsonObj = JSON.parse(xmlhttp.responseText);
-            var items = jsonObj.response.groups[0].items;
-            var items_length = jsonObj.response.groups[0].items.length; 
-            console.log(jsonObj.response.groups[0].items);
-            var total_iterations="";
-
-            if(items_length>16){
-                total_iterations=16;
-            }else{
-                total_iterations=items_length;
-            }
-            //console.log(jsonObj.response.groups[0].items.length);
-            for(var i=0;i<total_iterations;i++){
-
-                var venues = jsonObj.response.groups[0].items[i].venue;
-                ///var tips= jsonObj.response.groups[0].items[i].tips;
-                //console.log(venues);
-                var id = venues.id;
-                //console.log(id);
-                var location= venues.location;
-                var address = location.address;
-                var rating = venues.rating;
-                self.ratings.push(rating);
-                var name = venues.name;
-                var photo_suffix= venues.photos.groups[0].items[0].suffix;
-                var photo_prefix = "https://irs2.4sqi.net/img/general/";
-                var photo = photo_prefix+picture_dimension+photo_suffix;
-
-                //console.log(photo);
-                //console.log(tips);
-                //console.log(location);
-
-             
-
-                var reference = "http://foursquare.com/v/"+id;
-
-                var stars_rating="";
-
-                if(rating==10){
-                stars_rating=stars_5;
-                }else if(rating>=8 && rating <10){
-                stars_rating=stars_4;
-                }else if(rating>=5 && rating<8){
-                stars_rating=stars_3;
-                }else if(rating>=2 && rating<5){
-                stars_rating=stars_2;
-                }else{
-                stars_rating=stars_1;
-                }
-
-
-                body+= "<div class='col-md-3 col-sm-6'><div class='property'><a href="+reference+" target='blank'><div class='property-image'><img alt=''src="+photo+"></div><div class='overlay'><div class='info'><h3>"+name+"</h3><div class='tag price'>"+stars_rating+"</div><figure>"+address+"</figure></div></div></a></div><!-- /.property --></div><!-- /.col-md-3 -->";
-
-
-            }
-
-            //var final_html= html_intro + body + html_final;
-
-            //console.log(final_html);
-
-            console.log(self.ratings);
-
-            document.getElementById("foursquare").innerHTML=body;
-
-            }
-          }
-            xmlhttp.open("GET",url,true);
-            xmlhttp.send();
+        } else { // code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
+        
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+    
+                //var html_intro = "<div class='row'>";
+                //var html_final = "</div><!-- /.row-->";
+                var body = "";
+                var picture_dimension="250x140"
+                var stars_5= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span></p>";         
+                var stars_4= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span></p>";
+                var stars_3= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
+                var stars_2= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
+                var stars_1= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
+                var jsonObj = JSON.parse(xmlhttp.responseText);
+                var items = jsonObj.response.groups[0].items;
+                var items_length = jsonObj.response.groups[0].items.length; 
+                
+                console.log(jsonObj.response.groups[0].items);
+                var total_iterations;
+        
+                if (items_length > 16) {
+                    total_iterations = 16;
+                } else {
+                    total_iterations = items_length;
+                }
+                //console.log(jsonObj.response.groups[0].items.length);
+                for (var i = 0; i < total_iterations; i++) {
+    
+                    var venues = jsonObj.response.groups[0].items[i].venue;
+                    ///var tips= jsonObj.response.groups[0].items[i].tips;
+                    //console.log(venues);
+                    var id = venues.id;
+                    //console.log(id);
+                    var location= venues.location;
+                    var address = location.address;
+                    var rating = venues.rating;
+                    self.ratings.push(rating);
+                    var name = venues.name;
+                    var photo_suffix= venues.photos.groups[0].items[0].suffix;
+                    var photo_prefix = "https://irs2.4sqi.net/img/general/";
+                    var photo = photo_prefix+picture_dimension+photo_suffix;
+        
+                    //console.log(photo);
+                    //console.log(tips);
+                    //console.log(location);
+        
+                    var reference = "http://foursquare.com/v/"+id;
+                    var stars_rating;
+        
+                    if (rating == 10) {
+                        stars_rating = stars_5;
+                    } else if (rating >= 8 && rating < 10) {
+                        stars_rating = stars_4;
+                    } else if (rating >= 5 && rating < 8) {
+                        stars_rating = stars_3;
+                    } else if (rating >= 2 && rating < 5) {
+                        stars_rating = stars_2;
+                    } else {
+                        stars_rating = stars_1;
+                    }
+        
+                    body += "<div class='col-md-3 col-sm-6'><div class='property'><a href="+reference+" target='blank'><div class='property-image'><img alt=''src="+photo+"></div><div class='overlay'><div class='info'><h3>"+name+"</h3><div class='tag price'>"+stars_rating+"</div><figure>"+address+"</figure></div></div></a></div><!-- /.property --></div><!-- /.col-md-3 -->";
+    
+                }
+    
+                //var final_html= html_intro + body + html_final;
+                //console.log(final_html);
+                console.log(self.ratings);
+        
+                document.getElementById("foursquare").innerHTML=body;
+    
+            }
+        }
+        xmlhttp.open("GET",url,true);
+        xmlhttp.send();
+    }
 }
 
