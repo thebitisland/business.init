@@ -51,7 +51,7 @@
 							<li><a href="#statSection">Distrit statistics</a></li>
 							<li><a href="#featured-properties">Idealista</a></li>
 							<li><a href="#new-properties">Related Business</a></li>
-						    <li><a href="#partners">Tweets</a></li>
+						    <li><a href="#tweets">Tweets</a></li>
 						    <li><a href="#start">Start a business</a></li>
 							<li><a href="#page-footer">Contact</a></li>
 							<li><a href="#"><img src="assets/img/flags/gb.png" class="img-nav"></a></li>
