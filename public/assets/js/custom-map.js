@@ -601,7 +601,7 @@ function createHomepageOSM(_latitude,_longitude){
                     }else if(query == "Burguer King"){
                         query = "Burguer King";
                     }
-                    loadFoursquareData(layer._latlng.lat,layer._latlng.lng,query);
+                    loadFoursquareData(layer._latlng.lat,layer._latlng.lng,query,layer.getRadius());
                 }else{
                     toastr["error"]("In order to see related business", "Select a business type!")
                 }

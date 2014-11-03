@@ -213,6 +213,7 @@
 	window._latitude = 40.4000;
 	window._longitude = -3.6833;
 	createHomepageOSM(window._latitude,window._longitude);
+	//$("#Idealista").css("display","none");
 	//updateIdealista(window._latitude, window._longitude, 0.001);
 
 </script>
