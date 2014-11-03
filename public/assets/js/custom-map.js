@@ -633,4 +633,3 @@ function createHomepageOSM(_latitude,_longitude){
     }
 
 }
-
