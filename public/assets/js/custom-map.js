@@ -577,7 +577,7 @@ function createHomepageOSM(_latitude,_longitude){
         var xmlhttp;
         var txt,x,i;
 
-        $("#noBusiness").css("opacity","0");
+        $("#noBusiness").css("display","none");
         $("#foursquare").empty();
         var url="https://api.foursquare.com/v2/venues/explore?client_id=LXYDA3DJQAXS1F35ROQVWJTLGNBOYJHJPJZPNWHQ1DMTLJVM&venuePhotos=1&client_secret=CR30J1LYOGBZDCZQ2KQFXC2X4ADDO22SNXZO2HRDIGOBIURE&v=20120609&ll="+lat+","+lon+"&query="+query+"&llAcc=1";
         

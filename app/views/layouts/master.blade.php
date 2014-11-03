@@ -79,16 +79,6 @@
 								<form role="form" id="form-map" class="form-map form-search">
 									<h2>What do <b>you</b> want?</h2>
 									<div class="form-group">
-										<input type="text" class="form-control" id="search-box-property-id" placeholder="Where?">
-									</div>
-									<div class="form-group">
-										<select name="type">
-											<option value="">Status</option>
-											<option value="1">Rent</option>
-											<option value="2">Sale</option>
-										</select>
-									</div><!-- /.form-group -->
-									<div class="form-group">
 										<select name="property-type" id="bus_type">
 											<option value="0">Business type</option>
 											<option value="1">Book stores</option>
@@ -99,10 +89,20 @@
 										</select>
 									</div><!-- /.form-group -->
 									<div class="form-group">
+										<input type="text" class="form-control" id="search-box-property-id" placeholder="Where?">
+									</div>
+									<!--<div class="form-group">
+										<select name="type">
+											<option value="">Status</option>
+											<option value="1">Rent</option>
+											<option value="2">Sale</option>
+										</select>
+									</div>--><!-- /.form-group -->
+									<!--<div class="form-group">
 										<div class="price-range">
 											<input id="price-input" type="text" name="price" value="1000;299000">
 										</div>
-									</div>
+									</div>-->
 									<div class="form-group">
 										<button type="submit" class="btn btn-default">Search Now</button>
 									</div><!-- /.form-group -->
