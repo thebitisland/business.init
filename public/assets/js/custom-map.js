@@ -533,15 +533,35 @@ function createHomepageOSM(_latitude,_longitude){
                 console.log(layer._latlng.lat + ":" + layer._latlng.lng)
                 //updateIdealista(40.415914, -3.696148, 0.001);
                 updateIdealista(layer._latlng.lat, layer._latlng.lng, 0.001);
-                loadFoursquareData(layer._latlng.lat,layer._latlng.lng,"librerias");
+                 var query = $( "#bus_type option:selected" ).text();
+           
+
+                    if(query!= "Business type"){
+
+                    if(query == "Book stores"){
+                        query = "librerias";
+                    }else if(query == "Clothes"){
+                        query = "ropa";
+                    }else if(query == "Restaurants"){
+                        query = "restaurantes";
+                    }else if(query == "Electronics"){
+                        query = "electronica";
+                    }else if(query == "Music stores"){
+                        query = "musica";
+                    }        
+
+                loadFoursquareData(layer._latlng.lat,layer._latlng.lng,query);
+                }else{
+                    alert("No has seleccionado valor");
+                }
 
             }
             drawnItems.addLayer(layer);
-        });
+        }
+        );
 
         //LEAFLET - DRAW
         // ---------
-
 
     }
 
@@ -551,7 +571,8 @@ function createHomepageOSM(_latitude,_longitude){
         var xmlhttp;
         var txt,x,i;
 
-        //document.getElementById("noBusiness").css([ "opacity:0"]);
+        $("#noBusiness").css("opacity","0");
+        $("#foursquare").empty();
         var url="https://api.foursquare.com/v2/venues/explore?client_id=LXYDA3DJQAXS1F35ROQVWJTLGNBOYJHJPJZPNWHQ1DMTLJVM&venuePhotos=1&client_secret=CR30J1LYOGBZDCZQ2KQFXC2X4ADDO22SNXZO2HRDIGOBIURE&v=20120609&ll="+lat+","+lon+"&query="+query;
         if (window.XMLHttpRequest)
           {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -595,9 +616,11 @@ function createHomepageOSM(_latitude,_longitude){
                 ///var tips= jsonObj.response.groups[0].items[i].tips;
                 //console.log(venues);
                 var id = venues.id;
+                //console.log(id);
                 var location= venues.location;
                 var address = location.address;
                 var rating = venues.rating;
+                ratings.push(rating);
                 var name = venues.name;
                 var photo_suffix= venues.photos.groups[0].items[0].suffix;
                 var photo_prefix = "https://irs2.4sqi.net/img/general/";
@@ -606,6 +629,8 @@ function createHomepageOSM(_latitude,_longitude){
                 //console.log(photo);
                 //console.log(tips);
                 //console.log(location);
+
+             
 
                 var reference = "http://foursquare.com/v/"+id;
 
@@ -633,12 +658,14 @@ function createHomepageOSM(_latitude,_longitude){
 
             //console.log(final_html);
 
+            console.log(ratings);
+
             document.getElementById("foursquare").innerHTML=body;
 
             }
           }
-        xmlhttp.open("GET",url,true);
-        xmlhttp.send();
+            xmlhttp.open("GET",url,true);
+            xmlhttp.send();
         }
 }
 

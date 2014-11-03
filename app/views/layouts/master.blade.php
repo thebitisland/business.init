@@ -90,7 +90,7 @@
 									</div><!-- /.form-group -->
 									<div class="form-group">
 										<select name="property-type" id="bus_type">
-											<option value="">Business type</option>
+											<option value="0">Business type</option>
 											<option value="1">Book stores</option>
 											<option value="2">Clothes</option>
 											<option value="3">Restaurants</option>
