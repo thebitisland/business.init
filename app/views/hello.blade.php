@@ -290,7 +290,7 @@
 	</div><!-- /.container-->
 </section><!-- /#new-properties-->
 
-<section id="our-services" class="block">
+<section id="tweets" class="block">
 	<div class="container">
 		<header class="section-title"><h2>Related Tweets nearby</h2></header>
 		<div class="row">
@@ -387,10 +387,11 @@
 	<div class="container">
 		<header class="section-title"><h2>Our Partners</h2></header>
 		<div class="logos">
-			<div class="logo col-md-3 col-sm-3"><a href=""><img width="200" src="assets/img/partners/madrid_emprende.png" alt=""></a></div>
-			<div class="logo col-md-3 col-sm-3"><a href=""><img width="200" src="assets/img/partners/emt_alargado.gif" alt=""></a></div>
-			<div class="logo col-md-3 col-sm-3"><a href="http://www.idealista.com/"><img width="200" src="assets/img/partners/idealista.png" alt=""></a></div>
-			<div class="logo col-md-3 col-sm-3"><a href="http://www.idealista.com/labs/propertyMap.htm?k=1495facc6beff62d21a0282a6f8ac1f1&action=json&operation=sale&radio=40.416914%2C-3.695148&center=40.415914%2C-3.696148"><img width="200" src="assets/img/partners/logo_everis.jpg" alt=""></a></div>
+			<div style="margin-left:12px;margin-right:12px" class="logo col-md-2 col-sm-2"><a href=""><img width="175" src="assets/img/partners/madrid_emprende.png" alt=""></a></div>
+			<div style="margin-left:12px;margin-right:12px" class="logo col-md-2 col-sm-2"><a href=""><img width="175" src="assets/img/partners/emt_alargado.gif" alt=""></a></div>	
+			<div style="margin-left:12px;margin-right:12px" class="logo col-md-2 col-sm-2"><a href="http://www.idealista.com/labs/propertyMap.htm?k=1495facc6beff62d21a0282a6f8ac1f1&action=json&operation=sale&radio=40.416914%2C-3.695148&center=40.415914%2C-3.696148"><img width="175" src="assets/img/foursquare.png" alt=""></a></div>
+			<div style="margin-left:12px;margin-right:12px" class="logo col-md-2 col-sm-2"><a href="http://www.idealista.com/"><img width="175" src="assets/img/partners/idealista.png" alt=""></a></div>
+			<div style="margin-left:12px;margin-right:12px" class="logo col-md-2 col-sm-2"><a href="http://www.idealista.com/labs/propertyMap.htm?k=1495facc6beff62d21a0282a6f8ac1f1&action=json&operation=sale&radio=40.416914%2C-3.695148&center=40.415914%2C-3.696148"><img width="175" src="assets/img/partners/logo_everis.jpg" alt=""></a></div>
 		</div>
 	</div><!-- /.container -->
 </section><!-- /#partners -->
