@@ -4,13 +4,13 @@
 <section id="stats">
 	<div class="container">
 		<header class="section-title"><h2>Distrit statistics</h2></header>
-		
-		<div class="chart">
-		    <div id="sexRatio"></div>
-		</div>
-
-		<div id="chartPOPAGE">
-    		<svg></svg>
+		<div class="row">
+			<div class="col-md-5 col-sm-5" id="chartPOPAGE">
+    			<svg id="chartSVG"></svg>
+  			</div>
+			<div class="chart col-md-5 col-sm-5">
+			    <div id="sexRatio"></div>
+			</div>
   		</div>
 
 	</div><!-- /.container -->

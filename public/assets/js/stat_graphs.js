@@ -46,9 +46,9 @@ function getCHValues(feature){
 var drawCHgraps = function(feature){
 
     var
-    margin = { t : 20, r : 40, b : 40, l : 40 },
-    w = 850 - margin.l - margin.r,
-    h = 580 - margin.t - margin.b,
+    margin = { t : 20, r : 40, b : 20, l : 40 },
+    w = 600 - margin.l - margin.r,
+    h = 400 - margin.t - margin.b,
     forceW = w - 300;
     
     var data,icon1,icon2; 
@@ -68,7 +68,7 @@ var drawCHgraps = function(feature){
         });
     
     var sexControls = d3.select('#sexRatio').append('div')
-        .attr('width', 300)
+        .attr('width', 250)
         .attr('class', 'sexControls')
         .html('<h2>View statistics for:</h2>');
     
@@ -161,7 +161,7 @@ var drawCHgraps = function(feature){
     
         function tick() {
             node.attr('transform', function (d) {
-                return 'scale(1.2) translate(' + d.x + ',' + d.y + ')';
+                return 'scale(1) translate(' + d.x + ',' + d.y + ')';
             });
         }
     
@@ -251,6 +251,7 @@ function genJSON(feature){
         outJson.push(element)
     }
 
+    console.log(JSON.stringify(outJson))
     return outJson
 }
 
@@ -261,33 +262,26 @@ var multibarHM = function(feature, div_id, chart){
 
 var multiBar = function(div_id, json, chart){
 
-    console.log(json)
-
     nv.addGraph(function() {
         chart = nv.models.multiBarChart()
           .barColor(d3.scale.category20().range());
     
         chart.multibar
-          .hideable(true);
+            .hideable(false);
     
         chart.xAxis
             .showMaxMin(true)
     
-        chart.yAxis
     
         d3.select('#' + div_id + ' svg')
             .datum(json)
-          .transition().duration(500).call(chart);
+            .transition().duration(500).call(chart);
     
         nv.utils.windowResize(chart.update);
     
         chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
     
-        chart.tooltip(function (key, x, y, e, graph) {
-               return '<p><strong>' + key + '</strong></p>' +
-               '<p>' + y + ' in the month ' + x + '</p>';
-        });
-
+        
         return chart;
     });
 }

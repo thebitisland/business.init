@@ -8,6 +8,8 @@
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
 	<link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+	
+	<link rel="stylesheet" type="text/css" href="assets/js/stats_graphs/nv.d3.css">
 	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
 	<link rel="stylesheet" href="assets/css/bootstrap-select.min.css" type="text/css">
 	<link rel="stylesheet" href="assets/css/jquery.slider.min.css" type="text/css">
@@ -168,8 +170,6 @@
 	<script type="text/javascript" src="assets/js/stats_graphs/d3.v2.js"></script>
 	
 	<script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
-
-
 	<script type="text/javascript" src="assets/js/leaflet.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet.markercluster.js"></script>
 	<script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>

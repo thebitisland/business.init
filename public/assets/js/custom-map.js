@@ -355,6 +355,7 @@ function createHomepageOSM(_latitude,_longitude){
             d3.select("#sexRatio").html("");
             drawCHgraps(e.target.feature);
 
+            d3.select("#chartSVG").html("");
             self.chartPOPAGE = multibarHM(e.target.feature, "chartPOPAGE", self.chartPOPAGE)
 
             console.log(e.target.feature.properties.DESBDT + " : " + getValue(e.target.feature) + " : " + e.latlng.lat + "|" + e.latlng.lng)
@@ -628,4 +629,6 @@ function createHomepageOSM(_latitude,_longitude){
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
+
 }
+

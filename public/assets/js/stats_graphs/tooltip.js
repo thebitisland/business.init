@@ -94,8 +94,8 @@
     }
 
 
-    container.style.left = tLeft+'px';
-    container.style.top = tTop+'px';
+    container.style.left = tLeft+15+'px';
+    container.style.top = tTop+600+'px';
     container.style.opacity = 1;
     container.style.position = 'absolute'; //fix scroll bar issue
     container.style.pointerEvents = 'none'; //fix scroll bar issue
