@@ -1,6 +1,21 @@
 @extends('layouts.master')
 
 @section('content')
+<section id="stats">
+	<div class="container">
+		<header class="section-title"><h2>Distrit statistics</h2></header>
+		
+		<div class="chart">
+		    <div id="sexRatio"></div>
+		</div>
+
+		<div id="chartPOPAGE">
+    		<svg></svg>
+  		</div>
+
+	</div><!-- /.container -->
+</section><!-- /#stats -->
+
 <section id="featured-properties" class="featured-properties block background-color-grey-light carousel-full-width">
 	<div class="container">
 	<header class="section-title"><h2>Results</h2></header>

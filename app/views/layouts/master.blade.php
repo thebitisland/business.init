@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="css/custom.css" type="text/css">
 	<link rel="stylesheet" type="text/css" href="assets/js/leaflet-draw/leaflet.draw.css">
 	<link rel="stylesheet" type="text/css" href="assets/js/toastr/toastr.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/stat_graphs.css">
 
 	<title>{{ $title or 'Business.init()' }}</title>
 
@@ -163,8 +164,12 @@
 	</div>
 
 	<div id="overlay"></div>
-	<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+	<!--<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>-->
+	<script type="text/javascript" src="assets/js/stats_graphs/d3.v2.js"></script>
+	
 	<script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
+
+
 	<script type="text/javascript" src="assets/js/leaflet.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet.markercluster.js"></script>
 	<script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>
@@ -189,6 +194,16 @@
 	<script type="text/javascript" src="assets/js/custom.js"></script>
 	<script type="text/javascript" src="assets/js/leaflet-draw/leaflet.draw.js"></script>
 	<script type="text/javascript" src="assets/js/toastr/toastr.js"></script>
+
+	<script type="text/javascript" src="assets/js/stats_graphs/nv.d3.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/tooltip.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/utils.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/legend.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/axis.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/multiBar.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/multiBarChart.js"></script>
+	<script type="text/javascript" src="assets/js/stats_graphs/stream_layers.js"></script>
+	<script type="text/javascript" src="assets/js/stat_graphs.js"></script>
 <!--[if gt IE 8]>
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->
