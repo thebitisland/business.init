@@ -208,7 +208,52 @@
 		</header>
 	</div><!-- /.container-->
 	<div class="container" id="noBusiness">
-	<p> When you select a position in the map and a type of business you will be able to see related business.
+		<div class="our-process br-white black">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-2 col-sm-6">
+                    <!-- About Four Item -->
+                    <div class="our-process-item">
+                        <a href="#"><span class="br-lblue">1</span></a>
+                        <!-- Header -->
+                        <h3>Select your business</h3>
+                        <!-- Paragraph -->
+                        <p>Choose from a range of business types in the selector.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6">
+                    <!-- About Four Item -->
+                    <img src="./assets/img/business.png"/>
+                </div>
+
+                </div>
+                <div class="row">
+                <div class="col-md-4 col-md-offset-2 col-sm-6">
+                    <div class="our-process-item">
+                        <a href="#"> <span class="br-lblue ">2</span></a>
+                        <h3>Choose a location</h3>
+                        <p>Using the circle feature select a range in the map.</p>
+                    </div>
+                </div>
+                  <div class="col-md-6 col-sm-6">
+                    <!-- About Four Item -->
+                    <img src="./assets/img/position.png"/>
+                </div>
+                </div>
+                   <div class="row">
+                <div class="col-md-4 col-md-offset-2 col-sm-6">
+                    <div class="our-process-item">
+                        <a href="#"> <span class="br-lblue ">3</span></a>
+                        <h3>Get the info</h3>
+                        <p>Get info about related business in the area selected.</p>
+                    </div>
+                </div>
+                  <div class="col-md-6 col-sm-6">
+                    <!-- About Four Item -->
+                   <img src="./assets/img/related.png"/>
+                </div>
+            </div>
+        </div>
 	</div><!-- /.container-->
 	<div class="container" id="foursquare">
 		

@@ -5858,3 +5858,43 @@ body, html {
 .img-nav{
 margin-top: -5px;
 }
+
+.br-lblue {
+  background: #1396e2;
+}
+
+.our-process-item  a {
+  color: #f6f6f6;
+  border-bottom: 1px dotted #fff;
+}
+
+.our-process-item a {
+  font-size: 18px;
+  border-bottom: 0px;
+}
+
+.our-process-item a span {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 100px !important;
+  margin-right: 5px;
+}
+.our-process-item h3 {
+  font-size: 20px;
+  font-weight: bold;
+  display: inline;
+  position: relative;
+  top: 3px;
+}
+.our-process-item p {
+  padding: 10px 10px 10px 10px;
+}
+
+.our-process img{
+  width: 300px;
+  height: 150px;
+  padding: 10px;
+}
