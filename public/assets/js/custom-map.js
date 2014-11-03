@@ -352,6 +352,14 @@ function createHomepageOSM(_latitude,_longitude){
         }
 
         function clickOnDistrit(e) {
+            $('#noStats').css("display","none");
+            $('#stats').css("display","block");
+            d3.select("#sexRatio").html("");
+            drawCHgraps(e.target.feature);
+
+            d3.select("#chartSVG").html("");
+            self.chartPOPAGE = multibarHM(e.target.feature, "chartPOPAGE", self.chartPOPAGE)
+
             console.log(e.target.feature.properties.DESBDT + " : " + getValue(e.target.feature) + " : " + e.latlng.lat + "|" + e.latlng.lng)
         }
 
@@ -593,8 +601,7 @@ function createHomepageOSM(_latitude,_longitude){
                     }else if(query == "Burguer King"){
                         query = "Burguer King";
                     }
-                     loadFoursquareData(layer._latlng.lat,layer._latlng.lng,query,layer.getRadius());
-                     
+                    loadFoursquareData(layer._latlng.lat,layer._latlng.lng,query,layer.getRadius());
                     twitter.getTweets(query);
                 }else{
                     toastr["error"]("In order to see related business", "Select a business type!")
@@ -625,4 +632,5 @@ function createHomepageOSM(_latitude,_longitude){
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
+
 }

@@ -1,6 +1,28 @@
 @extends('layouts.master')
 
 @section('content')
+<section id="statSection">
+<div class="container">
+		<header class="section-title"><h2>Distrit statistics</h2></header>
+</div><!-- /.container-->
+<div class="container" id="noStats">
+		<h3>Choose a location</h3>
+        <p>Using the circle feature select a range in the map.</p>
+</div><!-- /.container-->
+<div class="container" id="stats">
+		
+	<div class="row">
+		<div class="col-md-5 col-sm-5" id="chartPOPAGE">
+    			<svg id="chartSVG"></svg>
+  		</div>
+		<div class="chart col-md-5 col-sm-5">
+			    <div id="sexRatio"></div>
+		</div>
+  	</div>
+
+</div><!-- /.container -->
+</section><!-- /#stats -->
+
 <section id="featured-properties" class="featured-properties block background-color-grey-light carousel-full-width">
 	<div class="container">
 	<header class="section-title"><h2>Idealista</h2></header>

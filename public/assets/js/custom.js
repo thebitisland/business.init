@@ -676,7 +676,7 @@ var updateIdealista = function(latitude, longitude, radius){
         error: function(){
             $('.owl-wrapper').html('<h4>The idealista API is not available</h4>');
         }
-	});
+    });
 
 }
 
@@ -778,4 +778,5 @@ var loadFoursquareData = function(lat,lon,query,radius) {
     xmlhttp.open("GET",url,true);
     xmlhttp.send();
 }
+
 
