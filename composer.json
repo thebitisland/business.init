@@ -6,8 +6,7 @@
     "require": {
         "laravel/framework": "4.2.*",
         "unikent/curl": "dev-master",
-        "way/generators": "~2.0",
-        "thujohn/twitter": "dev-master"
+        "way/generators": "~2.0"
     },
     "autoload": {
         "classmap": [

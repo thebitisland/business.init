@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3874d24f12d4fe73ead3dff8c4912c5f",
+    "hash": "34ed53c53a9fc1a2398354e64515ed4d",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1632,91 +1632,6 @@
             "time": "2014-10-01 05:50:18"
         },
         {
-            "name": "themattharris/tmhoauth",
-            "version": "0.8.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/themattharris/tmhOAuth.git",
-                "reference": "455552d6c57549632644b6c9ac9204766be2b5ee"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/themattharris/tmhOAuth/zipball/455552d6c57549632644b6c9ac9204766be2b5ee",
-                "reference": "455552d6c57549632644b6c9ac9204766be2b5ee",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "tmhOAuth": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "themattharris",
-                    "email": "matt@themattharris.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "An OAuth library written in PHP by @themattharris",
-            "keywords": [
-                "oauth",
-                "twitter"
-            ],
-            "time": "2014-08-06 22:29:35"
-        },
-        {
-            "name": "thujohn/twitter",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thujohn/twitter-l4.git",
-                "reference": "aa1c83a530f26bd491c1f626725c9a140de58dc7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thujohn/twitter-l4/zipball/aa1c83a530f26bd491c1f626725c9a140de58dc7",
-                "reference": "aa1c83a530f26bd491c1f626725c9a140de58dc7",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "4.*|5.*",
-                "php": ">=5.3.0",
-                "themattharris/tmhoauth": "~0.8.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Thujohn\\Twitter": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "thujohn",
-                    "email": "jonathan.thuau@gmail.com"
-                }
-            ],
-            "description": "Twitter API for Laravel 4",
-            "keywords": [
-                "laravel",
-                "laravel4",
-                "twitter"
-            ],
-            "time": "2014-09-20 13:07:02"
-        },
-        {
             "name": "unikent/curl",
             "version": "dev-master",
             "source": {
@@ -1816,8 +1731,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "unikent/curl": 20,
-        "thujohn/twitter": 20
+        "unikent/curl": 20
     },
     "prefer-stable": false,
     "platform": [],
