@@ -61,19 +61,12 @@ function createHomepageOSM(_latitude,_longitude){
                 if (cluster == false)
                     var zoomLevelCluster = 1;
                 else 
-                    var zoomLevelCluster = 16;
+                    var zoomLevelCluster = 13;
 
                 var iconCreateFunction = function (cluster) {
                     var childCount = cluster.getChildCount();
             
-                    var c = ' marker-cluster-';
-                    if (childCount < 10) {
-                        c += 'small';
-                    } else if (childCount < 100) {
-                        c += 'medium';
-                    } else {
-                        c += 'large';
-                    }
+                    var c = ' ';
             
                     return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster ' + color + c, iconSize: new L.Point(40, 40) });
                 }
@@ -128,9 +121,35 @@ function createHomepageOSM(_latitude,_longitude){
         }
 
         $('#bus_type').change(function() {
+            for (var i = 3; i < self.layers.length; i++) {
+                self.map.removeLayer(self.layers[i]);
+            }
+            
             if ($(this).val() == 1){
                 addMarkers("assets/js/data/locations_libreria.js", true, "red");
                 addMarkers("assets/js/data/locations_bibliotecas.js", true, "green");
+            }
+            else if ($(this).val() == 2){
+                addMarkers("assets/js/data/locations_guarderia.js", true, "red");
+                //addMarkers("assets/js/data/locations_infantil_municipal.js", true, "green");
+            }
+            else if ($(this).val() == 3){
+                addMarkers("assets/js/data/locations_gimnasio.js", true, "red");
+                //addMarkers("assets/js/data/locations_polideportivo.js", true, "green");
+            }
+            else if ($(this).val() == 4){
+                addMarkers("assets/js/data/locations_academia.js", true, "red");
+                //addMarkers("assets/js/data/locations_escuela_oficial.js", true, "green");
+            }
+            else if ($(this).val() == 5){
+                addMarkers("assets/js/data/locations_zapato.js", true, "red");
+            }
+            else if ($(this).val() == 6){
+                addMarkers("assets/js/data/locations_mercadona.js", true, "red");
+            }
+            else if ($(this).val() == 7){
+                addMarkers("assets/js/data/locations_bking.js", true, "green");
+                addMarkers("assets/js/data/locations_mcdonald.js", true, "red");
             }
 
         });
@@ -544,20 +563,24 @@ function createHomepageOSM(_latitude,_longitude){
                 var query = $( "#bus_type option:selected" ).text();
                 if(query!= "Business type"){
 
-                    if(query == "Book stores"){
+                    if(query == "Book store"){
                         query = "librerias";
-                    }else if(query == "Clothes"){
-                        query = "ropa";
-                    }else if(query == "Restaurants"){
-                        query = "restaurantes";
-                    }else if(query == "Electronics"){
-                        query = "electronica";
-                    }else if(query == "Music stores"){
-                        query = "musica";
+                    }else if(query == "Nursery"){
+                        query = "guarderia";
+                    }else if(query == "Gymnasium"){
+                        query = "gimnasio";
+                    }else if(query == "Shoeshop"){
+                        query = "zapateria";
+                    }else if(query == "Mercadona"){
+                        query = "mercadona";
+                    }else if(query == "Language School"){
+                        query = "academia idioma";
+                    }else if(query == "Burguer King"){
+                        query = "Burguer King";
                     }
                     loadFoursquareData(layer._latlng.lat,layer._latlng.lng,query);
                 }else{
-                    //alert("No has seleccionado valor");
+                    toastr["error"]("In order to see related business", "Select a business type!")
                 }
 
             }
@@ -571,8 +594,22 @@ function createHomepageOSM(_latitude,_longitude){
 
     }
 
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "positionClass": "toast-top-left",
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 
-     function loadFoursquareData(lat,lon,query) {
+    function loadFoursquareData(lat,lon,query) {
         self.ratings = []
         var xmlhttp;
         var txt,x,i;
