@@ -16,7 +16,7 @@ function createHomepageOSM(_latitude,_longitude){
         
         self.map = L.map('map', {
             center: [_latitude,_longitude],
-            zoom: 15,
+            zoom: 12,
             scrollWheelZoom: true
         });
         //L.tileLayer('http://openmapsurfer.uni-hd.de/tiles/roadsg/x={x}&y={y}&z={z}', {
@@ -128,7 +128,7 @@ function createHomepageOSM(_latitude,_longitude){
                     markers.addLayer(marker);
                 }
 
-                if(file != "assets/js/data/bus.js")
+                if(name != null)
                     self.map.addLayer(markers);
                 self.layers.push(markers);
             });
@@ -515,7 +515,7 @@ function createHomepageOSM(_latitude,_longitude){
         self.transport.onAdd = function (map) {
             self.transportControl = L.DomUtil.create('div', 'info transport');
 
-            self.transportControl.innerHTML = '<b>Public Transport</b><br>'
+            self.transportControl.innerHTML = '<b>Public Transport</b> <b style="font-size:9px">(Only visible on closer zooms)</b><br>'
             self.transportControl.innerHTML += '<form action="" onchange="self.getTransport()"><input type="checkbox" class="checkbox_transport" checked name="Metro" value="1"> Metro <img style="padding-bottom:2px" width="18px" src="./assets/img/metro.png"/>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" checked name="Renfe" value="0"> Renfe <img style="padding-bottom:4px" width="18px" src="./assets/img/cercanias.png"/>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" name="Bus" value="2"> Bus <i class="fa fa-bus"></i>'
             self.transportControl.innerHTML += '</form>'
 
@@ -623,96 +623,4 @@ function createHomepageOSM(_latitude,_longitude){
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-
-    function loadFoursquareData(lat,lon,query) {
-        self.ratings = []
-        var xmlhttp;
-        var txt,x,i;
-
-        $("#noBusiness").css("display","none");
-        $("#foursquare").empty();
-        var url="https://api.foursquare.com/v2/venues/explore?client_id=LXYDA3DJQAXS1F35ROQVWJTLGNBOYJHJPJZPNWHQ1DMTLJVM&venuePhotos=1&client_secret=CR30J1LYOGBZDCZQ2KQFXC2X4ADDO22SNXZO2HRDIGOBIURE&v=20120609&ll="+lat+","+lon+"&query="+query+"&llAcc=1";
-        
-        if (window.XMLHttpRequest) { // code for IE7+, Firefox, Chrome, Opera, Safari
-          xmlhttp=new XMLHttpRequest();
-        } else { // code for IE6, IE5
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        
-        xmlhttp.onreadystatechange=function() {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-    
-                //var html_intro = "<div class='row'>";
-                //var html_final = "</div><!-- /.row-->";
-                var body = "";
-                var picture_dimension="250x140"
-                var stars_5= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span></p>";         
-                var stars_4= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span></p>";
-                var stars_3= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
-                var stars_2= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
-                var stars_1= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
-                var jsonObj = JSON.parse(xmlhttp.responseText);
-                var items = jsonObj.response.groups[0].items;
-                var items_length = jsonObj.response.groups[0].items.length; 
-                
-                console.log(jsonObj.response.groups[0].items);
-                var total_iterations;
-        
-                if (items_length > 16) {
-                    total_iterations = 16;
-                } else {
-                    total_iterations = items_length;
-                }
-                //console.log(jsonObj.response.groups[0].items.length);
-                for (var i = 0; i < total_iterations; i++) {
-    
-                    var venues = jsonObj.response.groups[0].items[i].venue;
-                    ///var tips= jsonObj.response.groups[0].items[i].tips;
-                    //console.log(venues);
-                    var id = venues.id;
-                    //console.log(id);
-                    var location= venues.location;
-                    var address = location.address;
-                    var rating = venues.rating;
-                    self.ratings.push(rating);
-                    var name = venues.name;
-                    var photo_suffix= venues.photos.groups[0].items[0].suffix;
-                    var photo_prefix = "https://irs2.4sqi.net/img/general/";
-                    var photo = photo_prefix+picture_dimension+photo_suffix;
-        
-                    //console.log(photo);
-                    //console.log(tips);
-                    //console.log(location);
-        
-                    var reference = "http://foursquare.com/v/"+id;
-                    var stars_rating;
-        
-                    if (rating == 10) {
-                        stars_rating = stars_5;
-                    } else if (rating >= 8 && rating < 10) {
-                        stars_rating = stars_4;
-                    } else if (rating >= 5 && rating < 8) {
-                        stars_rating = stars_3;
-                    } else if (rating >= 2 && rating < 5) {
-                        stars_rating = stars_2;
-                    } else {
-                        stars_rating = stars_1;
-                    }
-        
-                    body += "<div class='col-md-3 col-sm-6'><div class='property'><a href="+reference+" target='blank'><div class='property-image'><img alt=''src="+photo+"></div><div class='overlay'><div class='info'><h3>"+name+"</h3><div class='tag price'>"+stars_rating+"</div><figure>"+address+"</figure></div></div></a></div><!-- /.property --></div><!-- /.col-md-3 -->";
-    
-                }
-    
-                //var final_html= html_intro + body + html_final;
-                //console.log(final_html);
-                console.log(self.ratings);
-        
-                document.getElementById("foursquare").innerHTML=body;
-    
-            }
-        }
-        xmlhttp.open("GET",url,true);
-        xmlhttp.send();
-    }
 }
-

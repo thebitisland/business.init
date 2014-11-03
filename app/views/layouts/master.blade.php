@@ -194,10 +194,10 @@
 <![endif]-->
 <script>
 //40.4102491,-3.6936405,17z
-	window._latitude = 40.4102716;
-	window._longitude =-3.6936405;
+	window._latitude = 40.4000;
+	window._longitude = -3.6833;
 	createHomepageOSM(window._latitude,window._longitude);
-	updateIdealista(window._latitude, window._longitude, 0.001);
+	//updateIdealista(window._latitude, window._longitude, 0.001);
 
 </script>
 </body>
