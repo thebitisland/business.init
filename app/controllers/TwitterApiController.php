@@ -12,7 +12,6 @@ class TwitterApiController extends BaseController {
             'k' => urlencode('cace7d1225f39e7a901d11baa37773d2'),
             'action' => 'json',
             'operation' => 'sale',
-            'office' = 'true',
             'radio' => urlencode(($latitude+$radius).','.($longitude+$radius))
         );
         //        $this->curl = New Curl;
