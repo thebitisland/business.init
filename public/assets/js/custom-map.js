@@ -363,6 +363,32 @@ function createHomepageOSM(_latitude,_longitude){
             d3.select("#chartSVG").html("");
             self.chartPOPAGE = multibarHM(e.target.feature, "chartPOPAGE", self.chartPOPAGE)
 
+            updateIdealista(e.latlng.lat, e.latlng.lng, 0.001);
+
+            var query = $( "#bus_type option:selected" ).text();
+            if(query!= "Business type"){
+
+                if(query == "Book store"){
+                    query = "librerias";
+                }else if(query == "Nursery"){
+                    query = "guarderia";
+                }else if(query == "Gymnasium"){
+                    query = "gimnasio";
+                }else if(query == "Shoeshop"){
+                    query = "zapateria";
+                }else if(query == "Mercadona"){
+                    query = "mercadona";
+                }else if(query == "Language School"){
+                    query = "academia idioma";
+                }else if(query == "Burguer King"){
+                    query = "Burguer King";
+                }
+                loadFoursquareData(e.latlng.lat,e.latlng.lng,query,100);
+                twitter.getTweets(query);
+            }else{
+                toastr["warning"]("Select a business type to see related business")
+            }
+
             console.log(e.target.feature.properties.DESBDT + " : " + getValue(e.target.feature) + " : " + e.latlng.lat + "|" + e.latlng.lng)
         }
 

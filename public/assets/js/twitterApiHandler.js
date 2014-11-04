@@ -36,9 +36,9 @@ var twitter = function () {
                     });
 
                     var text = ""
-                    finalTweets.forEach(function(tweet){
-                        text = tweet.text + " "
-                    })
+                    for(var i=0;i<15;i++){
+                        text += finalTweets[i].text + " "
+                    }
                     update_wordcloud(text)
 
                 });
