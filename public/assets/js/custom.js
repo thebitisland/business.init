@@ -681,6 +681,10 @@ var updateIdealista = function(latitude, longitude, radius){
 }
 
 var loadFoursquareData = function(lat,lon,query,radius) {
+
+    var target = document.getElementById('container_idealista');
+    self.spinner = new Spinner(opts).spin(target);
+
     self.ratings = []
     var xmlhttp;
     var txt,x,i;

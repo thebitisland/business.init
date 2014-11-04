@@ -24,7 +24,7 @@
 </section><!-- /#stats -->
 
 <section id="featured-properties" class="featured-properties block carousel-full-width">
-    <div class="container">
+    <div class="container" id="container_idealista">
     <header class="section-title"><h2>Idealista</h2></header>
     </div><!-- /.container -->
 
