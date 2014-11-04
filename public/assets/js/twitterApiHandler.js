@@ -4,6 +4,7 @@ var twitter = function () {
 
     /*Variables*/
     var tweets = null;
+    var genericTweets = 'demo.json';
 
     /*Constructor*/
     tw.init = function () {
@@ -21,8 +22,19 @@ var twitter = function () {
             },
             success: function(data) {
                 tweets = data;
-                console.log('--------------TWITTER API--------------');
-                console.log(tweets);
+
+                $.getJSON( "/assets/js/demotw.js", function( json ) {
+                    genericETweets = json;
+
+                    var finalTweets = tweets.statuses.concat(genericTweets.statuses);
+
+                    $('#tweets').children().each(function(index, element){
+                        $(element).find('h3').text(finalTweets[index].user.name);
+                        $(element).find('p').text(finalTweets[index].text);
+                        $(element).find('a').text('@' + finalTweets[index].user.screen_name);
+                        $(element).find('a').attr('href','https://twitter.com/' + finalTweets[index].user.screen_name);
+                    });
+                });
             }
         });
     };
