@@ -325,7 +325,7 @@
                 </div><!-- /.feature-box -->
             </div><!-- /.col-md-4 -->
         </div><!-- /.row -->
-        <div id="wordcloud_twitter"></div>
+        <div class ="row" id="wordcloud_twitter"></div>
     </div><!-- /.container -->
 </section><!-- /#our-services -->
 

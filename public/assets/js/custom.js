@@ -811,7 +811,7 @@ function cloud_draw(words) {
       .attr("width", 600)
       .attr("height", 300)
     .append("g")
-      .attr("transform", "translate(150,150)")
+      .attr("transform", "translate(300,150)")
     .selectAll("text")
       .data(words)
     .enter().append("text")
