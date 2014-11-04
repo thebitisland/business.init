@@ -895,7 +895,7 @@ var getSearch = function(){
                 }else if(query == "Burguer King"){
                     query = "Burguer King";
                 }
-                loadFoursquareData(self.lat, self.lon, query, 100);
+                loadFoursquareData(self.lat, self.lon, query, 1000);
                 twitter.getTweets(query);
             }else{
                 toastr["warning"]("Add a business type to see related business!", "")

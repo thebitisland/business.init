@@ -1811,7 +1811,7 @@ ul.list-links li a:hover {
 #page-content {
   padding-bottom: 10px;
   position: relative;
-  background-color: #f6f6f6;
+  background-color: #f9f9f9;
 }
 
 .pagination li:first-child a, .pagination li:last-child a {
@@ -5869,7 +5869,7 @@ margin-top: -5px;
 }
 
 .our-process-item  a {
-  color: #f6f6f6;
+  color: #f9f9f9;
   border-bottom: 1px dotted #fff;
 }
 

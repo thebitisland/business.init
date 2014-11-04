@@ -30,8 +30,8 @@
 
     <div class="container" id="noIdealista">
 
-    <h3>Choose a location</h3>
-    <p>Using the circle feature select a range in the map.</p>
+    <!--<h3>Choose a location</h3>-->
+    <p>Use the circle feature to draw a range on the map, write a location on the search box and click "Search now" or simply click on the map to see data form Idealista on available spots where you could deploy your business!.</p>
 
     </div><!-- /.container-->
 
@@ -234,7 +234,7 @@
 <section id="new-properties" class="block">
     <div class="container">
         <header class="section-title">
-            <h2>Related Business</h2>
+            <h2>Competition</h2>
         </header>
     </div><!-- /.container-->
     <div class="container" id="noBusiness">
@@ -262,7 +262,7 @@
                     <div class="our-process-item">
                         <a href="#"> <span class="br-lblue ">2</span></a>
                         <h3>Choose a location</h3>
-                        <p>Using the circle feature select a range in the map.</p>
+                        <p>Use the circle feature to draw a range on the map, write a location on the search box and click "Search now" or simply click on the map.</p>
                     </div>
                 </div>
                   <div class="col-md-6 col-sm-6">
@@ -345,7 +345,7 @@
 		                    </div><!-- /accordion-heading -->
 		                    <div id="collapseOne" class="accordion-body collapse in">
 		                        <div class="accordion-inner">
-								<p>To be made in your local IRS. You’ll have to complete the Census Declaration, "basically a summary of the tax situation in which the person is". To do this, you must file (either electronically or in person) model 036 or 037 (simplified). Register with the Business Tax (IAE) during the first month of starting the activity. The model to be presented is 840. The important part of this step is to pay attention when choosing the title that defines the activity you are going to develop, and if you intend to make several, you'll have to create as many entries as activities.</p>
+								<p style="margin-left:15px">To be made in your local IRS. You’ll have to complete the Census Declaration, "basically a summary of the tax situation in which the person is". To do this, you must file (either electronically or in person) model 036 or 037 (simplified). Register with the Business Tax (IAE) during the first month of starting the activity. The model to be presented is 840. The important part of this step is to pay attention when choosing the title that defines the activity you are going to develop, and if you intend to make several, you'll have to create as many entries as activities.</p>
 								</div><!-- /accordion-inner -->
 		                    </div><!-- /collapse -->
 		                </div><!-- /accordion-group -->
@@ -357,9 +357,9 @@
 		                        Labor proceedings
 		                        </a>
 		                    </div>
-		                    <div id="collapseTwo" class="accordion-body collapse">
+		                    <div id="collapseTwo" class="accordion-body collapse in">
 		                        <div class="accordion-inner">
-								<p>To be made by the General Treasury of the Social Security. You must sign up at the Special Scheme for Self-Employed professionals. To do this, present model TA.521 completed, together a copy of the IAE registration and photocopy of your ID.</p>
+								<p style="margin-left:15px">To be made by the General Treasury of the Social Security. You must sign up at the Special Scheme for Self-Employed professionals. To do this, present model TA.521 completed, together a copy of the IAE registration and photocopy of your ID.</p>
 								</div><!-- /accordion-inner -->
 		                    </div><!-- /collapse -->
 		                </div><!-- /accordion-group -->
@@ -371,9 +371,9 @@
 		                        Other proceedings
 		                        </a>
 		                    </div>
-		                    <div id="collapseThree" class="accordion-body collapse">
+		                    <div id="collapseThree" class="accordion-body collapse in">
 		                        <div class="accordion-inner">
-								<p>Regularize the Opening Permits at your local City Hall, in you have a workplace. Register your workers in the Social Security, if you decide to hire more people.</p>
+								<p style="margin-left:15px">Regularize the Opening Permits at your local City Hall, in you have a workplace. Register your workers in the Social Security, if you decide to hire more people.</p>
 								</div><!-- /accordion-inner -->
 		                    </div><!-- /collapse -->
 		                </div><!-- /accordion-group -->
@@ -382,6 +382,7 @@
 					</div>
 		</div><!-- /.row -->
 	</div><!-- /.container -->
+    <p>You can see more information on the <a href="http://www.ventanillaempresarial.org/" target="_blank">oficial guide-page for enterpreneurs</a></p>
 </section><!-- /#our-services -->
 
 <section id="partners">
