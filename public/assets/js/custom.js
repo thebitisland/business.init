@@ -643,8 +643,13 @@ var updateIdealista = function(latitude, longitude, radius){
     var target = document.getElementById('container_idealista');
     self.spinner_idealista = new Spinner(opts).spin(target);
 
+    var status_value = $("#property_status").val();
+    var status = 'sale';
+    if (status_value == 1)
+        status = 'rent'
+
     $.ajax({
-        url: "http://business.thebitisland.com/idealistaapi/"+latitude+"/"+longitude+"/"+radius,
+        url: "http://business.thebitisland.com/idealistaapi/"+latitude+"/"+longitude+"/"+radius+"/"+status,
         success: function(myData){
             console.dir(myData);
             $('.owl-wrapper').empty();
