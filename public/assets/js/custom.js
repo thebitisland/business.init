@@ -620,6 +620,28 @@ function drawFooterThumbnails(){
 }
 
 var updateIdealista = function(latitude, longitude, radius){
+
+    var opts = {
+      lines: 8, // The number of lines to draw
+      length: 8, // The length of each line
+      width: 3, // The line thickness
+      radius: 5, // The radius of the inner circle
+      corners: 1, // Corner roundness (0..1)
+      rotate: 0, // The rotation offset
+      direction: 1, // 1: clockwise, -1: counterclockwise
+      color: '#000', // #rgb or #rrggbb or array of colors
+      speed: 1, // Rounds per second
+      trail: 50, // Afterglow percentage
+      shadow: false, // Whether to render a shadow
+      hwaccel: false, // Whether to use hardware acceleration
+      className: 'spinner', // The CSS class to assign to the spinner
+      zIndex: 2e9, // The z-index (defaults to 2000000000)
+      top: '48px', // Top position relative to parent
+      left: '26%' // Left position relative to parent
+    };
+    var target = document.getElementById('container_idealista');
+    self.spinner_idealista = new Spinner(opts).spin(target);
+
     $.ajax({
         url: "http://business.thebitisland.com/idealistaapi/"+latitude+"/"+longitude+"/"+radius,
         success: function(myData){
@@ -634,7 +656,7 @@ var updateIdealista = function(latitude, longitude, radius){
             for (var i = 0; i < max ; i++) {
                 value = myData[1].elementList[i];
                 console.log(i + ' - ' + value);
-           var thumb = (value.thumbnail==="")?'assets/img/dummy.jpg':value.thumbnail;
+                var thumb = (value.thumbnail==="")?'assets/img/dummy.jpg':value.thumbnail;
                 var item = '<div class="owl-item" style="width: 381px;"><div style="max-height: 200px;" class="property big">'
                 item += '<a href="http://'+value.photosUrl+'">'
                 item += '<div class="property-image">'
@@ -669,21 +691,18 @@ var updateIdealista = function(latitude, longitude, radius){
                 item += '</div></div>'
 
                 $('.owl-wrapper').append(item);
-
             };
-
+            self.spinner_idealista.stop();
         }, 
         error: function(){
             $('.owl-wrapper').html('<h4>The idealista API is not available</h4>');
+            self.spinner_idealista.stop();
         }
     });
 
 }
 
 var loadFoursquareData = function(lat,lon,query,radius) {
-
-    var target = document.getElementById('container_idealista');
-    self.spinner = new Spinner(opts).spin(target);
 
     self.ratings = []
     var xmlhttp;

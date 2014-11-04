@@ -1402,7 +1402,7 @@ ul.list-links li a:hover {
 
 .featured-properties {
   padding-bottom: 0;
-  padding-top: 40px;
+  /*padding-top: 40px;*/
 }
 
 #featured-properties-carousel {
