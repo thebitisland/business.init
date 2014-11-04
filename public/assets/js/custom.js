@@ -806,6 +806,7 @@ function update_wordcloud(text){
 var fill = d3.scale.category20();
 
 function cloud_draw(words) {
+  d3.select("#wordcloud_twitter").html("")
   d3.select("#wordcloud_twitter").append("svg")
       .attr("width", 300)
       .attr("height", 300)
