@@ -644,9 +644,9 @@ var updateIdealista = function(latitude, longitude, radius){
     self.spinner_idealista = new Spinner(opts).spin(target);
 
     var status_value = $("#property_status").val();
-    var status = "sale";
+    var status = 'sale';
     if (status_value == 1)
-        status = "rent"
+        status = 'rent'
 
     $.ajax({
         url: "http://business.thebitisland.com/idealistaapi/"+latitude+"/"+longitude+"/"+radius+"/"+status,
