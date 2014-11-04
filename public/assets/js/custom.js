@@ -848,6 +848,8 @@ var getSearch = function(){
             self.searchposition.addTo(self.map);
             self.map.panTo(centerPoint);
 
+            updateIdealista(self.lat, self.lon, 0.001);
+
             var query = $( "#bus_type option:selected" ).text();
             if(query!= "Business type"){
 
@@ -866,7 +868,7 @@ var getSearch = function(){
                 }else if(query == "Burguer King"){
                     query = "Burguer King";
                 }
-                loadFoursquareData(self.lat,self.lon,query,100);
+                loadFoursquareData(self.lat, self.lon, query, 100);
                 twitter.getTweets(query);
             }else{
                 toastr["warning"]("Add a business type to see related business!", "")
