@@ -48,11 +48,11 @@
 					<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="#map">Map</a></li>
-							<li><a href="#statSection">District statistics</a></li>
+							<li><a href="#statSection">District stats</a></li>
 							<li><a href="#featured-properties">Idealista</a></li>
-							<li><a href="#new-properties">Related Business</a></li>
-						    <li><a href="#tweets">Tweets</a></li>
-						    <li><a href="#start">Start a business</a></li>
+							<li><a href="#new-properties">Competition</a></li>
+						    <!--<li><a href="#tweets">Tweets</a></li>-->
+						    <li><a href="#start">+Info</a></li>
 							<li><a href="#page-footer">Contact</a></li>
 							<li><a href="#"><img src="assets/img/flags/gb.png" class="img-nav"></a></li>
 							<li><a href="#"><img src="assets/img/flags/es.png" class="img-nav"></a></li>
