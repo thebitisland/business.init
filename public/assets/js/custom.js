@@ -810,6 +810,8 @@ function cloud_draw(words) {
   d3.select("#wordcloud_twitter").append("svg")
       .attr("width", 600)
       .attr("height", 300)
+      .style("display","block")
+      .style("margin","auto")
     .append("g")
       .attr("transform", "translate(300,150)")
     .selectAll("text")
