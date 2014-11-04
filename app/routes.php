@@ -6,6 +6,6 @@ Route::get('/', function()
 });
 
 Route::get('/twitterapi/{latitude}/{longitude}/{radius}', 'TwitterApiController@getTweets');
-Route::get('/idealistaapi/{latitude}/{longitude}/{radius}', 'TwitterApiController@getIdealista');
+Route::get('/idealistaapi/{latitude}/{longitude}/{radius}/{status}', 'TwitterApiController@getIdealista');
 
 Route::get('/getTweets', 'TwitterApiController@getTweets');
