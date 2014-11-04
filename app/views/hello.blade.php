@@ -23,7 +23,7 @@
 </div><!-- /.container -->
 </section><!-- /#stats -->
 
-<section id="featured-properties" class="featured-properties block background-color-grey-light carousel-full-width">
+<section id="featured-properties" class="featured-properties block carousel-full-width">
     <div class="container">
     <header class="section-title"><h2>Idealista</h2></header>
     </div><!-- /.container -->
