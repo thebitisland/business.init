@@ -357,6 +357,9 @@ function createHomepageOSM(_latitude,_longitude){
         function clickOnDistrit(e) {
             $('#noStats').css("display","none");
             $('#stats').css("display","block");
+
+            d3.select("#district_text").html("Here are some statistics about the population of the distrit "+"<font color='#388DC3'><b>" + e.target.feature.properties.DESBDT.split(" ").slice(1).join(' ') + "</b></font>")
+
             d3.select("#sexRatio").html("");
             drawCHgraps(e.target.feature);
 
@@ -383,7 +386,7 @@ function createHomepageOSM(_latitude,_longitude){
                 }else if(query == "Burguer King"){
                     query = "Burguer King";
                 }
-                loadFoursquareData(e.latlng.lat,e.latlng.lng,query,100);
+                loadFoursquareData(e.latlng.lat,e.latlng.lng,query,2000);
                 twitter.getTweets(query);
             }else{
                 toastr["warning"]("Select a business type to see related business")

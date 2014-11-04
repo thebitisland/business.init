@@ -6,11 +6,11 @@
         <header class="section-title"><h2>District statistics</h2></header>
 </div><!-- /.container-->
 <div class="container" id="noStats">
-        <h3>Choose a location</h3>
-        <p>Using the circle feature select a range in the map.</p>
+    <p>Click on a district to see statistics about its population.</p>
 </div><!-- /.container-->
 <div class="container" id="stats">
 
+    <p id="district_text">Here are some statistics about the population of the distrit you've selected</p>
     <div class="row">
         <div class="col-md-5 col-sm-5" id="chartPOPAGE">
                 <svg id="chartSVG"></svg>
@@ -23,15 +23,15 @@
 </div><!-- /.container -->
 </section><!-- /#stats -->
 
-<section id="featured-properties" class="featured-properties block background-color-grey-light carousel-full-width">
-    <div class="container">
+<section id="featured-properties" class="featured-properties block carousel-full-width">
+    <div class="container" id="container_idealista">
     <header class="section-title"><h2>Idealista</h2></header>
     </div><!-- /.container -->
 
     <div class="container" id="noIdealista">
 
-    <h3>Choose a location</h3>
-    <p>Using the circle feature select a range in the map.</p>
+    <!--<h3>Choose a location</h3>-->
+    <p>Use the circle feature to draw a range on the map, write a location on the search box and click "Search now" or simply click on the map to see data form Idealista on available spots where you could deploy your business!.</p>
 
     </div><!-- /.container-->
 
@@ -234,7 +234,7 @@
 <section id="new-properties" class="block">
     <div class="container">
         <header class="section-title">
-            <h2>Related Business</h2>
+            <h2>Competition</h2>
         </header>
     </div><!-- /.container-->
     <div class="container" id="noBusiness">
@@ -262,7 +262,7 @@
                     <div class="our-process-item">
                         <a href="#"> <span class="br-lblue ">2</span></a>
                         <h3>Choose a location</h3>
-                        <p>Using the circle feature select a range in the map.</p>
+                        <p>Use the circle feature to draw a range on the map, write a location on the search box and click "Search now" or simply click on the map.</p>
                     </div>
                 </div>
                   <div class="col-md-6 col-sm-6">
@@ -294,7 +294,7 @@
     <div class="container">
         <header class="section-title"><h2>Related Tweets nearby</h2></header>
         <div class="row" id="tweets">
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-4">
                 <div class="feature-box">
                     <figure class="icon"><i class="fa fa-users"></i></figure>
                     <aside class="description">
@@ -304,7 +304,7 @@
                     </aside>
                 </div><!-- /.feature-box -->
             </div><!-- /.col-md-4 -->
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-4">
                 <div class="feature-box">
                     <figure class="icon"><i class="fa fa-users"></i></figure>
                     <aside class="description">
@@ -314,7 +314,7 @@
                     </aside>
                 </div><!-- /.feature-box -->
             </div><!-- /.col-md-4 -->
-            <div class="col-md-3 col-sm-3">
+            <div class="col-md-4 col-sm-4">
                 <div class="feature-box">
                     <figure class="icon"><i class="fa fa-users"></i></figure>
                     <aside class="description">
@@ -324,9 +324,8 @@
                     </aside>
                 </div><!-- /.feature-box -->
             </div><!-- /.col-md-4 -->
-            <div id="wordcloud_twitter" class="col-md-3 col-sm-3"></div>
-
         </div><!-- /.row -->
+        <div class ="row" id="wordcloud_twitter"></div>
     </div><!-- /.container -->
 </section><!-- /#our-services -->
 
@@ -334,19 +333,19 @@
 	<div class="container">
 		<header class="section-title"><h2>Start a business</h2></header>
 
-		<h4>Para darte de alta como autónomo, tienes tres opciones: hacer los trámites acudiendo personalmente a Hacienda y a la Seguridad Social, acudir a un PAE (Puntos de Atención al Emprendedor) o hacerlo directamente a través de internet.</h4>
+		<p>To register as a self-employed professional in Spain, you have three options: make arrangements in person by going to the IRS and Social Security Office, go to a PAE (Help desks for Entrepreneurs) or do it directly via internet.</p>
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
 			<div class="accordion ac" id="accordion2">
 		                <div class="accordion-group">
 		                    <div class="accordion-heading">
 		                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-		                        Trámites fiscales
+		                        Tax procedures and paperwork
 		                        </a>
 		                    </div><!-- /accordion-heading -->
 		                    <div id="collapseOne" class="accordion-body collapse in">
 		                        <div class="accordion-inner">
-								<p>A realizar en tu delegación de Hacienda.Antes de iniciar la actividad tienes que realizar la Declaración Censal, "básicamente, un resumen de la situación tributaria en la que se encuentra la persona", indica Rosario Moreno, asesora jurídica de ATA. Para ello, debes presentar, bien telemática, bien presencialmente, el modelo 036 o 037 (simplificado). Darse de alta en el Impuesto de Actividades Económicas (IAE) durante el primer mes de inicio de la actividad. El modelo que tienes que presentar es el 840. Lo importante en este paso es prestar atención a la hora de elegir el epígrafe que defina la actividad que vas a desarrollar. "Y si se pretenden realizar varias, habrá que marcar tantos epígrafes como actividades".</p>
+								<p style="margin-left:15px">To be made in your local IRS. You’ll have to complete the Census Declaration, "basically a summary of the tax situation in which the person is". To do this, you must file (either electronically or in person) model 036 or 037 (simplified). Register with the Business Tax (IAE) during the first month of starting the activity. The model to be presented is 840. The important part of this step is to pay attention when choosing the title that defines the activity you are going to develop, and if you intend to make several, you'll have to create as many entries as activities.</p>
 								</div><!-- /accordion-inner -->
 		                    </div><!-- /collapse -->
 		                </div><!-- /accordion-group -->
@@ -355,12 +354,12 @@
 		                <div class="accordion-group">
 		                    <div class="accordion-heading">
 		                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-		                        Trámites laborales
+		                        Labor proceedings
 		                        </a>
 		                    </div>
-		                    <div id="collapseTwo" class="accordion-body collapse">
+		                    <div id="collapseTwo" class="accordion-body collapse in">
 		                        <div class="accordion-inner">
-								<p>A realizar en la Administración de la Tesorería General de la Seguridad Social. Debes darte de alta en el Régimen Especial de Trabajadores Autónomos. Para ello, presenta el modelo TA.521 cumplimentado, junto a la fotocopia del alta en el IAE y fotocopia del DNI.</p>
+								<p style="margin-left:15px">To be made by the General Treasury of the Social Security. You must sign up at the Special Scheme for Self-Employed professionals. To do this, present model TA.521 completed, together a copy of the IAE registration and photocopy of your ID.</p>
 								</div><!-- /accordion-inner -->
 		                    </div><!-- /collapse -->
 		                </div><!-- /accordion-group -->
@@ -369,12 +368,12 @@
 		                 <div class="accordion-group">
 		                    <div class="accordion-heading">
 		                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-		                        Otros tramites
+		                        Other proceedings
 		                        </a>
 		                    </div>
-		                    <div id="collapseThree" class="accordion-body collapse">
+		                    <div id="collapseThree" class="accordion-body collapse in">
 		                        <div class="accordion-inner">
-								<p>Formalizar la Licencia de Apertura en el Ayuntamiento, en caso de que haya un centro de trabajo. Dar de alta a tus trabajadores en la Seguridad Social, en caso de que decidas contratar a más gente.</p>
+								<p style="margin-left:15px">Regularize the Opening Permits at your local City Hall, in you have a workplace. Register your workers in the Social Security, if you decide to hire more people.</p>
 								</div><!-- /accordion-inner -->
 		                    </div><!-- /collapse -->
 		                </div><!-- /accordion-group -->
@@ -383,6 +382,7 @@
 					</div>
 		</div><!-- /.row -->
 	</div><!-- /.container -->
+    <p>You can see more information on the <a href="http://www.ventanillaempresarial.org/" target="_blank">oficial guide-page for enterpreneurs</a></p>
 </section><!-- /#our-services -->
 
 <section id="partners">
