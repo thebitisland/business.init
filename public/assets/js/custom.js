@@ -692,7 +692,7 @@ var updateIdealista = function(latitude, longitude, radius){
                 item += '</div></div>'
 
                 $('.owl-wrapper').append(item);
-            };
+            }
             self.spinner_idealista.stop();
         }, 
         error: function(){
@@ -738,66 +738,66 @@ var loadFoursquareData = function(lat,lon,query,radius) {
             
             console.log(jsonObj.response.groups[0].items);
             var total_iterations;
+            var success = false;
     
-            if(items_length == 0) {
-                body = "No results are available in this area =("
-                total_iterations = 0;
+            if (items_length > 16) {
+                total_iterations = 16;
             } else {
-                if (items_length > 16) {
-                    total_iterations = 16;
-                } else {
-                    total_iterations = items_length;
-                }
-                //console.log(jsonObj.response.groups[0].items.length);
-                for (var i = 0; i < total_iterations; i++) {
+                total_iterations = items_length;
+            }
+            //console.log(jsonObj.response.groups[0].items.length);
+            for (var i = 0; i < total_iterations; i++) {
     
-                    var venues = jsonObj.response.groups[0].items[i].venue;
-                    ///var tips= jsonObj.response.groups[0].items[i].tips;
-                    //console.log(venues);
-                    var id = venues.id;
-                    //console.log(id);
-                    var location= venues.location;
-                    var address = location.address;
-                    var rating = venues.rating;
-                    var name = venues.name;
-                    var group_items=venues.photos.groups;
-                    //console.log(group_items);
-                     if($.isArray(group_items) && group_items.length > 0){
+                var venues = jsonObj.response.groups[0].items[i].venue;
+                ///var tips= jsonObj.response.groups[0].items[i].tips;
+                //console.log(venues);
+                var id = venues.id;
+                //console.log(id);
+                var location= venues.location;
+                var address = location.address;
+                var rating = venues.rating;
+                var name = venues.name;
+                var group_items=venues.photos.groups;
+                //console.log(group_items);
+                if($.isArray(group_items) && group_items.length > 0){
     
-                        var photo_suffix= venues.photos.groups[0].items[0].suffix;
-                        var photo_prefix = "https://irs2.4sqi.net/img/general/";
-                        var photo = photo_prefix+picture_dimension+photo_suffix;
+                   var photo_suffix= venues.photos.groups[0].items[0].suffix;
+                   var photo_prefix = "https://irs2.4sqi.net/img/general/";
+                   var photo = photo_prefix+picture_dimension+photo_suffix;
             
-                        //console.log(photo);
-                        //console.log(tips);
-                        //console.log(location);
-                        if(rating){
-                          self.ratings.push(rating);  
-                        } 
-                        var reference = "http://foursquare.com/v/"+id;
-                        var stars_rating;
+                   //console.log(photo);
+                   //console.log(tips);
+                   //console.log(location);
+                   if(rating){
+                     self.ratings.push(rating);  
+                   } 
+                   var reference = "http://foursquare.com/v/"+id;
+                   var stars_rating;
             
-                        if (rating == 10) {
-                            stars_rating = stars_5;
-                        } else if (rating >= 8 && rating < 10) {
-                            stars_rating = stars_4;
-                        } else if (rating >= 5 && rating < 8) {
-                            stars_rating = stars_3;
-                        } else if (rating >= 2 && rating < 5) {
-                            stars_rating = stars_2;
-                        } else {
-                            stars_rating = stars_1;
-                        }
+                   if (rating == 10) {
+                       stars_rating = stars_5;
+                   } else if (rating >= 8 && rating < 10) {
+                       stars_rating = stars_4;
+                   } else if (rating >= 5 && rating < 8) {
+                       stars_rating = stars_3;
+                   } else if (rating >= 2 && rating < 5) {
+                       stars_rating = stars_2;
+                   } else {
+                       stars_rating = stars_1;
+                   }
             
-                        body += "<div class='col-md-3 col-sm-6'><div class='property'><a href="+reference+" target='blank'><div class='property-image'><img alt=''src="+photo+"></div><div class='overlay'><div class='info'><h3>"+name+"</h3><div class='tag price'>"+stars_rating+"</div><figure>"+address+"</figure></div></div></a></div><!-- /.property --></div><!-- /.col-md-3 -->";
-                    }   
-                }
+                   body += "<div class='col-md-3 col-sm-6'><div class='property'><a href="+reference+" target='blank'><div class='property-image'><img alt=''src="+photo+"></div><div class='overlay'><div class='info'><h3>"+name+"</h3><div class='tag price'>"+stars_rating+"</div><figure>"+address+"</figure></div></div></a></div><!-- /.property --></div><!-- /.col-md-3 -->";
+                    success = true
+                }   
             }
 
             //var final_html= html_intro + body + html_final;
             //console.log(final_html);
-            console.log(self.ratings);
+            //console.log(self.ratings);
     
+            if(!success)
+                body = "No results available in the area =("
+
             document.getElementById("foursquare").innerHTML=body;
 
         }
