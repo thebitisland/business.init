@@ -1,6 +1,44 @@
-@extends('layouts.master')
+<!DOCTYPE html>
 
-@section('content')
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="The bit Island">
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
+	<link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+	
+	<link rel="stylesheet" type="text/css" href="assets/js/stats_graphs/nv.d3.css">
+	<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/bootstrap-select.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/jquery.slider.min.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/osm.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/leaflet.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/MarkerCluster.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/custom.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="assets/js/leaflet-draw/leaflet.draw.css">
+	<link rel="stylesheet" type="text/css" href="assets/js/toastr/toastr.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/stat_graphs.css">
+
+	<title>{{ $title or 'Business.init()' }}</title>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  ga('create', 'UA-44584344-2', 'auto');
+	  ga('send', 'pageview');
+	
+	</script>
+</head>
+
+<body class="page-homepage navigation-fixed-top  map-osm" id="page-top" data-spy="scroll" data-target=".navigation" data-offset="90">
+
 <div class="container">
 
 <br/>
@@ -29,7 +67,11 @@
 </p>
 <br/>
 <br/>
+
+<a href="/"><button class="btn btn-default">Back to home</button></a>
+
 </div>
 
-@stop
+</body>
+</html>>
 

@@ -149,6 +149,7 @@
 									<h3>About Us</h3>
 									<p>The bit island was founded by five technology-loving members from Madrid, Spain. Our goal is the use of open data to offer innovative ways to improve and better our society.
 									</p>
+									<a href="about"><button class="btn btn-default">More about us!</button></a>
 								</article>
 							</div><!-- /.col-sm-3 -->
 
