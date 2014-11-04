@@ -791,7 +791,7 @@ function update_wordcloud(text){
         wordList.push(word)
     }
     
-    d3.layout.cloud().size([300, 300])
+    d3.layout.cloud().size([600, 300])
         .words(wordList.map(function(d) {
           return {text: d, size: 10 + countDict[d]/10 * 90};
         }))
@@ -808,7 +808,7 @@ var fill = d3.scale.category20();
 function cloud_draw(words) {
   d3.select("#wordcloud_twitter").html("")
   d3.select("#wordcloud_twitter").append("svg")
-      .attr("width", 300)
+      .attr("width", 600)
       .attr("height", 300)
     .append("g")
       .attr("transform", "translate(150,150)")
