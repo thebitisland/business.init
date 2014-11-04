@@ -294,7 +294,7 @@
     <div class="container">
         <header class="section-title"><h2>Related Tweets nearby</h2></header>
         <div class="row" id="tweets">
-            <div class="col-md-4 col-sm-4">
+            <div class="col-md-3 col-sm-3">
                 <div class="feature-box">
                     <figure class="icon"><i class="fa fa-users"></i></figure>
                     <aside class="description">
@@ -304,7 +304,7 @@
                     </aside>
                 </div><!-- /.feature-box -->
             </div><!-- /.col-md-4 -->
-            <div class="col-md-4 col-sm-4">
+            <div class="col-md-3 col-sm-3">
                 <div class="feature-box">
                     <figure class="icon"><i class="fa fa-users"></i></figure>
                     <aside class="description">
@@ -314,7 +314,7 @@
                     </aside>
                 </div><!-- /.feature-box -->
             </div><!-- /.col-md-4 -->
-            <div class="col-md-4 col-sm-4">
+            <div class="col-md-3 col-sm-3">
                 <div class="feature-box">
                     <figure class="icon"><i class="fa fa-users"></i></figure>
                     <aside class="description">
@@ -324,6 +324,8 @@
                     </aside>
                 </div><!-- /.feature-box -->
             </div><!-- /.col-md-4 -->
+            <div id="wordcloud_twitter" class="col-md-3 col-sm-3"></div>
+
         </div><!-- /.row -->
     </div><!-- /.container -->
 </section><!-- /#our-services -->

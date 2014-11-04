@@ -781,8 +781,8 @@ var loadFoursquareData = function(lat,lon,query,radius) {
 
 var fill = d3.scale.category20();
 
-function cloud_draw(words, div_id) {
-  d3.select("#"+div_id).append("svg")
+function cloud_draw(words) {
+  d3.select("#wordcloud_twitter").append("svg")
       .attr("width", 300)
       .attr("height", 300)
     .append("g")
