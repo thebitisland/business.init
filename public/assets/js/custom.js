@@ -1025,7 +1025,7 @@ String.prototype.removeStopWords = function() {
         "la",
         "lo",
         "los",
-        "las"
+        "las",
         "largo",
         "más",
         "me",
