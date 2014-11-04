@@ -779,6 +779,30 @@ var loadFoursquareData = function(lat,lon,query,radius) {
     xmlhttp.send();
 }
 
+function update_wordcloud(text){
+    var s = text.split(' '),
+        countDict = {}, wordList = [];
+    
+    for (var i=s.length; i--;) {
+        countDict[s[i]] = (s[i] in countDict) ? countDict[s[i]]+1 : 1;
+    }
+    
+    for (word in countDict) {
+        wordList.push(word)
+    }
+    
+    d3.layout.cloud().size([300, 300])
+        .words(wordList.map(function(d) {
+          return {text: d, size: 10 + countDict[d]/10 * 90};
+        }))
+        .padding(5)
+        .rotate(function() { return ~~(Math.random() * 2) * 90; })
+        .font("Impact")
+        .fontSize(function(d) { return d.size; })
+        .on("end", cloud_draw)
+        .start();
+}
+
 var fill = d3.scale.category20();
 
 function cloud_draw(words) {

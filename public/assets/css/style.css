@@ -5902,3 +5902,10 @@ margin-top: -5px;
   height: 150px;
   padding: 10px;
 }
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: @screen-sm-min) { 
+  #map{
+    height: 480px;
+  }
+}
