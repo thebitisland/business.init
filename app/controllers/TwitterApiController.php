@@ -2,7 +2,7 @@
 
 class TwitterApiController extends BaseController {
 
-    public function getIdealista($latitude, $longitude, $radius)
+    public function getIdealista($latitude, $longitude, $radius, $status)
     {
         $longUrl = 'http://www.idealista.com/labs/propertyMap.htm?k=1495facc6beff62d21a0282a6f8ac1f1&action=json&operation=sale&radio=40.416914%2C-3.695148&center=40.415914%2C-3.696148';
 
@@ -11,7 +11,7 @@ class TwitterApiController extends BaseController {
             'center' => urlencode($latitude . ',' . $longitude),
             'k' => urlencode('cace7d1225f39e7a901d11baa37773d2'),
             'action' => 'json',
-            'operation' => 'sale',
+            'operation' => urlencode($status),
             'radio' => urlencode(($latitude+$radius).','.($longitude+$radius))
         );
         //        $this->curl = New Curl;
