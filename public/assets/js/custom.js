@@ -1033,7 +1033,7 @@ String.prototype.removeStopWords = function() {
         "mi",
         "mis",
         "mía",
-        "mías"
+        "mías",
         "mientras",
         "mío",
         "míos",
