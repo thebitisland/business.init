@@ -150,7 +150,7 @@
 										Madrid<br>
 										Spain
 									</address>
-									<a href="#">contact@thebitisland.com</a>
+									<a href="#">thebitislandcontact@gmail.com</a>
 								</article>
 							</div><!-- /.col-sm-3 -->
 						</div><!-- /.row -->

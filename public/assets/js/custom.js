@@ -846,6 +846,33 @@ var getSearch = function(){
             var centerPoint = L.latLng(self.lat, self.lon);
             self.searchposition = L.marker(centerPoint);
             self.searchposition.addTo(self.map);
+            self.map.panTo(centerPoint);
+
+            var query = $( "#bus_type option:selected" ).text();
+            if(query!= "Business type"){
+
+                if(query == "Book store"){
+                    query = "librerias";
+                }else if(query == "Nursery"){
+                    query = "guarderia";
+                }else if(query == "Gymnasium"){
+                    query = "gimnasio";
+                }else if(query == "Shoeshop"){
+                    query = "zapateria";
+                }else if(query == "Mercadona"){
+                    query = "mercadona";
+                }else if(query == "Language School"){
+                    query = "academia idioma";
+                }else if(query == "Burguer King"){
+                    query = "Burguer King";
+                }
+                loadFoursquareData(self.lat,self.lon,query,100);
+                twitter.getTweets(query);
+            }else{
+                toastr["warning"]("Add a business type to see related business!", "")
+            }
+
+
         }); 
 
     } else {
