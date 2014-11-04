@@ -15,10 +15,12 @@ function createHomepageOSM(_latitude,_longitude){
     if( document.getElementById('map') != null ){
         
         try{
-            var map_height = parseInt(window.innerHeight * 0.80)
+            var map_height = parseInt(window.innerHeight * 0.70)
             if (map_height != 0 && map_height != NaN && map_height != null){
                 if (parseInt(map_height) < 400)
                     map_height = 400
+                if (parseInt(map_height) > 1000)
+                    map_height = 1000
                 document.getElementById('map').style.height=map_height+'px'
             }
         } catch(err) {}
