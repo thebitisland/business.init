@@ -621,6 +621,7 @@ function drawFooterThumbnails(){
 
 var updateIdealista = function(latitude, longitude, radius){
 
+    radius = radius * 2;
     var opts = {
       lines: 8, // The number of lines to draw
       length: 8, // The length of each line
@@ -918,7 +919,7 @@ var getSearch = function(){
                 }else if(query == "Burguer King"){
                     query = "Burguer King";
                 }
-                loadFoursquareData(self.lat, self.lon, query, 1000);
+                loadFoursquareData(self.lat, self.lon, query, 2000);
                 twitter.getTweets(query);
             }else{
                 toastr["warning"]("Add a business type to see related business!", "")
