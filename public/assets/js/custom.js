@@ -800,7 +800,7 @@ function cloud_draw(words, div_id) {
       .text(function(d) { return d.text; });
 }
 
-var searchPlace = function(query) {
+var searchPlace = function(query, _callback) {
     var xmlhttp;
     var txt,x,i;
 
@@ -816,13 +816,13 @@ var searchPlace = function(query) {
             
             var jsonObj = JSON.parse(xmlhttp.responseText);
             var items = jsonObj[0];
-            var lon = jsonObj[0].lon;
-            var lat= jsonObj[0].lat;
+
+            self.lon = jsonObj[0].lon;
+            self.lat= jsonObj[0].lat;
             //console.log(lon);
             //console.log(lat);
-
-            return [lat,lon]
-            
+            _callback();
+          
         }
     }
     xmlhttp.open("GET",url,true);
@@ -830,16 +830,23 @@ var searchPlace = function(query) {
 }
 
 var getSearch = function(){
+
     var search_text = $("#search-box-property-id").val();
+    console.log(search_text)
 
     if (search_text != ""){
 
-        var latlon = searchPlace(search_text);
+        searchPlace(search_text, function() {
+            console.log(self.lat + "|" + self.lon)
 
-        //self.map.removeLayer(self.searchposition);
+            try {
+                self.map.removeLayer(self.searchposition);
+            } catch(err) {}
 
-        self.searchposition = L.marker(latlon);
-        self.searchposition.addTo(self.map);
+            var centerPoint = L.latLng(self.lat, self.lon);
+            self.searchposition = L.marker(centerPoint);
+            self.searchposition.addTo(self.map);
+        }); 
 
     } else {
         toastr["error"]("Search Box cannot be empty!", "")

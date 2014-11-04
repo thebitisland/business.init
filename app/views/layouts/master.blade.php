@@ -111,10 +111,10 @@
 											<input id="price-input" type="text" name="price" value="1000;299000">
 										</div>
 									</div>-->
-									<div class="form-group">
-										<button type="submit" class="btn btn-default">Search Now</button>
-									</div><!-- /.form-group -->
-								</form><!-- /#form-map -->
+									</form><!-- /#form-map -->
+								<div style="padding-left:10px;padding-right:10px" class="form-group">
+									<button onclick="getSearch()" class="btn btn-default">Search Now</button>
+								</div><!-- /.form-group -->
 							</div><!-- /.search-box.map -->
 						</div><!-- /.col-md-3 -->
 					</div><!-- /.row -->
