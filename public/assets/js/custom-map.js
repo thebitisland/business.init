@@ -369,7 +369,7 @@ function createHomepageOSM(_latitude,_longitude){
             $('#noStats').css("display","none");
             $('#stats').css("display","block");
 
-            d3.select("#district_text").html("Here are some statistics about the population of the distrit "+"<font color='#388DC3'><b>" + e.target.feature.properties.DESBDT.split(" ").slice(1).join(' ') + "</b></font>")
+            d3.select("#district_text").html("Here are some statistics about the population of the district "+"<font color='#388DC3'><b>" + e.target.feature.properties.DESBDT.split(" ").slice(1).join(' ') + "</b></font>")
 
             d3.select("#sexRatio").html("");
             drawCHgraps(e.target.feature);
@@ -486,7 +486,7 @@ function createHomepageOSM(_latitude,_longitude){
             self.htmlPop +='</div>'
 
             self.htmlInfo = '<div class="info">'
-            self.htmlInfo += '  <h4>Population per distrit</h4>'
+            self.htmlInfo += '  <h4>Population per district</h4>'
             self.htmlInfo += '  Hover over a region to <br>see more info'
             self.htmlInfo += '</div>';
 
@@ -516,8 +516,8 @@ function createHomepageOSM(_latitude,_longitude){
                 info2 = "€/year"
             }
 
-            self.htmlInfo = '<h4>' + info1 + ' per distrit</h4>' +  (props ?
-                'Distrit: <b>' + props.properties.DESBDT.split(" ").slice(1).join(' ') + '</b><br />' + getValue(props) + ' ' + info2
+            self.htmlInfo = '<h4>' + info1 + ' per district</h4>' +  (props ?
+                'District: <b>' + props.properties.DESBDT.split(" ").slice(1).join(' ') + '</b><br />' + getValue(props) + ' ' + info2
                 : 'Hover over a region to <br>see more info');
 
             d3.select('.info').html(self.htmlInfo);
