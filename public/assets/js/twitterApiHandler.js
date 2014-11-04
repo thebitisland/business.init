@@ -35,7 +35,11 @@ var twitter = function () {
                         $(element).find('a').attr('href','https://twitter.com/' + finalTweets[index].user.screen_name);
                     });
 
-                    update_wordcloud(finalTweets[0].text)
+                    var text = ""
+                    finalTweets.forEach(function(tweet){
+                        text = tweet.text + " "
+                    })
+                    update_wordcloud(text)
 
                 });
             }
