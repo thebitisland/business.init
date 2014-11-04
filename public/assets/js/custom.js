@@ -779,10 +779,35 @@ var loadFoursquareData = function(lat,lon,query,radius) {
     xmlhttp.send();
 }
 
+function update_wordcloud(text){
+    var s = text.split(' '),
+        countDict = {}, wordList = [];
+    
+    for (var i=s.length; i--;) {
+        countDict[s[i]] = (s[i] in countDict) ? countDict[s[i]]+1 : 1;
+    }
+    
+    for (word in countDict) {
+        wordList.push(word)
+    }
+    
+    d3.layout.cloud().size([300, 300])
+        .words(wordList.map(function(d) {
+          return {text: d, size: 10 + countDict[d]/10 * 90};
+        }))
+        .padding(5)
+        .rotate(function() { return ~~(Math.random() * 2) * 90; })
+        .font("Impact")
+        .fontSize(function(d) { return d.size; })
+        .on("end", cloud_draw)
+        .start();
+}
+
 var fill = d3.scale.category20();
 
-function cloud_draw(words, div_id) {
-  d3.select("#"+div_id).append("svg")
+function cloud_draw(words) {
+  d3.select("#wordcloud_twitter").html("")
+  d3.select("#wordcloud_twitter").append("svg")
       .attr("width", 300)
       .attr("height", 300)
     .append("g")
@@ -880,4 +905,285 @@ var getSearch = function(){
     } else {
         toastr["error"]("Search Box cannot be empty!", "")
     }
+}
+
+String.prototype.removeStopWords = function() {
+    var x;
+    var y;
+    var word;
+    var stop_word;
+    var regex_str;
+    var regex;
+    var cleansed_string = this.valueOf();
+
+    var stop_words = new Array(
+        "a",
+        "acá",
+        "ahí",
+        "ajeno",
+        "al",
+        "algo",
+        "algún",
+        "allá/í",
+        "ambos",
+        "ante",
+        "antes",
+        "aquel",
+        "aquella",
+        "aquí",
+        "arriba",
+        "así",
+        "atrás",
+        "aun",
+        "aunque",
+        "bajo",
+        "bastante",
+        "bien",
+        "cabe",
+        "cada",
+        "casi",
+        "cierto",
+        "como",
+        "con",
+        "conmigo",
+        "conseguimos",
+        "conseguir",
+        "consigo",
+        "consigue",
+        "consiguen",
+        "consigues",
+        "contigo",
+        "contra",
+        "cual",
+        "cuales",
+        "cualquier",
+        "cuan",
+        "cuando",
+        "cuanto",
+        "de",
+        "dejar",
+        "del",
+        "demás",
+        "demasiada/o/s",
+        "dentro",
+        "desde",
+        "donde",
+        "dos",
+        "el",
+        "él",
+        "ella/o/s",
+        "empleáis",
+        "emplean",
+        "emplear",
+        "empleas",
+        "empleo",
+        "en",
+        "encima",
+        "entonces",
+        "entre",
+        "era/s",
+        "eramos",
+        "eran",
+        "eres",
+        "es",
+        "esa/e/o/s",
+        "esta/s",
+        "estaba",
+        "estado",
+        "estáis",
+        "estamos",
+        "están",
+        "estar",
+        "este/o/s",
+        "estoy",
+        "etc",
+        "fin",
+        "fue",
+        "fueron",
+        "fui",
+        "fuimos",
+        "gueno",
+        "ha",
+        "hace/s",
+        "hacéis",
+        "hacemos",
+        "hacen",
+        "hacer",
+        "hacia",
+        "hago",
+        "hasta",
+        "incluso",
+        "intenta/s",
+        "intentáis",
+        "intentamos",
+        "intentan",
+        "intentar",
+        "intento",
+        "ir",
+        "jamás",
+        "junto/s",
+        "la",
+        "lo",
+        "los",
+        "las",
+        "largo",
+        "más",
+        "me",
+        "menos",
+        "mi",
+        "mis",
+        "mía",
+        "mías",
+        "mientras",
+        "mío",
+        "míos",
+        "misma/o/s",
+        "modo",
+        "mucha",
+        "muchísima/o/s",
+        "mucho",
+        "muchos",
+        "muy",
+        "nada",
+        "ni",
+        "ningún/a/o/s",
+        "no",
+        "nos",
+        "nosotras/os",
+        "nuestra/o/s",
+        "nunca",
+        "os",
+        "otra/o/s",
+        "para",
+        "parecer",
+        "pero",
+        "poca/o/s",
+        "podéis",
+        "podemos",
+        "poder",
+        "podría/s",
+        "podríais",
+        "podríamos",
+        "podrían",
+        "por",
+        "por qué",
+        "porque",
+        "primero",
+        "puede/n",
+        "puedo",
+        "pues",
+        "que",
+        "qué",
+        "querer",
+        "quién/es",
+        "quienesquiera",
+        "quienquiera",
+        "quizá/s",
+        "sabe/s/n",
+        "sabéis",
+        "sabemos",
+        "saber",
+        "se",
+        "según",
+        "ser",
+        "si",
+        "sí",
+        "siempre",
+        "siendo",
+        "sin",
+        "sino",
+        "so",
+        "sobre",
+        "sois",
+        "solamente",
+        "solo",
+        "sólo",
+        "somos",
+        "soy",
+        "sr",
+        "sra",
+        "sres",
+        "sta",
+        "su/s",
+        "suya/o/s",
+        "tal/es",
+        "también",
+        "tampoco",
+        "tan",
+        "tanta/o/s",
+        "te",
+        "tenéis",
+        "tenemos",
+        "tener",
+        "tengo",
+        "ti",
+        "tiempo",
+        "tiene",
+        "tienen",
+        "toda/o/s",
+        "tomar",
+        "trabaja/o",
+        "trabajáis",
+        "trabajamos",
+        "trabajan",
+        "trabajar",
+        "trabajas",
+        "tras",
+        "tú",
+        "tu",
+        "tus",
+        "tuya/o/s",
+        "último",
+        "ultimo",
+        "un/a/o/s",
+        "usa/s",
+        "usáis",
+        "usamos",
+        "usan",
+        "usar",
+        "uso",
+        "usted/es",
+        "va/n",
+        "vais",
+        "valor",
+        "vamos",
+        "varias/os",
+        "vaya",
+        "verdadera",
+        "vosotras/os",
+        "voy",
+        "vuestra/o/s",
+        "y",
+        "ya",
+        "yo"
+    )
+
+    // Split out all the individual words in the phrase
+    words = cleansed_string.match(/[^\s]+|\s+[^\s+]$/g)
+ 
+    // Review all the words
+    for(x=0; x < words.length; x++) {
+        // For each word, check all the stop words
+        for(y=0; y < stop_words.length; y++) {
+            // Get the current word
+            word = words[x].replace(/\s+|[^a-z]+/ig, "");   // Trim the word and remove non-alpha
+             
+            // Get the stop word
+            stop_word = stop_words[y];
+             
+            // If the word matches the stop word, remove it from the keywords
+            if(word.toLowerCase() == stop_word) {
+                // Build the regex
+                regex_str = "^\\s*"+stop_word+"\\s*$";      // Only word
+                regex_str += "|^\\s*"+stop_word+"\\s+";     // First word
+                regex_str += "|\\s+"+stop_word+"\\s*$";     // Last word
+                regex_str += "|\\s+"+stop_word+"\\s+";      // Word somewhere in the middle
+                regex = new RegExp(regex_str, "ig");
+             
+                // Remove the word from the keywords
+                cleansed_string = cleansed_string.replace(regex, " ");
+            }
+        }
+    }
+    return cleansed_string.replace(/^\s+|\s+$/g, "");
 }
