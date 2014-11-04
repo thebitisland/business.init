@@ -357,6 +357,9 @@ function createHomepageOSM(_latitude,_longitude){
         function clickOnDistrit(e) {
             $('#noStats').css("display","none");
             $('#stats').css("display","block");
+
+            d3.select("#district_text").html("Here are some statistics about the population of the distrit "+"<font color='#388DC3'><b>" + e.target.feature.properties.DESBDT.split(" ").slice(1).join(' ') + "</b></font>")
+
             d3.select("#sexRatio").html("");
             drawCHgraps(e.target.feature);
 

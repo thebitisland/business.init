@@ -10,7 +10,7 @@
 </div><!-- /.container-->
 <div class="container" id="stats">
 
-    <p>Here are some statistics about the population of the distrit you've selected</p>
+    <p id="district_text">Here are some statistics about the population of the distrit you've selected</p>
     <div class="row">
         <div class="col-md-5 col-sm-5" id="chartPOPAGE">
                 <svg id="chartSVG"></svg>
@@ -333,7 +333,7 @@
 	<div class="container">
 		<header class="section-title"><h2>Start a business</h2></header>
 
-		<h4>To register as a self-employed professional in Spain, you have three options: make arrangements in person by going to the IRS and Social Security Office, go to a PAE (Help desks for Entrepreneurs) or do it directly via internet.</h4>
+		<p>To register as a self-employed professional in Spain, you have three options: make arrangements in person by going to the IRS and Social Security Office, go to a PAE (Help desks for Entrepreneurs) or do it directly via internet.</p>
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
 			<div class="accordion ac" id="accordion2">
