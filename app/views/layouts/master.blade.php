@@ -92,7 +92,7 @@
 					<div class="row">
 						<div class="col-md-3 col-sm-4">
 							<div class="search-box map">
-								<form role="form" id="form-map" class="form-map form-search">
+								<div id="form-map" class="form-map form-search">
 									<h2>What do <b>you</b> want?</h2>
 									<div class="form-group">
 										<select name="property-type" id="bus_type">
@@ -121,10 +121,10 @@
 											<input id="price-input" type="text" name="price" value="1000;299000">
 										</div>
 									</div>-->
-									</form><!-- /#form-map -->
-								<div style="padding-left:10px;padding-right:10px" class="form-group">
-									<button onclick="getSearch()" class="btn btn-default">Search Now</button>
-								</div><!-- /.form-group -->
+									<div class="form-group">
+										<button onclick="getSearch()" class="btn btn-default">Search Now</button>
+									</div><!-- /.form-group -->
+								</div><!-- /#form-map -->
 							</div><!-- /.search-box.map -->
 						</div><!-- /.col-md-3 -->
 					</div><!-- /.row -->
