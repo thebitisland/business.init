@@ -107,11 +107,11 @@
 										</select>
 									</div><!-- /.form-group -->
 									<div class="form-group">
-										<input type="text" class="form-control" id="search-box-property-id" placeholder="Where?">
+										<input type="text" class="form-control" id="search-box-property-id" placeholder="Sol, Madrid">
 									</div>
 									<div class="form-group">
 										<select name="type" id="property_status">
-											<option value="">Status</option>
+											<option value="">Property status</option>
 											<option value="1">Rent</option>
 											<option value="2">Sale</option>
 										</select>
