@@ -1031,18 +1031,18 @@ String.prototype.removeStopWords = function() {
         "me",
         "menos",
         "mi",
-        "mis"
+        "mis",
         "mía",
         "mías"
         "mientras",
         "mío",
-        "míos"
+        "míos",
         "misma/o/s",
         "modo",
-        "mucha/s",
+        "mucha",
         "muchísima/o/s",
         "mucho",
-        "muchos"
+        "muchos",
         "muy",
         "nada",
         "ni",
