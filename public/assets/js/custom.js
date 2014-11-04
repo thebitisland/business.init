@@ -828,3 +828,20 @@ var searchPlace = function(query) {
     xmlhttp.open("GET",url,true);
     xmlhttp.send();
 }
+
+var getSearch = function(){
+    var search_text = $("#search-box-property-id").val();
+
+    if (search_text != ""){
+
+        var latlon = searchPlace(search_text);
+
+        //self.map.removeLayer(self.searchposition);
+
+        self.searchposition = L.marker(latlon);
+        self.searchposition.addTo(self.map);
+
+    } else {
+        toastr["error"]("Search Box cannot be empty!", "")
+    }
+}
