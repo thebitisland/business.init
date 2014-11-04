@@ -14,6 +14,7 @@ function createHomepageOSM(_latitude,_longitude){
     setMapHeight();
     if( document.getElementById('map') != null ){
         
+        var tweets = twitter.getTweets();
         self.map = L.map('map', {
             center: [_latitude,_longitude],
             zoom: 12,
