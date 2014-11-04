@@ -743,6 +743,7 @@ var loadFoursquareData = function(lat,lon,query,radius) {
                 total_iterations = 16;
             } else if(items_length == 0) {
                 body = "No results are available in this area =("
+                total_iterations = 0;
             } else {
                 total_iterations = items_length;
             }
