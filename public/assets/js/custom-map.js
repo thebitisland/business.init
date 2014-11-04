@@ -21,10 +21,7 @@ function createHomepageOSM(_latitude,_longitude){
                     map_height = 400
                 document.getElementById('map').style.height=map_height+'px'
             }
-        } catch(err) {
-
-        }
-        console.log(window.innerHeight)
+        } catch(err) {}
 
         var tweets = twitter.getTweets();
         self.map = L.map('map', {

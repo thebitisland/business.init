@@ -109,13 +109,13 @@
 									<div class="form-group">
 										<input type="text" class="form-control" id="search-box-property-id" placeholder="Where?">
 									</div>
-									<!--<div class="form-group">
-										<select name="type">
+									<div class="form-group">
+										<select name="type" id="property_status">
 											<option value="">Status</option>
 											<option value="1">Rent</option>
 											<option value="2">Sale</option>
 										</select>
-									</div>--><!-- /.form-group -->
+									</div><!-- /.form-group -->
 									<!--<div class="form-group">
 										<div class="price-range">
 											<input id="price-input" type="text" name="price" value="1000;299000">
