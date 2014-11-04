@@ -48,7 +48,7 @@
 					<nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="#map">Map</a></li>
-							<li><a href="#statSection">Distrit statistics</a></li>
+							<li><a href="#statSection">District statistics</a></li>
 							<li><a href="#featured-properties">Idealista</a></li>
 							<li><a href="#new-properties">Related Business</a></li>
 						    <li><a href="#tweets">Tweets</a></li>
@@ -111,10 +111,10 @@
 											<input id="price-input" type="text" name="price" value="1000;299000">
 										</div>
 									</div>-->
-									<div class="form-group">
-										<button type="submit" class="btn btn-default">Search Now</button>
-									</div><!-- /.form-group -->
-								</form><!-- /#form-map -->
+									</form><!-- /#form-map -->
+								<div style="padding-left:10px;padding-right:10px" class="form-group">
+									<button onclick="getSearch()" class="btn btn-default">Search Now</button>
+								</div><!-- /.form-group -->
 							</div><!-- /.search-box.map -->
 						</div><!-- /.col-md-3 -->
 					</div><!-- /.row -->
@@ -150,7 +150,7 @@
 										Madrid<br>
 										Spain
 									</address>
-									<a href="#">contact@thebitisland.com</a>
+									<a href="#">thebitislandcontact@gmail.com</a>
 								</article>
 							</div><!-- /.col-sm-3 -->
 						</div><!-- /.row -->
@@ -206,6 +206,7 @@
 	<script type="text/javascript" src="assets/js/stats_graphs/multiBarChart.js"></script>
 	<script type="text/javascript" src="assets/js/stats_graphs/stream_layers.js"></script>
 	<script type="text/javascript" src="assets/js/stat_graphs.js"></script>
+	<script type="text/javascript" src="assets/js/d3.layout.cloud.js"></script>
 <!--[if gt IE 8]>
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->

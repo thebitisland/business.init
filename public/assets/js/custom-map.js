@@ -333,6 +333,8 @@ function createHomepageOSM(_latitude,_longitude){
         function highlightFeature(e) {
             var layer = e.target;
 
+            self.latest = e;
+
             layer.setStyle({
                 weight: 5,
                 color: '#666',
@@ -612,6 +614,7 @@ function createHomepageOSM(_latitude,_longitude){
             drawnItems.addLayer(layer);
             layer.bringToBack();
             self.prevCircle = layer;
+            clickOnDistrit(self.latest);
         });
 
         //LEAFLET - DRAW

@@ -779,8 +779,28 @@ var loadFoursquareData = function(lat,lon,query,radius) {
     xmlhttp.send();
 }
 
+var fill = d3.scale.category20();
 
-var searchPlace = function(query) {
+function cloud_draw(words, div_id) {
+  d3.select("#"+div_id).append("svg")
+      .attr("width", 300)
+      .attr("height", 300)
+    .append("g")
+      .attr("transform", "translate(150,150)")
+    .selectAll("text")
+      .data(words)
+    .enter().append("text")
+      .style("font-size", function(d) { return d.size + "px"; })
+      .style("font-family", "Impact")
+      .style("fill", function(d, i) { return fill(i); })
+      .attr("text-anchor", "middle")
+      .attr("transform", function(d) {
+        return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+      })
+      .text(function(d) { return d.text; });
+}
+
+var searchPlace = function(query, _callback) {
     var xmlhttp;
     var txt,x,i;
 
@@ -796,16 +816,66 @@ var searchPlace = function(query) {
             
             var jsonObj = JSON.parse(xmlhttp.responseText);
             var items = jsonObj[0];
-            var lon = jsonObj[0].lon;
-            var lat= jsonObj[0].lat;
+
+            self.lon = jsonObj[0].lon;
+            self.lat= jsonObj[0].lat;
             //console.log(lon);
             //console.log(lat);
-
-            return [lat,lon]
-            
+            _callback();
+          
         }
     }
     xmlhttp.open("GET",url,true);
     xmlhttp.send();
 }
 
+var getSearch = function(){
+
+    var search_text = $("#search-box-property-id").val();
+    console.log(search_text)
+
+    if (search_text != ""){
+
+        searchPlace(search_text, function() {
+            console.log(self.lat + "|" + self.lon)
+
+            try {
+                self.map.removeLayer(self.searchposition);
+            } catch(err) {}
+
+            var centerPoint = L.latLng(self.lat, self.lon);
+            self.searchposition = L.marker(centerPoint);
+            self.searchposition.addTo(self.map);
+            self.map.panTo(centerPoint);
+
+            var query = $( "#bus_type option:selected" ).text();
+            if(query!= "Business type"){
+
+                if(query == "Book store"){
+                    query = "librerias";
+                }else if(query == "Nursery"){
+                    query = "guarderia";
+                }else if(query == "Gymnasium"){
+                    query = "gimnasio";
+                }else if(query == "Shoeshop"){
+                    query = "zapateria";
+                }else if(query == "Mercadona"){
+                    query = "mercadona";
+                }else if(query == "Language School"){
+                    query = "academia idioma";
+                }else if(query == "Burguer King"){
+                    query = "Burguer King";
+                }
+                loadFoursquareData(self.lat,self.lon,query,100);
+                twitter.getTweets(query);
+            }else{
+                toastr["warning"]("Add a business type to see related business!", "")
+            }
+
+
+        }); 
+
+    } else {
+        toastr["error"]("Search Box cannot be empty!", "")
+    }
+}
