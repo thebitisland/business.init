@@ -39,6 +39,7 @@ var twitter = function () {
                     for(var i=0;i<15;i++){
                         text += finalTweets[i].text + " "
                     }
+                    console.log(text.removeStopWords())
                     update_wordcloud(text.removeStopWords())
 
                 });
