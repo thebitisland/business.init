@@ -796,7 +796,7 @@ var loadFoursquareData = function(lat,lon,query,radius) {
             //console.log(self.ratings);
     
             if(!success)
-                body = "No results available in the area =("
+                body = "<p>No results available in the area =(</p>"
 
             document.getElementById("foursquare").innerHTML=body;
 
