@@ -654,7 +654,18 @@ function createHomepageOSM(_latitude,_longitude){
             drawnItems.addLayer(layer);
             layer.bringToBack();
             self.prevCircle = layer;
-            clickOnDistrit(self.latest);
+            
+            //clickOnDistrit(self.latest);
+            $('#noStats').css("display","none");
+            $('#stats').css("display","block");
+
+            d3.select("#district_text").html("Here are some statistics about the population of the district "+"<font color='#388DC3'><b>" + self.latest.target.feature.properties.DESBDT.split(" ").slice(1).join(' ') + "</b></font>")
+
+            d3.select("#sexRatio").html("");
+            drawCHgraps(self.latest.target.feature);
+
+            d3.select("#chartSVG").html("");
+            self.chartPOPAGE = multibarHM(self.latest.target.feature, "chartPOPAGE", self.chartPOPAGE);
         });
 
         //LEAFLET - DRAW

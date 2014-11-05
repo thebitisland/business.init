@@ -695,10 +695,9 @@ var updateIdealista = function(latitude, longitude, radius){
                 item += '</div>'
                 item += '</a>'
                 item += '</div></div>'
-
+                self.spinner_idealista.stop();
                 $('.owl-wrapper').append(item);
             }
-            self.spinner_idealista.stop();
         }, 
         error: function(){
             $('.owl-wrapper').html('<h4>The idealista API is not available</h4>');
