@@ -4,50 +4,54 @@ var twitter = function () {
 
     /*Variables*/
     var tweets = null;
-    var genericTweets = 'demo.json';
 
     /*Constructor*/
-    tw.init = function () {
-        /*Trigger class events*/
-        classEvents();
-    };
+    tw.init = function () {};
+
+    $.getJSON( "assets/js/demotw.js", function( json ) {
+        tweets = json.statuses;
+        $('#tweets').children().each(function(index, element){
+                $(element).find('h3').text(tweets[index].user.name);
+                $(element).find('p').text(tweets[index].text);
+                $(element).find('a').text('@' + tweets[index].user.screen_name);
+                $(element).find('a').attr('href','https://twitter.com/' + tweets[index].user.screen_name);
+        });
+        var text = ""
+        for(var i=0;i<15;i++){
+            text += tweets[i].text + " "
+        }
+        update_wordcloud(text.removeStopWords());
+    });
 
     /*Public Stuff*/
     tw.getTweets = function (tags) {
-        tags = [].concat(tags);
+        if (!(tags))
+            tags = 'madrid';
+        else
+            tags += ",madrid"
+
+        console.log("TAGG")
+        console.log(tags);
         $.ajax({
-            url: "/getTweets",
-            data: {
-                tags: tags
-            },
+            url: "/getTweets/" + tags,
             success: function(data) {
-                tweets = data;
+                tweets = JSON.parse(data);
+                console.log(tweets.length);
 
-                $.getJSON( "/assets/js/demotw.js", function( json ) {
-                    genericETweets = json;
-
-                    var finalTweets = tweets.statuses.concat(genericTweets.statuses);
-
-                    $('#tweets').children().each(function(index, element){
-                        $(element).find('h3').text(finalTweets[index].user.name);
-                        $(element).find('p').text(finalTweets[index].text);
-                        $(element).find('a').text('@' + finalTweets[index].user.screen_name);
-                        $(element).find('a').attr('href','https://twitter.com/' + finalTweets[index].user.screen_name);
-                    });
-
-                    var text = ""
-                    for(var i=0;i<15;i++){
-                        text += finalTweets[i].text + " "
-                    }
-                    update_wordcloud(text.removeStopWords());
-
+                $('#tweets').children().each(function(index, element){
+                        $(element).find('h3').text(tweets[index].user.name);
+                        $(element).find('p').text(tweets[index].text);
+                        $(element).find('a').text('@' + tweets[index].user.screen_name);
+                        $(element).find('a').attr('href','https://twitter.com/' + tweets[index].user.screen_name);
                 });
+
+                var text = ""
+                for(var i=0;i<15;i++){
+                    text += tweets[i].text + " "
+                }
+                update_wordcloud(text.removeStopWords());
             }
         });
-    };
-
-    /*Internal Stuff*/
-    var classEvents = function () {
     };
 
     return tw;

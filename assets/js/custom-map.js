@@ -184,12 +184,14 @@ function createHomepageOSM(_latitude,_longitude){
         addMarkers("assets/js/data/renfe.js", false, "blue", null);
         addMarkers("assets/js/data/metro.js", false, "blue", null);
         addMarkers("assets/js/data/bus.js", false, "blue", null);
+        addMarkers("assets/js/data/bicimad.js", false, "blue", null);
+
         self.metro = 1;
 
         self.map.on('zoomend', function(e) {
 
             if (self.map.getZoom() >= 14) {
-                for (var i = 0; i < 3; i++) {
+                for (var i = 0; i < 4; i++) {
                     if ($.inArray(''+i, self.transport_types) != -1)
                         self.map.addLayer(self.layers[i])
                     else
@@ -200,6 +202,7 @@ function createHomepageOSM(_latitude,_longitude){
                 self.map.removeLayer(self.layers[0]);
                 self.map.removeLayer(self.layers[1]);
                 self.map.removeLayer(self.layers[2]);
+                self.map.removeLayer(self.layers[3]);
                 self.metro = 0;
             }
         });
@@ -567,7 +570,7 @@ function createHomepageOSM(_latitude,_longitude){
             self.transportControl = L.DomUtil.create('div', 'info transport');
 
             self.transportControl.innerHTML = '<b>Public Transport</b> <b style="font-size:9px">(Only visible on closer zooms)</b><br>'
-            self.transportControl.innerHTML += '<form action="" onchange="self.getTransport()"><input type="checkbox" class="checkbox_transport" checked name="Metro" value="1"> Metro <img style="padding-bottom:2px" width="18px" src="./assets/img/metro.png"/>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" checked name="Renfe" value="0"> Renfe <img style="padding-bottom:4px" width="18px" src="./assets/img/cercanias.png"/>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" name="Bus" value="2"> Bus <i class="fa fa-bus"></i>'
+            self.transportControl.innerHTML += '<form action="" onchange="self.getTransport()"><input type="checkbox" class="checkbox_transport" checked name="Metro" value="1"> Metro <img style="padding-bottom:2px" width="18px" src="./assets/img/metro.png"/>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" checked name="Renfe" value="0"> Renfe <img style="padding-bottom:4px" width="18px" src="./assets/img/cercanias.png"/>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" name="Bicimad" value="2"> Bicimad <i class="fa fa-bicycle"></i>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" name="Bus" value="3">Bus <i class="fa fa-bus"></i>';
             self.transportControl.innerHTML += '</form>'
 
             return self.transportControl;
