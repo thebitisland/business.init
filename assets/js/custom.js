@@ -699,7 +699,7 @@ var updateIdealista = function(latitude, longitude, radius){
                 $('.owl-wrapper').append(item);
             }
             self.spinner_idealista.stop();
-        }, 
+        },
         error: function(){
             $('.owl-wrapper').html('<h4>The idealista API is not available</h4>');
             self.spinner_idealista.stop();
@@ -724,7 +724,7 @@ var loadFoursquareData = function(lat,lon,query,radius) {
     } else { // code for IE6, IE5
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
-    
+
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 
@@ -732,27 +732,28 @@ var loadFoursquareData = function(lat,lon,query,radius) {
             //var html_final = "</div><!-- /.row-->";
             var body = "";
             var picture_dimension="250x140"
-            var stars_5= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span></p>";         
+            var stars_5= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span></p>";
             var stars_4= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span></p>";
-            var stars_3= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
-            var stars_2= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
-            var stars_1= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";         
+            var stars_3= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";
+            var stars_2= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";
+            var stars_1= "<p><span class='glyphicon glyphicon-star'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span><span class='glyphicon glyphicon-star-empty'></span></p>";
             var jsonObj = JSON.parse(xmlhttp.responseText);
             var items = jsonObj.response.groups[0].items;
-            var items_length = jsonObj.response.groups[0].items.length; 
-            
+            var items_length = jsonObj.response.groups[0].items.length;
+
             console.log(jsonObj.response.groups[0].items);
             var total_iterations;
             var success = false;
-    
-            if (items_length > 16) {
-                total_iterations = 16;
+
+            if (items_length > 8) {
+                total_iterations = 8;
             } else {
                 total_iterations = items_length;
             }
             //console.log(jsonObj.response.groups[0].items.length);
+
             for (var i = 0; i < total_iterations; i++) {
-    
+
                 var venues = jsonObj.response.groups[0].items[i].venue;
                 ///var tips= jsonObj.response.groups[0].items[i].tips;
                 //console.log(venues);
@@ -763,22 +764,23 @@ var loadFoursquareData = function(lat,lon,query,radius) {
                 var rating = venues.rating;
                 var name = venues.name;
                 var group_items=venues.photos.groups;
+
                 //console.log(group_items);
                 if($.isArray(group_items) && group_items.length > 0){
-    
+
                    var photo_suffix= venues.photos.groups[0].items[0].suffix;
                    var photo_prefix = "https://irs2.4sqi.net/img/general/";
                    var photo = photo_prefix+picture_dimension+photo_suffix;
-            
+
                    //console.log(photo);
                    //console.log(tips);
                    //console.log(location);
                    if(rating){
-                     self.ratings.push(rating);  
-                   } 
+                     self.ratings.push(rating);
+                   }
                    var reference = "http://foursquare.com/v/"+id;
                    var stars_rating;
-            
+
                    if (rating == 10) {
                        stars_rating = stars_5;
                    } else if (rating >= 8 && rating < 10) {
@@ -790,16 +792,20 @@ var loadFoursquareData = function(lat,lon,query,radius) {
                    } else {
                        stars_rating = stars_1;
                    }
-            
-                   body += "<div class='col-md-3 col-sm-6'><div class='property'><a href="+reference+" target='blank'><div class='property-image'><img alt=''src="+photo+"></div><div class='overlay'><div class='info'><h3>"+name+"</h3><div class='tag price'>"+stars_rating+"</div><figure>"+address+"</figure></div></div></a></div><!-- /.property --></div><!-- /.col-md-3 -->";
+
+                   body += "<div class='col-xs-6' style='margin-bottom:10px;'><div class='property'><a href="+reference+" target='blank'><div class='property-image'><img alt=''src="+photo+"></div><div class='overlay'><div class='info'><h3>"+name+"</h3><div class='tag price'>"+stars_rating+"</div><figure>"+address+"</figure></div></div></a></div><!-- /.property --></div><!-- /.col-xs-6 -->";
                     success = true
-                }   
+                }
+
             }
+
+
+
 
             //var final_html= html_intro + body + html_final;
             //console.log(final_html);
             //console.log(self.ratings);
-    
+
             if(!success)
                 body = "<p>No results available in the area =(</p>"
 
@@ -814,15 +820,15 @@ var loadFoursquareData = function(lat,lon,query,radius) {
 function update_wordcloud(text){
     var s = text.split(' '),
         countDict = {}, wordList = [];
-    
+
     for (var i=s.length; i--;) {
         countDict[s[i]] = (s[i] in countDict) ? countDict[s[i]]+1 : 1;
     }
-    
+
     for (word in countDict) {
         wordList.push(word)
     }
-    
+
     d3.layout.cloud().size([600, 300])
         .words(wordList.map(function(d) {
           return {text: d, size: 10 + countDict[d]/10 * 90};
@@ -869,10 +875,10 @@ var searchPlace = function(query, _callback) {
     } else { // code for IE6, IE5
         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
-    
+
     xmlhttp.onreadystatechange=function() {
         if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-            
+
             var jsonObj = JSON.parse(xmlhttp.responseText);
             var items = jsonObj[0];
 
@@ -881,7 +887,7 @@ var searchPlace = function(query, _callback) {
             //console.log(lon);
             //console.log(lat);
             _callback();
-          
+
         }
     }
     xmlhttp.open("GET",url,true);
@@ -934,7 +940,7 @@ var getSearch = function(){
             }
 
 
-        }); 
+        });
 
     } else {
         toastr["error"]("Search Box cannot be empty!", "")
@@ -1194,17 +1200,17 @@ String.prototype.removeStopWords = function() {
 
     // Split out all the individual words in the phrase
     words = cleansed_string.match(/[^\s]+|\s+[^\s+]$/g)
- 
+
     // Review all the words
     for(x=0; x < words.length; x++) {
         // For each word, check all the stop words
         for(y=0; y < stop_words.length; y++) {
             // Get the current word
             word = words[x].replace(/\s+|[^a-z]+/ig, "");   // Trim the word and remove non-alpha
-             
+
             // Get the stop word
             stop_word = stop_words[y];
-             
+
             // If the word matches the stop word, remove it from the keywords
             if(word.toLowerCase() == stop_word) {
                 // Build the regex
@@ -1213,7 +1219,7 @@ String.prototype.removeStopWords = function() {
                 regex_str += "|\\s+"+stop_word+"\\s*$";     // Last word
                 regex_str += "|\\s+"+stop_word+"\\s+";      // Word somewhere in the middle
                 regex = new RegExp(regex_str, "ig");
-             
+
                 // Remove the word from the keywords
                 cleansed_string = cleansed_string.replace(regex, " ");
             }
