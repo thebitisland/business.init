@@ -7,26 +7,15 @@ angular.module('bussinesInit', ['ngRoute'])
      $scope.$location = $location;
      $scope.$routeParams = $routeParams;
  })
-
- .controller('BookController', function($scope, $routeParams) {
-     $scope.name = "BookController";
-     $scope.params = $routeParams;
- })
-
- .controller('ChapterController', function($scope, $routeParams) {
-     $scope.name = "ChapterController";
-     $scope.params = $routeParams;
- })
-
+ 
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
    .when('/index', {
     templateUrl: 'index.html',
-    controller: 'BookController'
+    controller: 'MainController'
   })
   .when('/about', {
-    templateUrl: 'about.html',
-    controller: 'ChapterController'
+    templateUrl: 'about.html'
   });
 
   // configure html5 to get links working on jsfiddle
