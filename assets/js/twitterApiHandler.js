@@ -16,6 +16,10 @@ var twitter = function () {
                 $(element).find('a').text('@' + tweets[index].user.screen_name);
                 $(element).find('a').attr('href','https://twitter.com/' + tweets[index].user.screen_name);
         });
+        var text = ""
+        for(var i=0;i<15;i++){
+            text += tweets[i].text + " "
+        }
         update_wordcloud(text.removeStopWords());
     });
 
