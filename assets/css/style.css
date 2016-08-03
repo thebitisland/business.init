@@ -559,7 +559,7 @@ ul.list-links li a:hover {
   background-color: #fff;
   color: #073855;
   position: absolute;
-  right: 180px;
+  /*right: 180px;*/
   top: 69px;
   width: 38px;
 }
@@ -1402,6 +1402,7 @@ ul.list-links li a:hover {
 
 .featured-properties {
   padding-bottom: 0;
+  width:100% !important;
   /*padding-top: 40px;*/
 }
 
@@ -3213,9 +3214,8 @@ ul.list-links li a:hover {
 }
 
 #map {
-  width: 100%;
-   margin-top:265px;
-  height: 600px;
+  /*margin-top:265px;*/
+  height: 100%;
 }
 
 #contact-map {
@@ -5887,8 +5887,8 @@ margin-top: -5px;
   border-radius: 100px !important;
   margin-right: 5px;
 }
-.our-process-item h3 {
-  font-size: 20px;
+.our-process-item h4 {
+  font-size: 16px;
   font-weight: bold;
   display: inline;
   position: relative;
@@ -5899,13 +5899,13 @@ margin-top: -5px;
 }
 
 .our-process img{
-  width: 300px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   padding: 10px;
 }
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: @screen-sm-min) { 
+@media (min-width: @screen-sm-min) {
   #map{
     height: 480px;
   }
