@@ -846,7 +846,7 @@ var fill = d3.scale.category20();
 function cloud_draw(words) {
   d3.select("#wordcloud_twitter").html("")
   d3.select("#wordcloud_twitter").append("svg")
-      .attr("width", 600)
+      .attr("width", document.getElementById("wordcloud_twitter").offsetWidth -10)
       .attr("height", 300)
       .style("display","block")
       .style("margin","auto")

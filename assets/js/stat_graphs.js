@@ -45,9 +45,11 @@ function getCHValues(feature){
 
 var drawCHgraps = function(feature){
 
+    var totalW = document.getElementById("sexRatio").offsetWidth;
+
     var
     margin = { t : 20, r : 40, b : 20, l : 40 },
-    w = 600 - margin.l - margin.r,
+    w = totalW - margin.l - margin.r,
     h = 400 - margin.t - margin.b,
     forceW = w - 300;
     
@@ -68,7 +70,7 @@ var drawCHgraps = function(feature){
         });
     
     var sexControls = d3.select('#sexRatio').append('div')
-        .attr('width', 250)
+        .style('max-width', totalW/2 + "px")
         .attr('class', 'sexControls')
         .html('<h2>View statistics for:</h2>');
     
