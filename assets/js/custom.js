@@ -829,7 +829,7 @@ function update_wordcloud(text){
         wordList.push(word)
     }
 
-    d3.layout.cloud().size([600, 300])
+    d3.layout.cloud().size([document.getElementById("wordcloud_twitter").offsetWidth - 30, 300])
         .words(wordList.map(function(d) {
           return {text: d, size: 10 + countDict[d]/10 * 90};
         }))
@@ -846,12 +846,12 @@ var fill = d3.scale.category20();
 function cloud_draw(words) {
   d3.select("#wordcloud_twitter").html("")
   d3.select("#wordcloud_twitter").append("svg")
-      .attr("width", document.getElementById("wordcloud_twitter").offsetWidth -10)
+      .attr("width", document.getElementById("wordcloud_twitter").offsetWidth - 30)
       .attr("height", 300)
       .style("display","block")
       .style("margin","auto")
     .append("g")
-      .attr("transform", "translate(300,150)")
+      .attr("transform", "translate(" + (document.getElementById("wordcloud_twitter").offsetWidth - 30)/2 + ",150)")
     .selectAll("text")
       .data(words)
     .enter().append("text")

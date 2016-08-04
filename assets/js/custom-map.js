@@ -371,16 +371,16 @@ function createHomepageOSM(_latitude,_longitude){
         function clickOnDistrit(e) {
 
             //Resize container
-            $("#close-button").slideDown( 1000 );
-            $("#map-container").animate({width: '41.66666667%'});
-            $("#main-content").animate({width: '58.33333333%'});
+            //$("#close-button").slideDown( 1000 );
+            //$("#map-container").animate({width: '41.66666667%'});
+            //$("#main-content").animate({width: '58.33333333%'});
 
             $('#noStats').css("display","none");
             $('#stats').css("display","block");
 
-            $('#main-content').animate({
-            scrollTop: $("#form-map").height()},
-            'slow');
+            //$('#main-content').animate({
+            //scrollTop: $("#form-map").height()},
+            //'slow');
 
             d3.select("#district_text").html("Estas son algunas estadísticas acerca de la población del distrito "+"<font color='#388DC3'><b>" + e.target.feature.properties.DESBDT.split(" ").slice(1).join(' ') + "</b></font>")
 
