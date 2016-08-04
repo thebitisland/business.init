@@ -338,15 +338,13 @@ function createHomepageOSM(_latitude,_longitude){
             });
 
             if (self.heatmap==0){
-                minRange = '#ff0';//'#ff0';
-                midRange = '#FF8000';//''
-                maxRange = '#F00';//'#F00';
+                minRange = '#F8BBD0';//'#ff0';
+                maxRange = '#FF4081';//'#F00';
             } else {
-                minRange = '#0f0';
-                midRange = '#008080'
-                maxRange = '#00f';
+                minRange = '#F8BBD0';
+                maxRange = '#673AB7';
             }
-            self.color_scale = d3.scale.linear().domain([self.min, (self.max+self.min)/2, self.max]).range([minRange, midRange, maxRange]).clamp(true);
+            self.color_scale = d3.scale.linear().domain([self.min, self.max]).range([minRange, maxRange]).clamp(true);
         }
 
         function styleCloropleth(feature) {

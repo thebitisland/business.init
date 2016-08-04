@@ -50,7 +50,7 @@ var drawCHgraps = function(feature){
     var
     margin = { t : 20, r : 40, b : 20, l : 40 },
     w = totalW - margin.l - margin.r,
-    h = 400 - margin.t - margin.b,
+    h = 350 - margin.t - margin.b,
     forceW = w - 300;
 
     var data,icon1,icon2;
@@ -65,7 +65,7 @@ var drawCHgraps = function(feature){
         .attr('id', 'CHgraph')
     .append('g')
         .attr({
-            transform: 'translate(300,' + -margin.b + ')',
+            transform: 'translate(300, 0)',
             class: 'sexGroup'
         });
 
@@ -91,13 +91,12 @@ var drawCHgraps = function(feature){
         .selectAll('li')
         .data(data)
     .enter().append('li')
+        .attr('class', 'countryLink')
+        .append('a')
         .attr('class', function (d) {
             if (d.measure == 'Nationality')
-                return 'countryLink clicked'
-            else
-                return 'countryLink'
+                return 'clicked'
         })
-        .append('a')
         .style('cursor', 'pointer')
         .on('click', function (d) {
             d3.selectAll('.countryLink a').classed('clicked', false);

@@ -701,7 +701,7 @@ var updateIdealista = function(latitude, longitude, radius){
             self.spinner_idealista.stop();
         },
         error: function(){
-            $('.owl-wrapper').html('<h4>The idealista API is not available</h4>');
+            $('.owl-wrapper').html('<h4>La API de Idealista no está disponible ahora mismo, inténtelo de nuevo más tarde</h4>');
             self.spinner_idealista.stop();
         }
     });

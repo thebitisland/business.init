@@ -66,7 +66,7 @@ div.chart li {
 /*sex ratios*/
 div#sexRatio {
     width: 100%;
-    margin: 35px auto;
+    margin: 35px auto 0 auto;
     position: relative;
 }
 
@@ -89,22 +89,22 @@ div.sexCountries, div.sexLegend {
 
 path.girlPath {
     stroke: none;
-    fill: orange;
+    fill: #9C27B0;
 }
 
 path.boyPath {
     stroke: none;
-    fill: #B83834;
+    fill: #7C4DFF;
 }
 
 path.icon2 {
     stroke: none;
-    fill: orange;
+    fill: #9C27B0;
 }
 
 path.icon1 {
     stroke: none;
-    fill: #B83834;
+    fill: #7C4DFF;
 }
 
 path.missingPath {
@@ -142,7 +142,7 @@ ul.countries li {
     margin: 0;
     padding: 0;
 }
-ul.countries li.clicked a {
+ul.countries li a.clicked {
     color: #E5ABA9;
 }
 
