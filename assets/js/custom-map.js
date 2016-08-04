@@ -382,7 +382,7 @@ function createHomepageOSM(_latitude,_longitude){
             scrollTop: $("#form-map").height()},
             'slow');
 
-            d3.select("#district_text").html("Here are some statistics about the population of the district "+"<font color='#388DC3'><b>" + e.target.feature.properties.DESBDT.split(" ").slice(1).join(' ') + "</b></font>")
+            d3.select("#district_text").html("Estas son algunas estadísticas acerca de la población del distrito "+"<font color='#388DC3'><b>" + e.target.feature.properties.DESBDT.split(" ").slice(1).join(' ') + "</b></font>")
 
             d3.select("#sexRatio").html("");
             drawCHgraps(e.target.feature);
@@ -475,23 +475,23 @@ function createHomepageOSM(_latitude,_longitude){
         self.cloro_control.onAdd = function (map) {
             self.cloroplethControl = L.DomUtil.create('div', 'cloroplethControl'); // create a div with a class "info"
             var myhtml = ''
-            myhtml += '<h5>Map controls</h5>'
-            myhtml += '<div class="form-group control-form"><b>Show:</b> '
+            myhtml += '<h5>Controles del mapa</h5>'
+            myhtml += '<div class="form-group control-form"><b>Mostrar:</b> '
             myhtml += '  <select name="district" id="cloro_type">'
-            myhtml += '    <option value="1">Population</option>'
-            myhtml += '    <option value="2">Income</option>'
+            myhtml += '    <option value="1">Población</option>'
+            myhtml += '    <option value="2">Renta</option>'
             myhtml += '  </select>'
             myhtml += '</div>'
 
             self.htmlPop = '<div class="populationSelector">'
             self.htmlPop += '<form action="" onchange="self.getSelector()">'
-            self.htmlPop += '<input type="checkbox" class="checkbox_genre" checked name="women" value="mujer"> Women <i style="color:#ff69b4;" class="fa fa-female"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
-            self.htmlPop += '<input type="checkbox" class="checkbox_genre" checked name="men" value="hombre"> Men <i style="color:#1e90ff;" class="fa fa-male"></i><br>'
-            self.htmlPop += '<input type="checkbox" class="checkbox_country" checked name="nationals" value="ES"> Nationals <i style="color:#f00;" class="fa fa-flag-o"></i>&nbsp;&nbsp;&nbsp;'
-            self.htmlPop += '<input type="checkbox" class="checkbox_country" checked name="Foreigners" value="EX"> Foreigners <i style="color:#000;" class="fa fa-compass"></i><br>'
+            self.htmlPop += '<input type="checkbox" class="checkbox_genre" checked name="women" value="mujer"> Mujeres <i style="color:#ff69b4;" class="fa fa-female"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+            self.htmlPop += '<input type="checkbox" class="checkbox_genre" checked name="men" value="hombre"> Hombres <i style="color:#1e90ff;" class="fa fa-male"></i><br>'
+            self.htmlPop += '<input type="checkbox" class="checkbox_country" checked name="nationals" value="ES"> Nacionales <i style="color:#f00;" class="fa fa-flag-o"></i>&nbsp;&nbsp;&nbsp;'
+            self.htmlPop += '<input type="checkbox" class="checkbox_country" checked name="Foreigners" value="EX"> Extranjeros <i style="color:#000;" class="fa fa-compass"></i><br>'
             self.htmlPop += '</form>'
             self.htmlPop += '<div class="form-group">'
-            self.htmlPop += '<h4><b>Age range:</b></h4>'
+            self.htmlPop += '<h4><b>Rango de edad:</b></h4>'
             self.htmlPop += '    <div class="price-range" onmouseup="self.onSliderChanged()">'
             self.htmlPop += '        <input id="age-input" type="text" name="price" value="0;120">'
             self.htmlPop += '    </div>'
@@ -499,8 +499,8 @@ function createHomepageOSM(_latitude,_longitude){
             self.htmlPop +='</div>'
 
             self.htmlInfo = '<div class="info">'
-            self.htmlInfo += '  <h4>Population per district</h4>'
-            self.htmlInfo += '  Hover over a region to <br>see more info'
+            self.htmlInfo += '  <h4>Población por distrito</h4>'
+            self.htmlInfo += '  Pon el ratón encima de una región para<br>obtener más info'
             self.htmlInfo += '</div>';
 
             self.cloroplethControl.innerHTML = myhtml + self.htmlInfo + self.htmlPop;
@@ -522,16 +522,16 @@ function createHomepageOSM(_latitude,_longitude){
         self.infoUpdate = function (props) {
             var info1, info2;
             if (self.heatmap == 0){
-                info1 = "Population"
+                info1 = "Población"
                 info2 = "people"
             } else {
-                info1 = "Mean income"
+                info1 = "Renta media"
                 info2 = "€/year"
             }
 
-            self.htmlInfo = '<h4>' + info1 + ' per district</h4>' +  (props ?
-                'District: <b>' + props.properties.DESBDT.split(" ").slice(1).join(' ') + '</b><br />' + getValue(props) + ' ' + info2
-                : 'Hover over a region to <br>see more info');
+            self.htmlInfo = '<h4>' + info1 + ' por distrito</h4>' +  (props ?
+                'Distrito: <b>' + props.properties.DESBDT.split(" ").slice(1).join(' ') + '</b><br />' + getValue(props) + ' ' + info2
+                : 'Pon el ratón encima de una región para<br>obtener más info');
 
             d3.select('.info').html(self.htmlInfo);
         };
@@ -579,7 +579,7 @@ function createHomepageOSM(_latitude,_longitude){
         self.transport.onAdd = function (map) {
             self.transportControl = L.DomUtil.create('div', 'info transport');
 
-            self.transportControl.innerHTML = '<b>Public Transport</b> <b style="font-size:9px">(Only visible on closer zooms)</b><br>'
+            self.transportControl.innerHTML = '<b>Transporte público</b> <b style="font-size:9px">(Solo visible con zooms cercanos)</b><br>'
             self.transportControl.innerHTML += '<form action="" onchange="self.getTransport()"><input type="checkbox" class="checkbox_transport" checked name="Metro" value="1"> Metro <img style="padding-bottom:2px" width="18px" src="./assets/img/metro.png"/>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" checked name="Renfe" value="0"> Renfe <img style="padding-bottom:4px" width="18px" src="./assets/img/cercanias.png"/>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" name="Bicimad" value="2"> Bicimad <i class="fa fa-bicycle"></i>&nbsp;&nbsp;<input type="checkbox" class="checkbox_transport" name="Bus" value="3">Bus <i class="fa fa-bus"></i>';
             self.transportControl.innerHTML += '</form>'
 
@@ -622,7 +622,7 @@ function createHomepageOSM(_latitude,_longitude){
         self.map.addControl(drawControl);
 
         d3.select(".leaflet-top.leaflet-left").append("div")
-            .html("Click to add circle")
+            .html("Haz click para dibujar un círculo")
             .attr("class", "help_circle")
 
         self.map.on('draw:created', function (e) {

@@ -44,7 +44,7 @@
 			<div class="row max-height">
 				<div id="map-container" class="col-xs-7 max-height">
 					<div class="geo-location-wrapper">
-						<span class="btn geo-location"><i class="fa fa-map-marker"></i><span class="text">Find My Position</span></span>
+						<span class="btn geo-location"><i class="fa fa-map-marker"></i><span class="text">Buscar mi posición</span></span>
 					</div>
 					<!-- Map -->
 					<div id="map" class="has-parallax leaflet-container leaflet-fade-anim max-height " tabindex="0" style=""></div>
@@ -56,15 +56,15 @@
 
 					<div class="search-box map">
 						<div id="form-map" class="form-map form-search">
-							<h2>What do <b>you</b> want?</h2>
+							<h2>¿Qué andas<b> buscando</b> ?</h2>
 							<div class="form-group">
 								<select name="property-type" id="bus_type">
-									<option value="0">Business type</option>
-									<option value="1">Book store</option>
+									<option value="0">Tipo de negocio</option>
+									<option value="1">Libreria</option>
 									<option value="2">Nursery</option>
-									<option value="3">Gymnasium</option>
-									<option value="4">Language School</option>
-									<option value="5">Shoeshop</option>
+									<option value="3">Gym</option>
+									<option value="4">Academia de idiomas</option>
+									<option value="5">Zapateria</option>
 									<option value="6">Mercadona</option>
 									<option value="7">Burguer King</option>
 								</select>
@@ -75,9 +75,9 @@
 							</div>
 							<div class="form-group">
 								<select name="type" id="property_status">
-									<option value="">Property status</option>
-									<option value="1">Rent</option>
-									<option value="2">Sale</option>
+									<option value="">Estado propiedad</option>
+									<option value="1">Alquiler</option>
+									<option value="2">Venta</option>
 								</select>
 							</div>
 							<!-- /.form-group -->
@@ -87,7 +87,7 @@
 								</div>
 								</div>-->
 							<div class="form-group">
-								<button onclick="getSearch()" class="btn btn-default">Search Now</button>
+								<button onclick="getSearch()" class="btn btn-default">Buscar</button>
 							</div>
 							<!-- /.form-group -->
 						</div>
@@ -100,16 +100,16 @@
 					<section id="statSection">
 						<div>
 							<header class="section-title">
-								<h2>District statistics</h2>
+								<h2>Estadísticas del distrito</h2>
 							</header>
 						</div>
 						<!-- /.container-->
 						<div id="noStats">
-							<p>Click on a district to see statistics about its population.</p>
+							<p>Haz click en un distrito para ver las estadísticas acerca de su población o renta.</p>
 						</div>
 						<!-- /.container-->
 						<div id="stats">
-							<p id="district_text">Here are some statistics about the population of the distrit you've selected</p>
+							<p id="district_text">Aquí tienes algunas estadísticas sobre el distrito que has seleccionado.</p>
 							<div class="row">
 								<div class="col-xs-12" id="chartPOPAGE">
 									<svg id="chartSVG"></svg>
@@ -131,7 +131,7 @@
 						<!-- /.container -->
 						<div class="" id="noIdealista">
 							<!--<h3>Choose a location</h3>-->
-							<p>Use the circle feature to draw a range on the map, write a location on the search box and click "Search now" or simply click on the map to see data form Idealista on available spots where you could deploy your business!.</p>
+							<p>Usa el círculo para seleccionar un rango en el mapa o escribe una localización en el campo de búsqueda y haz click en "Buscar" o simplemente haz click en el mapa para ver la información de Idealista acerca de locales disponibles donde podrás empezar tu negocio!!</p>
 						</div>
 						<!-- /.container-->
 						<div class="owl-carousel featured-properties-carousel" id="Idealista">
@@ -339,7 +339,7 @@
 					<section id="new-properties" class="block">
 						<div class="">
 							<header class="section-title">
-								<h2>Competition</h2>
+								<h2>Competidores</h2>
 							</header>
 						</div>
 						<!-- /.container-->
@@ -351,9 +351,9 @@
 										<div class="our-process-item">
 											<a href="#"><span class="br-lblue">1</span></a>
 											<!-- Header -->
-											<h4>Select your business</h4>
+											<h4>Selecciona tu negocio</h4>
 											<!-- Paragraph -->
-											<p>Choose from a range of business types in the selector.</p>
+											<p>Elige uno del rango de negocios especificados en el combo de arriba.</p>
 										</div>
 									</div>
 									<div class="col-md-7 col-sm-6">
@@ -365,8 +365,8 @@
 									<div class="col-md-5 col-sm-6">
 										<div class="our-process-item">
 											<a href="#"> <span class="br-lblue ">2</span></a>
-											<h4>Choose a location</h4>
-											<p>Use the circle feature to draw a range on the map, write a location on the search box and click "Search now" or simply click on the map.</p>
+											<h4>Elige una localización</h4>
+										<p>Utiliza el circulo del mapa para seleccionar un rango, escribe una localización en el campo de búsqueda de arriba y haz click en "Buscar" o simplemente haz click en el mapa.</p>
 										</div>
 									</div>
 									<div class="col-md-7 col-sm-6">
@@ -378,8 +378,8 @@
 									<div class="col-md-5 col-sm-6">
 										<div class="our-process-item">
 											<a href="#"> <span class="br-lblue ">3</span></a>
-											<h4>Get the info</h4>
-											<p>Get info about related business in the area selected.</p>
+											<h4>Obtén la información</h4>
+											<p>Obtén información acerca de negocios locales relacionados en el area seleccionada.</p>
 										</div>
 									</div>
 									<div class="col-md-7 col-sm-6">
@@ -398,7 +398,7 @@
 					<section id="our-services" class="block" style="margin-top:10px;">
 						<div class="">
 							<header class="section-title">
-								<h2>Related Tweets nearby</h2>
+								<h2>Tweets relacionados</h2>
 							</header>
 							<div class="row" id="tweets">
 								<div class="col-xs-12" style="margin-bottom: 10px;">
@@ -453,7 +453,7 @@
 					<section id="start" class="block">
 						<div class="">
 							<header class="section-title">
-								<h2>Start a business</h2>
+								<h2>Empieza un negocio</h2>
 							</header>
 							<p>To register as a self-employed professional in Spain, you have three options: make arrangements in person by going to the IRS and Social Security Office, go to a PAE (Help desks for Entrepreneurs) or do it directly via internet.</p>
 							<div class="row">
@@ -495,7 +495,7 @@
 										<div class="accordion-group">
 											<div class="accordion-heading">
 												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-												Other proceedings
+												Otros procedimientos
 												</a>
 											</div>
 											<div id="collapseThree" class="accordion-body collapse in">
@@ -513,12 +513,12 @@
 								<!-- /.row -->
 							</div>
 							<!-- /.container -->
-							<p>You can see more information on the <a href="http://www.ventanillaempresarial.org/" target="_blank">oficial guide-page for enterpreneurs</a></p>
+							<p>Puedes obtener más información en la <a href="http://www.ventanillaempresarial.org/" target="_blank">guía oficial para emprendedores.</a></p>
 					</section>
 					<!-- /#our-services -->
 					<section id="partners">
 					<div class="">
-					<header class="section-title"><h2>Our Partners</h2></header>
+					<header class="section-title"><h2>Nuestros colaboradores</h2></header>
 					<div class="logos">
 					<div style="margin-left:12px;margin-right:12px" class="logo col-md-2 col-sm-2"><a href=""><img width="100%" src="assets/img/partners/madrid_emprende.png" alt=""></a></div>
 					<div style="margin-left:12px;margin-right:12px" class="logo col-md-2 col-sm-2"><a href=""><img width="100%" src="assets/img/partners/emt_alargado.gif" alt=""></a></div>
@@ -583,14 +583,6 @@
 			    //updateIdealista(window._latitude, window._longitude, 0.001);
 
 					$(function(){
-						$("#map-container").on('click', function() {
-							$("#close-button").slideDown( 1000 );
-							$('#noStats').fadeIn( "slow" );
-			          $('#stats').fadeOut( "slow" );
-							$("#map-container").animate({width: '41.66666667%'});
-							$("#main-content").animate({width: '58.33333333%'});
-						});
-
 						$("#close-button").on('click', function() {
 								$("#close-button").slideUp( 1000 );
 							$("#main-content").animate({width: '41.66666667%'});
