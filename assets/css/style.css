@@ -6009,3 +6009,15 @@ body, html {
 .leaflet-control-attribution {
   font-size: 8px !important;
 }
+
+.leaflet-map-pane path {
+    stroke: black;
+    stroke-dasharray: 0;
+    stroke-width: 1;
+    stroke-opacity: 10;
+    fill-opacity: 0.5;
+    transform: translate3d(-4px, 7px, 0px);
+}
+.leaflet-map-pane path:hover {
+    fill-opacity: 0.8;
+}

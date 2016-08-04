@@ -37,7 +37,24 @@ function createHomepageOSM(_latitude,_longitude){
         //    attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
         //})
         // replace "toner" here with "terrain" or "watercolor"
-        new L.StamenTileLayer("toner-lite").addTo(self.map)
+        new L.StamenTileLayer("toner").addTo(self.map)
+
+        self.map.on('zoomend', function() {
+            console.log("HEY")
+            var zoom = self.map.getZoom(),
+                x = -4 * (zoom-12) * 2,
+                y = 7 * (zoom-12) * 2;
+
+            if (zoom == 12){
+                x = -4;
+                y = 7;
+            } else if(zoom <12){
+                x=-4 / ((12-zoom) * 2);
+                y=7 / ((12-zoom)* 2);
+            }
+
+            $(".leaflet-map-pane path").css("transform", "translate3d(" + x + "px, " + y + "px, 0px)");
+        });
 
 
         var opts = {
