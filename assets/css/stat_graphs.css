@@ -142,6 +142,10 @@ ul.countries li {
     margin: 0;
     padding: 0;
 }
+ul.countries li.clicked a {
+    color: #E5ABA9;
+}
+
 
 #chartPOPAGE {
   height: 400px;

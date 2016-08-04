@@ -6002,7 +6002,7 @@ body, html {
    line-height: 44px;
 }
 
-.leaflet-top.leaflet-right{
+.leaflet-top.leaflet-right, .leaflet-bottom.leaflet-right{
   zoom: 0.9;
 }
 
