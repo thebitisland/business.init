@@ -23,14 +23,18 @@
 		<script type="text/javascript" src="js/vendor/angular-route.js"></script>
 		<script type="text/javascript" src="js/vendor/app.js"></script>
 		<title>Business.init()</title>
+		<style>
+		#Intro {
+		 top: 0;
+		 position: fixed;
+		 background-color: red;
+		 height: 40px;
+		 width: 100%;
+	 }
+		</style>
 	</head>
 	<body class="page-homepage navigation-fixed-top  map-osm" id="page-top" data-spy="scroll" data-target=".navigation" data-offset="90">
 		<!-- Wrapper -->
-		<div class="container">
-			<div class="geo-location-wrapper">
-				<span class="btn geo-location"><i class="fa fa-map-marker"></i><span class="text">Find My Position</span></span>
-			</div>
-		</div>
 		<div class="fixed-action-btn" id="close-button">
 			<a class="action-towernav-toggle btn-floating btn-large green">
 			<i class="large mdi-navigation-menu fa fa-times"></i>
@@ -39,67 +43,60 @@
 		<div class="container-full max-height no-overflow">
 			<div class="row max-height">
 				<div id="map-container" class="col-xs-7 max-height">
+					<div class="geo-location-wrapper">
+						<span class="btn geo-location"><i class="fa fa-map-marker"></i><span class="text">Find My Position</span></span>
+					</div>
 					<!-- Map -->
 					<div id="map" class="has-parallax leaflet-container leaflet-fade-anim max-height " tabindex="0" style=""></div>
 					<!-- end Map -->
-					<!-- Search Box -->
-					<div class="search-box-wrapper">
-						<div class="search-box-inner">
-							<div class="container">
-								<div class="row">
-									<div class="col-md-3 col-sm-4">
-										<div class="search-box map">
-											<div id="form-map" class="form-map form-search">
-												<h2>What do <b>you</b> want?</h2>
-												<div class="form-group">
-													<select name="property-type" id="bus_type">
-														<option value="0">Business type</option>
-														<option value="1">Book store</option>
-														<option value="2">Nursery</option>
-														<option value="3">Gymnasium</option>
-														<option value="4">Language School</option>
-														<option value="5">Shoeshop</option>
-														<option value="6">Mercadona</option>
-														<option value="7">Burguer King</option>
-													</select>
-												</div>
-												<!-- /.form-group -->
-												<div class="form-group">
-													<input type="text" class="form-control" id="search-box-property-id" placeholder="Sol, Madrid">
-												</div>
-												<div class="form-group">
-													<select name="type" id="property_status">
-														<option value="">Property status</option>
-														<option value="1">Rent</option>
-														<option value="2">Sale</option>
-													</select>
-												</div>
-												<!-- /.form-group -->
-												<!--<div class="form-group">
-													<div class="price-range">
-															<input id="price-input" type="text" name="price" value="1000;299000">
-													</div>
-													</div>-->
-												<div class="form-group">
-													<button onclick="getSearch()" class="btn btn-default">Search Now</button>
-												</div>
-												<!-- /.form-group -->
-											</div>
-											<!-- /#form-map -->
-										</div>
-										<!-- /.search-box.map -->
-									</div>
-									<!-- /.col-md-3 -->
-								</div>
-								<!-- /.row -->
-							</div>
-							<!-- /.container -->
-						</div>
-						<!-- /.search-box-inner -->
-					</div>
-					<!-- end Search Box -->
 				</div>
 				<div id="main-content" class="col-xs-5 scrollable">
+					<div class="row">
+					<div class="col-xs-12">
+
+					<div class="search-box map">
+						<div id="form-map" class="form-map form-search">
+							<h2>What do <b>you</b> want?</h2>
+							<div class="form-group">
+								<select name="property-type" id="bus_type">
+									<option value="0">Business type</option>
+									<option value="1">Book store</option>
+									<option value="2">Nursery</option>
+									<option value="3">Gymnasium</option>
+									<option value="4">Language School</option>
+									<option value="5">Shoeshop</option>
+									<option value="6">Mercadona</option>
+									<option value="7">Burguer King</option>
+								</select>
+							</div>
+							<!-- /.form-group -->
+							<div class="form-group">
+								<input type="text" class="form-control" id="search-box-property-id" placeholder="Sol, Madrid">
+							</div>
+							<div class="form-group">
+								<select name="type" id="property_status">
+									<option value="">Property status</option>
+									<option value="1">Rent</option>
+									<option value="2">Sale</option>
+								</select>
+							</div>
+							<!-- /.form-group -->
+							<!--<div class="form-group">
+								<div class="price-range">
+										<input id="price-input" type="text" name="price" value="1000;299000">
+								</div>
+								</div>-->
+							<div class="form-group">
+								<button onclick="getSearch()" class="btn btn-default">Search Now</button>
+							</div>
+							<!-- /.form-group -->
+						</div>
+						<!-- /#form-map -->
+						</div>
+					</div>
+					<!-- /.search-box.map -->
+					</div>
+					<div id="content-margin">
 					<section id="statSection">
 						<div>
 							<header class="section-title">

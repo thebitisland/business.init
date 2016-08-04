@@ -378,6 +378,9 @@ function createHomepageOSM(_latitude,_longitude){
             $('#noStats').css("display","none");
             $('#stats').css("display","block");
 
+            $('#main-content').animate({
+            scrollTop: $("#form-map").height()},
+            'slow');
 
             d3.select("#district_text").html("Here are some statistics about the population of the district "+"<font color='#388DC3'><b>" + e.target.feature.properties.DESBDT.split(" ").slice(1).join(' ') + "</b></font>")
 
