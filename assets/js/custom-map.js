@@ -10,6 +10,27 @@ $.ajaxSetup({
 var self = {};
 self.layers = [];
 
+function fixZoom(){
+    
+        console.log("HEY")
+        var zoom = self.map.getZoom(),
+            x = -4 * (zoom-12) * 2,
+            y = 7 * (zoom-12) * 2;
+
+        if (zoom == 12){
+            x = -4;
+            y = 7;
+        } else if(zoom <12){
+            x=-4 / ((12-zoom) * 2);
+            y=7 / ((12-zoom)* 2);
+        } else if(zoom >= 15){
+            x = -4 * (zoom-12) * 2.7;
+            y = 7 * (zoom-12) * 2.7;
+        }
+
+        $(".leaflet-map-pane path").css("transform", "translate3d(" + x + "px, " + y + "px, 0px)");
+}
+
 function createHomepageOSM(_latitude,_longitude){
     setMapHeight();
     if( document.getElementById('map') != null ){
@@ -29,6 +50,8 @@ function createHomepageOSM(_latitude,_longitude){
         self.map = L.map('map', {
             center: [_latitude,_longitude],
             zoom: 12,
+            maxZoom: 15,
+            minZoom: 10,
             scrollWheelZoom: true
         });
         //L.tileLayer('http://openmapsurfer.uni-hd.de/tiles/roadsg/x={x}&y={y}&z={z}', {
@@ -38,24 +61,9 @@ function createHomepageOSM(_latitude,_longitude){
         //})
         // replace "toner" here with "terrain" or "watercolor"
         new L.StamenTileLayer("toner").addTo(self.map)
-
         self.map.on('zoomend', function() {
-            console.log("HEY")
-            var zoom = self.map.getZoom(),
-                x = -4 * (zoom-12) * 2,
-                y = 7 * (zoom-12) * 2;
-
-            if (zoom == 12){
-                x = -4;
-                y = 7;
-            } else if(zoom <12){
-                x=-4 / ((12-zoom) * 2);
-                y=7 / ((12-zoom)* 2);
-            }
-
-            $(".leaflet-map-pane path").css("transform", "translate3d(" + x + "px, " + y + "px, 0px)");
+            fixZoom();
         });
-
 
         var opts = {
           lines: 9, // The number of lines to draw
@@ -330,13 +338,15 @@ function createHomepageOSM(_latitude,_longitude){
             });
 
             if (self.heatmap==0){
-                minRange = '#ff0';
-                maxRange = '#F00';
+                minRange = '#ff0';//'#ff0';
+                midRange = '#FF8000';//''
+                maxRange = '#F00';//'#F00';
             } else {
-                minRange = '#21F600';
-                maxRange = '#1B1BF0';
+                minRange = '#0f0';
+                midRange = '#008080'
+                maxRange = '#00f';
             }
-            self.color_scale = d3.scale.linear().domain([self.min,self.max]).range([minRange, maxRange]).clamp(true);
+            self.color_scale = d3.scale.linear().domain([self.min, (self.max+self.min)/2, self.max]).range([minRange, midRange, maxRange]).clamp(true);
         }
 
         function styleCloropleth(feature) {
@@ -614,6 +624,8 @@ function createHomepageOSM(_latitude,_longitude){
 
             self.heatmap = $(this).val()-1
             loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth, false);
+
+            fixZoom();
         });
 
         // CHOROPLETH

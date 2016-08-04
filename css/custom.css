@@ -12,7 +12,7 @@
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
     background: white;
-    background: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,1);
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     border-radius: 5px;
     min-width: 250px;
@@ -44,18 +44,20 @@
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
     background: white;
-    background: rgba(255,255,255,0.6);
+    width: 280px;
+    background: rgba(255,255,255,0.95);
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     border-radius: 5px;
 }
 
 .cloroplethControl:hover {
-    background: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,1);
 }
 
 .cloroplethControl h5 {
     text-align: center;
     font: 16px/18px Arial, Helvetica, sans-serif;
+    color: #673AB7;
 }
 
 .control-form {

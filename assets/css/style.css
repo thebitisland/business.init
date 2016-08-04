@@ -558,16 +558,16 @@ ul.list-links li a:hover {
 }
 .geo-location-wrapper .btn {
   background-color: #fff;
-  color: #073855;
+  color: #512DA8;
   position: absolute;
-  left: 42px;
+  right: 295px;
   top: 10px;
   width: 38px;
   border-radius:4px;
 }
 .geo-location-wrapper .btn:hover {
   background-color: #fff;
-  color: #1396e2;
+  color: #FF4081;
 }
 .geo-location-wrapper .fa {
   font-size: 20px;
@@ -582,7 +582,7 @@ ul.list-links li a:hover {
   -webkit-transition: 0.4s;
   transition: 0.4s;
   color: #fff;
-  background-color: #073855;
+  background-color: #512DA8;
   padding: 10px;
   position: absolute;
   right: 40px;
@@ -4170,6 +4170,9 @@ form label.error:before {
 .search-box h2 {
   border: none;
   padding-bottom: 0;
+}
+.search-box h2 b {
+  color: #FF4081;
 }
 .search-box .btn {
   width: 100%;
