@@ -13,7 +13,7 @@ self.layers = [];
 function createHomepageOSM(_latitude,_longitude){
     setMapHeight();
     if( document.getElementById('map') != null ){
-        
+
         try{
             var map_height = parseInt(window.innerHeight * 0.70)
             if (map_height != 0 && map_height != NaN && map_height != null){
@@ -69,17 +69,17 @@ function createHomepageOSM(_latitude,_longitude){
         var addMarkers = function(file, cluster, color, name){
             var markers;
             $.getScript(file, function(){
-            
+
                 if (cluster == false)
                     var zoomLevelCluster = 1;
-                else 
+                else
                     var zoomLevelCluster = 13;
 
                 var iconCreateFunction = function (cluster) {
                     var childCount = cluster.getChildCount();
-            
+
                     var c = ' ';
-            
+
                     return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster ' + color + c, iconSize: new L.Point(40, 40) });
                 }
 
@@ -94,11 +94,11 @@ function createHomepageOSM(_latitude,_longitude){
                     if (cluster == true){
                         if ((file == "assets/js/data/locations_guarderia.js") || (file == "assets/js/data/locations_infantil.js" || (file == "assets/js/data/locations_zapato.js")))
                             mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:8px;" class="fa ' + locations[i][3] + '"></i>'
-                        else if ((file == "assets/js/data/locations_bking.js") || (file == "assets/js/data/locations_mcdonald.js")) 
+                        else if ((file == "assets/js/data/locations_bking.js") || (file == "assets/js/data/locations_mcdonald.js"))
                             mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:7px;" class="fa ' + locations[i][3] + '"></i>'
                         else
                             mHtml = '<i style="font-size:13px; padding-top:7px; padding-left:6px;" class="fa ' + locations[i][3] + '"></i>'
-                    } else {  
+                    } else {
                         if(locations[i][3]=="metro"){
                             mHtml = '<img style="padding-top:6px;" width="18px" src="./assets/img/metro.png"/>'
                         } else if (locations[i][3]=="renfe") {
@@ -151,7 +151,7 @@ function createHomepageOSM(_latitude,_longitude){
             for (var i = 3; i < self.layers.length; i++) {
                 self.map.removeLayer(self.layers[i]);
             }
-            
+
             if ($(this).val() == 1){
                 addMarkers("assets/js/data/locations_libreria.js", true, "red", "LIBRERÍA");
                 addMarkers("assets/js/data/locations_bibliotecas.js", true, "green", "BIBLIOTECA MUNICIPAL");
@@ -237,7 +237,7 @@ function createHomepageOSM(_latitude,_longitude){
         // LOCATE MYSELF
         // ----------
         //-------------------------------------------------------------------------------------
-        
+
 
         //-------------------------------------------------------------------------------------
         // ----------
@@ -279,14 +279,14 @@ function createHomepageOSM(_latitude,_longitude){
             if((val[0] != self.minAge) || (val[1] != self.maxAge)) {
                 self.minAge = val[0];
                 self.maxAge = val[1];
-                self.getSelector()   
+                self.getSelector()
             }
         }
 
         function getValue(feature){
             if (self.heatmap == 0){
                 var population = 0;
-                
+
                 for (var key in feature.properties.population) {
                     if ($.inArray(key, self.genreSelectors) != -1) {
                         for (var key2 in feature.properties.population[key]){
@@ -305,7 +305,7 @@ function createHomepageOSM(_latitude,_longitude){
         function setColorScales(json){
             var value, minRange, maxRange;
                 self.min = 999999,
-                self.max = 0; 
+                self.max = 0;
             json.features.forEach(function(feature){
                 value = getValue(feature);
                 if(value < self.min) self.min = value;
@@ -369,8 +369,15 @@ function createHomepageOSM(_latitude,_longitude){
         }
 
         function clickOnDistrit(e) {
+
+            //Resize container
+            $("#close-button").slideDown( 1000 );
+            $("#map-container").animate({width: '41.66666667%'});
+            $("#main-content").animate({width: '58.33333333%'});
+
             $('#noStats').css("display","none");
             $('#stats').css("display","block");
+
 
             d3.select("#district_text").html("Here are some statistics about the population of the district "+"<font color='#388DC3'><b>" + e.target.feature.properties.DESBDT.split(" ").slice(1).join(' ') + "</b></font>")
 
@@ -428,35 +435,35 @@ function createHomepageOSM(_latitude,_longitude){
 
             if (dd){
                 d3.json(file, function(json) {
-    
+
                     self.dataJson = json;
                     setColorScales(json);
-    
+
                     self.geojson = L.geoJson(json, {
                         style: style,
                         onEachFeature: onEachFeature
                     })//.addTo(map);
-    
+
                     self.map.addLayer(self.geojson)
                     self.legend.addTo(self.map);
                     self.transport.addTo(self.map)
-    
+
                     self.spinner.stop();
                 });
             }else{
                 self.spinner = new Spinner(opts).spin(target);
 
                 setColorScales(self.dataJson);
-    
+
                 self.geojson = L.geoJson(self.dataJson, {
                     style: style,
                     onEachFeature: onEachFeature
                 })//.addTo(map);
-    
+
                 self.map.addLayer(self.geojson)
                 self.legend.addTo(self.map);
                 self.transport.addTo(self.map)
-    
+
                 self.spinner.stop();
             }
         }
@@ -466,7 +473,7 @@ function createHomepageOSM(_latitude,_longitude){
             self.cloroplethControl = L.DomUtil.create('div', 'cloroplethControl'); // create a div with a class "info"
             var myhtml = ''
             myhtml += '<h5>Map controls</h5>'
-            myhtml += '<div class="form-group control-form"><b>Show:</b> ' 
+            myhtml += '<div class="form-group control-form"><b>Show:</b> '
             myhtml += '  <select name="district" id="cloro_type">'
             myhtml += '    <option value="1">Population</option>'
             myhtml += '    <option value="2">Income</option>'
@@ -553,7 +560,7 @@ function createHomepageOSM(_latitude,_longitude){
             self.transport_types = $(".checkbox_transport:checked").map(function(){
                 return $(this).val();
             }).get();
-            
+
             if (self.map.getZoom() >= 14) {
                 for (var i = 0; i < 3; i++) {
                     if ($.inArray(''+i, self.transport_types) != -1)
@@ -575,7 +582,7 @@ function createHomepageOSM(_latitude,_longitude){
 
             return self.transportControl;
         };
-        
+
         self.heatmap = 0
         loadCloropleth("assets/js/data/madrid_barrios.json", styleCloropleth, true);
 
@@ -616,7 +623,7 @@ function createHomepageOSM(_latitude,_longitude){
             .attr("class", "help_circle")
 
         self.map.on('draw:created', function (e) {
-            
+
             d3.select(".help_circle").remove();
 
             var type = e.layerType,
