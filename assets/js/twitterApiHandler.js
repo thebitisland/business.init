@@ -33,7 +33,7 @@ var twitter = function () {
         console.log("TAGG")
         console.log(tags);
         $.ajax({
-            url: "/getTweets/" + tags,
+            url: "http://195.235.93.90/csv_api_spain/getTweets/" + tags,
             success: function(data) {
                 tweets = JSON.parse(data);
                 console.log(tweets.length);
